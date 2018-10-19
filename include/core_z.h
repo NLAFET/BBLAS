@@ -12,10 +12,13 @@
 #ifndef ICL_CORE_Z_H
 #define ICL_CORE_Z_H
 
+#include "bblas_types.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+    
 #define COMPLEX
 
 
