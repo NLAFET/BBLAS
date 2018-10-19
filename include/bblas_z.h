@@ -14,7 +14,7 @@
 #ifndef BBLAS_Z_H
 #define BBLAS_Z_H
 
-
+#include "core_z.h"
 
 #define COMPLEX
 

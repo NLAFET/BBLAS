@@ -22,8 +22,7 @@
  **/
 #endif
 
-#include "cblas.h"
-#include "bblas_z.h"
+#include "bblas.h"
 
 #define COMPLEX
 

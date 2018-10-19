@@ -12,6 +12,7 @@
 
 #include <stdio.h>
 #include "bblas_error.h"
+#include "bblas_types"
 
 #ifdef __cplusplus
 extern "C" {
