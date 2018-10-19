@@ -243,7 +243,7 @@ clean:
 # grep for any stale generated files without a template.
 distclean: clean cleangen
 	grep -s -l @generated $(bblas_src) $(core_src) $(test_src) | xargs rm -f
-	-rm -f compute/*.o  core/*.o test/*.o
+	-rm -f compute/*.o control/*.o  core/*.o test/*.o
 	-rm -f $(makefiles_gen)
 	-rm -rf docs/html
 
@@ -253,7 +253,7 @@ distclean: clean cleangen
 
 bblas_src   := $(wildcard compute/*.c include/bblas*.h)
 
-core_src := $(wildcard core/*.c  include/core*.h)
+core_src := $(wildcard core/*.c  control/*.c include/core*.h)
 
 test_src     := $(wildcard test/*.c test/*.h)
 

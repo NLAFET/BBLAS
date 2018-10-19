@@ -55,8 +55,5 @@
 /**
  * CBLAS requires for complex scalar arguments to be passed by address rather than by value
  **/
-#ifndef CBLAS_SADDR
-#define CBLAS_SADDR( _val_ ) &(_val_)
-#endif
 
 #endif /* BBLAS_MACROS_H */

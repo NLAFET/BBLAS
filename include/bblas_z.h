@@ -15,10 +15,6 @@
 #define BBLAS_Z_H
 
 
-#include "bblas_types.h"
-#include "bblas_macros.h"
-#include "auxiliary.h"
-
 
 #define COMPLEX
 

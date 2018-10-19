@@ -11,11 +11,31 @@
 #define CORE_BBLAS_H
 
 #include <stdio.h>
+#include "bblas_error.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+/******************************************************************************/
+static inline int imin(int a, int b)
+{
+    if (a < b)
+        return a;
+    else
+        return b;
+}
+
+/******************************************************************************/
+static inline int imax(int a, int b)
+{
+    if (a > b)
+        return a;
+    else
+        return b;
+}
+
+    
 static const char *lapack_constants[] = {
     "", "", "", "", "", "", "", "", "", "",
     "", "", "", "", "", "", "", "", "", "",
@@ -94,17 +114,6 @@ static const char *lapack_constants[] = {
  ******************************************************************************/
 static inline char lapack_const(int plasma_const) {
     return lapack_constants[plasma_const][0];
-}
-
-#define coreblas_error(msg) \
-        coreblas_error_func_line_file(__func__, __LINE__, __FILE__, msg)
-
-static inline void coreblas_error_func_line_file(
-    char const *func, int line, const char *file, const char *msg)
-{
-    fprintf(stderr,
-            "COREBLAS ERROR at %d of %s() in %s: %s\n",
-            line, func, file, msg);
 }
 
 #ifdef __cplusplus

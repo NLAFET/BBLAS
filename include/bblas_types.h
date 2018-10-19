@@ -1,25 +1,38 @@
 /**
  *
- * @file bblas_types.h
+ * @file
  *
- * @brief BBLAS typedefs and enumerates.
- *
- *  BBLAS is a software package provided by 
- *  Univ. of Manschester,
- *  Univ. of Tennessee.
- *
- * @version 1.0.0
- * @author Srikara Pranesh
- * @author Samuel  D. Relton
- * @author Pedro   V. Lara
- * @author Mawussi Zounon
- * @date 2016-02-20
- *
- * Contains enumerates for parameter values and typedefs to support various platforms.
+ *  BBLAS is a software package provided by:
+ *  University of Tennessee, US,
+ *  University of Manchester, UK.
  *
  **/
+
 #ifndef BBLAS_TYPES_H
 #define BBLAS_TYPES_H
+
+#include <complex.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/******************************************************************************/
+#if defined(HAVE_MKL) || defined(BBLAS_WITH_MKL)
+#define lapack_complex_float plasma_complex32_t
+#define lapack_complex_double plasma_complex64_t
+#endif
+
+/***************************************************************************//**
+ *
+ *  Some CBLAS routines take scalars by value in real arithmetic
+ *  and by pointer in complex arithmetic.
+ *  In precision generation, CBLAS_SADDR is removed from real arithmetic files.
+ *
+ **/
+#ifndef CBLAS_SADDR
+#define CBLAS_SADDR(var) &(var)
+#endif
 
 /*
  *  BBLAS enumerates for parameter values. During 
@@ -67,84 +80,35 @@ enum {
     BblasA2            = 502
 };
 
+enum {
+    BblasSuccess = 0,
+    BblasFail
+};
 
-/*
- *  BBLAS typedefs
- */
-typedef int  bblas_bool; //!< Define bblas_bool
-typedef long bblas_index; //!< Define bblas_index
-typedef long bblas_size; //!< Define bblas_size
-typedef double bblas_double_t; //!< Define bblas_double_t
+enum {
+    BblasErrorsReportAll = 0,
+    BblasErrorsReportGroup,
+    BblasErrorsReportAny,
+    BblasErrorsReportNone 
+};
+
+/******************************************************************************/
 typedef int bblas_enum_t;
 
+typedef float  _Complex bblas_complex32_t;
+typedef double _Complex bblas_complex64_t;
 
-/*
- * BBLAS Complex numbers
- */
-
-
-#define BBLAS_HAS_COMPLEX_H 1 //!< Is complex arithmetic is available?
-
-#if defined(_WIN32)
-# include <float.h>
-# if defined(__INTEL_COMPILER)
-    /* Fix name conflict within the cabs prototype (_Complex) that
-     * conflicts with a C99 keyword.  */
-    #define _Complex __ConflictingComplex
-    #include <math.h>
-    #undef _Complex
-    #undef complex
-typedef float  _Complex bblas_complex32_t; //!< Define bblas_complex32_t
-    typedef double _Complex bblas_complex64_t; //!< Define bblas_complex64_t
-# else
-    /* Use MS VC complex class */
-    #include <complex>
-    typedef std::complex<float> bblas_complex32_t; //!< Define bblas_complex32_t
-    typedef std::complex<double> bblas_complex64_t; //!< Define bblas_complex64_t
-    #undef BBLAS_HAS_COMPLEX_H
-# endif
-# define isnan _isnan
-# define isinf !_finite
-
-#else /* defined(_WIN32) */
-
-    typedef float  _Complex bblas_complex32_t; //!< Define bblas_complex32_t
-    typedef double _Complex bblas_complex64_t; //!< Define bblas_complex64_t
-
-#endif /* defined(_WIN32) */
-
-/* Sun doesn't ship the complex.h header. Sun Studio doesn't have it and older GCC compilers don't have it either. */
-#if defined(__SUNPRO_C) || defined(__SUNPRO_CC) || defined(sun) || defined(__sun)
-#undef BBLAS_HAS_COMPLEX_H
-#endif
-
-#if (__GNUC__ > 3 || (__GNUC__ == 3 && __GNUC_MINOR__ >= 1))
-#define BBLAS_DEPRECATED  __attribute__((__deprecated__)) //!< Define BBLAS_DEPRECIATED
-#else
-#define BBLAS_DEPRECATED //!< Define BBLAS_DEPRECIATED
-#endif /* __GNUC__ */
-
-#ifdef BBLAS_HAS_COMPLEX_H
-#include <complex.h>
-
-#else
+/******************************************************************************/
+bblas_enum_t bblas_diag_const(char lapack_char);
+bblas_enum_t bblas_direct_const(char lapack_char);
+bblas_enum_t bblas_norm_const(char lapack_char);
+bblas_enum_t bblas_side_const(char lapack_char);
+bblas_enum_t bblas_storev_const(char lapack_char);
+bblas_enum_t bblas_trans_const(char lapack_char);
+bblas_enum_t bblas_uplo_const(char lapack_char);
 
 #ifdef __cplusplus
-extern "C" {
+}  // extern "C"
 #endif
 
-/* These declarations will not clash with what C++ provides because the names in C++ are name-mangled. */
-#if !defined(_WIN32)
-extern double cabs(bblas_complex64_t z);
-extern bblas_complex64_t conj(bblas_complex64_t z);
-#endif
-extern float cabsf(bblas_complex32_t z);
-extern double cimag(bblas_complex64_t z);
-extern double creal(bblas_complex64_t z);
-
-#ifdef __cplusplus
-}
-#endif
-#endif /* defined(BBLAS_HAS_COMPLEX_H) */
-
-#endif  /* BBLAS_TYPES_H */
+#endif  // BBLAS_TYPES_H 
