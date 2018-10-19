@@ -7,8 +7,7 @@
 # --------------------
 # programs
 
-CC        = gcc-7
-FC        = gfortran-7
+CC        = gcc
 AR        = ar
 RANLIB    = ranlib
 
@@ -20,9 +19,8 @@ RANLIB    = ranlib
 # can be commented out if making only static libraries.
 FPIC      = -fPIC
 
-CFLAGS    = -fopenmp $(FPIC) -O3 -std=c99   -Wall -pedantic -Wshadow -Wno-unused-function
-FCFLAGS   = -fopenmp $(FPIC) -O2 -std=f2008 -Wall
-LDFLAGS   = -fopenmp $(FPIC)
+CFLAGS    =  $(FPIC) -O3 -std=c99   -Wall -pedantic -Wshadow -Wno-unused-function
+LDFLAGS   =  $(FPIC)
 
 # one of: aix bsd c89 freebsd generic linux macosx mingw posix solaris
 # usually generic is fine
@@ -42,12 +40,10 @@ lua_platform = macosx
 CFLAGS   += -DHAVE_MKL
 
 LIBS      = -L$(MKLROOT)/lib -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lm
-
 INC       = -I$(MKLROOT)/include
 
 
 # ----- with MacOS Accelerate (Veclib)
 # do not use Netlib LAPACK with Accelerate; zdotc crashes.
 #LIBS      = -L$(LAPACKDIR) -llapacke -framework Accelerate
-
 #INC       = -I$(LAPACKDIR)/LAPACKE/include -I$(CBLASDIR)

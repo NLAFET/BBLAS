@@ -7,7 +7,7 @@ BBLAS_SRC_DIR   = $(BBLAS_BASE_DIR)/src
 BBLAS_TEST_DIR  = $(BBLAS_BASE_DIR)/test
 DEPS            = -I$(BBLAS_BASE_DIR)/include -I$(BBLAS_TEST_DIR)
 
-#BBLAS_UTILS      = $(BBLAS_UTILS_DIR)/xerbla_batch.c
+#BBLAS_UTILS     = $(BBLAS_UTILS_DIR)/xerbla_batch.c
 BBLAS_SRC_LIST   = blas_zgemm_batch.c 
 
 BBLAS_SRC=$(addprefix $(BBLAS_SRC_DIR)/, $(BBLAS_SRC_LIST))
@@ -32,6 +32,3 @@ test_gemm: $(OBJECTS_Z)
 
 clean:
 	rm */*.o
-#	rm */test_gemv
-#	rm */test_gemm
-#	rm */test_dotu
