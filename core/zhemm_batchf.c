@@ -21,7 +21,7 @@
 #endif
 
 #include "cblas.h"
-#include "bblas_z.h"
+#include "bblas.h"
 
 #define COMPLEX
 
@@ -126,94 +126,96 @@ void blas_zhemm_batchf(int group_size,
     			int *info)
 {
 	// Local variables
-	int first_index = 0;
-	int batch_iter;
+	int iter;
 	int LDA;
-	char func_name[15] = "zhemm_batchf";
 
-	// Check input arguments 
-	if (group_size < 0) {
-		xerbla_batch(func_name, BblasErrorBatchCount, -1);
+	// Check input arguments
+	
+	if ((layout != CblasRowMajor) &&
+			(layout != CblasColMajor)) {
+		bblas_error("Illegal value of layout");
+		if (info[0] != BblasErrorsReportNone) {
+			bblas_set_info(info[0], &info[0], group_size, 3);
+		}
+		return;
 	}
+	if ((side != BblasLeft) && (side != BblasRight)) {
+		bblas_error("Illegal value of side");
+		if (info[0] != BblasErrorsReportNone) {
+			bblas_set_info(info[0], &info[0], group_size, 4);
+		}
+		return;
+	}
+	if ((uplo != BblasUpper) && (uplo != BblasLower)) {
+		bblas_error("Illegal value of uplo");
+		if (info[0] != BblasErrorsReportNone) {
+			bblas_set_info(info[0], &info[0], group_size, 5);
+		}
+		return;
+	}
+	if (m < 0) {
+		bblas_error("Illegal value of m");
+		if (info[0] != BblasErrorsReportNone) {
+			bblas_set_info(info[0], &info[0], group_size, 6);
+		}
+		return;
+	}
+	if (n < 0) {
+		bblas_error("Illegal value of n");
+		if (info[0] != BblasErrorsReportNone) {
+			bblas_set_info(info[0], &info[0], group_size, 7);
+		}
+		return;
+	}
+	if (side == BblasLeft) {
+		LDA = m;
+	} 
 	else {
-
-		if ((side != BblasLeft) && (side != BblasRight)) {
-			xerbla_batch(func_name, BblasErrorSide, first_index);
-			for (batch_iter = 0; batch_iter < group_size; batch_iter++) {
-				info[batch_iter]  = BblasErrorSide;
-			}
-			return;
-		}
-		if ((uplo != BblasUpper) && (uplo != BblasLower)) {
-			xerbla_batch(func_name, BblasErrorUplo, first_index);
-			for (batch_iter = 0; batch_iter < group_size; batch_iter++) {
-				info[batch_iter] = BblasErrorUplo;
-			}
-			return;
-		}
-		if (m < 0) {
-			xerbla_batch(func_name, BblasErrorM, first_index);
-			for (batch_iter = 0; batch_iter < group_size; batch_iter++) {
-				info[batch_iter] = BblasErrorM;
-			}
-			return;
-		}
-		if (n < 0) {
-			xerbla_batch(func_name, BblasErrorN, first_index);
-			for (batch_iter = 0; batch_iter < group_size; batch_iter++) {
-				info[batch_iter] = BblasErrorN;
-			}
-			return;
-		}
-		if (side == BblasLeft) {
-			LDA = m;
-		} 
-		else {
-			LDA = n;
-		}
-		if (lda < max(1, LDA)) {
-			xerbla_batch(func_name, BblasErrorlda, first_index);
-			for (batch_iter = 0; batch_iter < group_size; batch_iter++) {
-				info[first_index] =  BblasErrorlda;
-			}
-			return;
-		}
-		if (ldb < max(1, m)) {
-			xerbla_batch(func_name, BblasErrorldb, first_index);
-			for (batch_iter = 0; batch_iter < group_size; batch_iter++) {
-				info[batch_iter] = BblasErrorldb;
-			}
-			return;
-		}
-		if (ldc < max(1, m)) {
-			xerbla_batch(func_name, BblasErrorldc, first_index);
-			for (batch_iter = 0; batch_iter < group_size; batch_iter++) {
-				info[batch_iter] = BblasErrorldc;
-			}
-			return;
-		}
-		// Skip subproblems where nothing needs to be done 
-		if (m == 0 || n == 0 ||
-				((alpha == (bblas_complex64_t)0.0) &&
-				 (beta == (bblas_complex64_t)1.0))) {
-			for (batch_iter = 0; batch_iter < group_size; batch_iter++) {
-				info[batch_iter] =  BblasSuccess;
-			}
-			return;
-		}
-		for (batch_iter = 0; batch_iter < group_size; batch_iter++) {
-			// Call to cblas_zhemm 
-			cblas_zhemm(layout,
-					side, uplo,
-					m,n,
-					CBLAS_SADDR(alpha),
-					A[batch_iter], lda,
-					B[batch_iter], ldb,
-					CBLAS_SADDR(beta),
-					C[batch_iter], ldc);
-			// Successful
-			info[batch_iter] = BblasSuccess;
-		} // END FIXED SIZE FOR LOOP 
+		LDA = n;
 	}
+	if (lda < imax(1, LDA)) {
+		bblas_error("Illegal value of lda");
+		if (info[0] != BblasErrorsReportNone) {
+			bblas_set_info(info[0], &info[0], group_size, 8);
+		}
+		return;
+	}
+	if (ldb < imax(1, m)) {
+		bblas_error("Illegal value of ldb");
+		if (info[0] != BblasErrorsReportNone) {
+			bblas_set_info(info[0], &info[0], group_size, 9);
+		}
+		return;
+	}
+	if (ldc < imax(1, m)) {
+		bblas_error("Illegal value of ldc");
+		if (info[0] != BblasErrorsReportNone) {
+			bblas_set_info(info[0], &info[0], group_size, 10);
+		}
+		return;
+	}
+	// Skip subproblems where nothing needs to be done 
+	if (m == 0 || n == 0 ||
+			((alpha == (bblas_complex64_t)0.0) &&
+			 (beta == (bblas_complex64_t)1.0))) {
+		for (iter = 0; iter < group_size; iter++) {
+			info[iter] =  0;
+		}
+		return;
+	}
+	for (iter = 0; iter < group_size; iter++) {
+		// Call to cblas_zhemm 
+		cblas_zhemm(layout,
+				side, uplo,
+				m,n,
+				CBLAS_SADDR(alpha),
+				A[iter], lda,
+				B[iter], ldb,
+				CBLAS_SADDR(beta),
+				C[iter], ldc);
+		// Successful
+		info[iter] = 0;
+	} // END FIXED SIZE FOR LOOP 
+
 }
 #undef COMPLEX

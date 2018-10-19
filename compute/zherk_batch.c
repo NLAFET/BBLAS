@@ -1,11 +1,11 @@
 /**
- * @file blas_zsyrk_batch.c
+ * @file blas_zherk_batch.c
  *
- * @brief BBLAS zsyrk_batch  for double _Complex routine.
+ * @brief BBLAS zherk_batchf double _Complex routine.
  *
- * BBLAS is a software package provided by 
- * Univ. of Manchester,
- * Univ. of Tennessee.
+ *  BBLAS is a software package provided by 
+ *  Univ. of Manchester,
+ *  Univ. of Tennessee.
  *
  * @author  Srikara Pranesh
  * @author  Mawussi Zounon
@@ -16,28 +16,30 @@
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
 /**
  * Code generation
- * @precisions normal z -> c d s
+ * @precisions normal z -> c
  **/
 #endif
 
+
 #include "cblas.h"
-#include "bblas_z.h"
+#include "bblas.h"
 
 #define COMPLEX
 
 /***************************************************************************//**
  *
- * @ingroup syrk_batch
+ * @ingroup herk_batch
  *
- *  Performs one of the batch symmetric rank k operations 
+ *  Performs one of the batch Hermitian rank k operations on a group 
+ *  of matrices, where matrices in each group have constant properties
  *
- *    \f[ C[i] = \alpha A[i] \times A[i]^T + \beta C[i], \f]
+ *    \f[ C[i] = \alpha A[i] \times A[i]^H + \beta C[i], \f]
  *    or
- *    \f[ C[i] = \alpha A[i]^T \times A[i] + \beta C[i], \f]
+ *    \f[ C[i] = \alpha A[i]^H \times A[i] + \beta C[i], \f]
  *
- *  for a group of matrices, where alpha[i] and beta[i] are scalars, 
- *  C[i]-s are n[i]-by-n[i] symmetric matrices, and A[i]-s are n[i]-by-k[i] matrices 
- *  in the first case and a k[i]-by-n[i] matrices in the second case.
+ *  where alpha and beta are real scalars, C[i]-s are n-by-n Hermitian
+ *  matrices, and A[i]-s are n-by-k matrices in the first case and k-by-n
+ *  matrices in the second case.
  *
  *******************************************************************************
  * @param[in] group_count
@@ -59,15 +61,19 @@
  *          the Hermitian matrices C[j]-s of i-th group are to be stored
  *  
  *          - BblasLower:     Only the lower triangular part of the
- *                            Symmetric matrices C[j] are to be stored.
+ *                             Hermitian matrices C[j] are to be stored.
  *          - BblasUpper:     Only the upper triangular part of the
- *                            Symmetric matrices C[j] are to be stored.
+ *                             Hermitian matrices C[j] are to be stored.
  *
  * @param[in] trans
  * 	    An array of size group_count-1, where 
  * 	    for j-th matrix in i-th group
- *          - BblasNoTrans: \f[ C[j] = \alpha[i] A[j] \times A[j]^T + \beta[i] C[j]; \f]
- *          - BblasTrans:   \f[ C[j] = \alpha[i] A[j]^T \times A[j] + \beta[i] C[j]. \f]
+ *          - BblasNoTrans:
+ *            \f[ C[j] = \alpha[i] A[j] \times B[j]^H
+ *                  + conjg( \alpha[i] ) B[j] \times A[j]^H + \beta[i] C[j]; \f]
+ *          - BblasConjTrans:
+ *            \f[ C[j] = \alpha[i] A[j]^H \times B[j]
+ *                  + conjg( \alpha[i] ) B[j]^H \times A[j] + \beta[i] C[j]. \f]
  *
  * @param[in] n
  *          An array of integers of size group count-1, where n[i] is 
@@ -77,7 +83,7 @@
  * 	    An array of integers of length group_count-1. For matrices
  * 	    in i-th group
  *          If trans = BblasNoTrans, number of columns of A[j]-s and B[j]-s matrices;
- *          if trans = BblasTrans, number of rows of A[j]-s and B[j]-s matrices.
+ *          if trans = BblasConjTrans, number of rows of A[j]-s and B[j]-s matrices.
  *
  * @param[in] alpha
  *          An array of scalars of length group_count-1.
@@ -87,14 +93,14 @@
  * 	    In i-th group each element A[j] is a pointer to a matrix of 
  * 	    A[j] of size lda[i]-by-ka.
  *    	    If trans[i] = BblasNoTrans,   ka = k[i];
- *          if trans[i] = BblasTrans, ka = n[i].
+ *          if trans[i] = BblasConjTrans, ka = n[i].
  *
  * @param[in] lda
  *          An array of integers of length group_count-1, 
  *          are the leading dimension of the arrays A[j]
  *          in i-th group.
  *          If trans[i] = BblasNoTrans,   lda[i] >= max(1, n[i]);
- *          if trans[i] = BblasTrans, lda[i] >= max(1, k[i]).
+ *          if trans[i] = BblasConjTrans, lda[i] >= max(1, k[i]).
  *
  * @param[in] beta
  *          An array of scalars of size group_count-1.
@@ -116,7 +122,7 @@
  * 		following values
  *			- BblasErrorsReportAll    :  All errors will be specified on output.
  *						     Length of the array should be atleast
- *						     \sum_{i=1}^{group_count-1}group_size[i].
+ *						     \sum_{i=1}^{group_count-1}group_sizes[i].
  *			- BblasErrorsReportGroup  :  Single error from each group will be 
  *						     reported. Length of the array should 
  *						     be atleast to (group_count).
@@ -126,7 +132,8 @@
  *			- BblasErrorsReportNone   :  No error will be reported on output, and
  *						     length of the array should be atleast 1.
  ******************************************************************************/
-void blas_zsyrk_batch( int group_count, const int *group_sizes,
+
+void blas_zherk_batch( int group_count, const int *group_sizes,
 		      bblas_enum_t layout, const bblas_enum_t *uplo, const bblas_enum_t *trans,
 		      const int *n, const int *k, 
 		      const double *alpha, bblas_complex64_t const *const *A, const int *lda, 
@@ -138,39 +145,49 @@ void blas_zsyrk_batch( int group_count, const int *group_sizes,
 	// Local variables 
 	int group_iter;
 	int offset = 0;
-	char func_name[15] = "batch_zsyrk";
+	int info_offset = offset;
 
 	// Check input arguments 
 	if (group_count < 0) {
-		xerbla_batch(func_name, BblasErrorGroupCount, -1);
+		bblas_error("Illegal value of group_count");
+		info[0] = 1;
 		return;
 	}
 
 	// Check group_size and call fixed batch computation 
 	for (group_iter = 0; group_iter < group_count; group_iter++) {
 		if (group_sizes[group_iter] < 0) {
-			xerbla_batch(func_name, BblasErrorGroupSize, group_iter);
-			info[group_iter] = BblasErrorGroupSize;
-			continue;
+			bblas_error("Illegal values of group_sizes");
+			if (info[0] != BblasErrorsReportNone) {
+				bblas_set_info(info[0], &info[0], group_sizes[group_iter], 2);
+			}
+			return;
 		}
 
-		// Call to bblas_zsyrk_batchf 
-		blas_zsyrk_batchf (group_sizes[group_iter], 
-				layout,
-				uplo[group_iter],
-				trans[group_iter],
-				n[group_iter],
-				k[group_iter],
-				alpha[group_iter],
-				A+offset,
-				lda[group_iter],
-				beta[group_iter],
-				C+offset,
-				ldc[group_iter],
-				&info[group_iter]);    
+		if (group_iter != 0) {
+			if (info[0] == BblasErrorsReportAll) 
+				info_offset = offset;
+			else
+				info_offset = group_iter;
+		}
+		info[info_offset] = info[0];	
+
+		// Call to bblas_zherk_batchf 
+		blas_zherk_batchf (group_sizes[group_iter], 
+				   layout,
+				   uplo[group_iter],
+				   trans[group_iter],
+				   n[group_iter],
+				   k[group_iter],
+				   alpha[group_iter],
+				   A+offset,
+				   lda[group_iter],
+				   beta[group_iter],
+				   C+offset,
+				   ldc[group_iter],
+				   &info[info_offset]);    
 
 		offset += group_sizes[group_iter];    
 	}
 }
 #undef COMPLEX
-

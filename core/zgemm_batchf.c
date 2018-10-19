@@ -23,6 +23,7 @@
 #endif
 
 #include "bblas.h"
+#include "cblas.h"
 
 #define COMPLEX
 
@@ -134,134 +135,120 @@
  *			- BblasErrorsReportNone   :  No error will be reported on output, and
  *						     length of the array should be atleast 1.
  ******************************************************************************/
-
-`:
 void blas_zgemm_batchf (int group_size, 
 			bblas_enum_t layout, bblas_enum_t transa, bblas_enum_t transb,
 			int m,  int n, int k,
 			bblas_complex64_t alpha, bblas_complex64_t const *const *A, int lda,
-    			 		 	         bblas_complex64_t const* const *B, int ldb, 
+						 bblas_complex64_t const* const *B, int ldb, 
 			bblas_complex64_t beta,  bblas_complex64_t** C, int ldc, 
 			int *info)
 {
 	// Local variables
-	int first_index = 0;
 	int iter;
-	char func_name[15] = "zgemm_batchf";
 
 	// Check input arguments 
-	if (group_size < 0) {
-		xerbla_batch(func_name, BblasErrorBatchCount, -1);
+	if ((layout != CblasRowMajor) &&
+			(layout != CblasColMajor)) {
+		bblas_error("Illegal value of layout");
+		if (info[0] != BblasErrorsReportNone) {
+			bblas_set_info(info[0], &info[0], group_size, 3);
+		}
+		return;
 	}
-	else {
-		if ((layout != CblasRowMajor) &&
-				(layout != CblasColMajor)) {
-			xerbla_batch(func_name, BblasErrorLayout, first_index);
-			for (iter = 0; batch_iter < ; batch_iter++) {
-				info[iter]  = BblasErrorLayout;
-			}
-			return;
-
-
-		if ((transa != BblasNoTrans) &&
-				(transa != BblasTrans) &&
-				(transa != BblasConjTrans)) {
-			xerbla_batch(func_name, BblasErrorTransa, first_index);
-			for (iter = 0; batch_iter < ; batch_iter++) {
-				info[iter]  = BblasErrorTransa;
-			}
-			return;
+	if ((transa != BblasNoTrans) &&
+			(transa != BblasTrans) &&
+			(transa != BblasConjTrans)) {
+		bblas_error("Illegal value of transa");
+		if (info[0] != BblasErrorsReportNone) {
+			bblas_set_info(info[0], &info[0], group_size, 4);
 		}
-		if ((transb != BblasNoTrans) &&
-				(transb != BblasTrans) &&
-				(transb != BblasConjTrans)) {
-			xerbla_batch(func_name, BblasErrorTransb, first_index); 
-			for (iter = 0; batch_iter < ; batch_iter++) {
-				info[iter] = BblasErrorTransb;
-			}
-			return;
-		}
-		if ( transa == BblasNoTrans ) { 
-			lda = m;
-		} 
-		else { 
-			lda = k;
-		}
-		if ( transb == BblasNoTrans ) { 
-			ldb = k;
-		} 
-		else { 
-			ldb = n;
-		}
-		if (m < 0) {
-			xerbla_batch(func_name, BblasErrorM, first_index);
-
-			for (iter = 0; batch_iter < ; batch_iter++) {
-				info[iter] = BblasErrorM;
-			}
-			return;
-		}
-		if (n < 0) {
-			xerbla_batch(func_name, BblasErrorN, first_index); 
-			for (iter = 0; batch_iter < ; batch_iter++) {
-				info[iter] = BblasErrorN;
-			}
-			return;
-		}
-		if (k < 0) {
-			xerbla_batch(func_name, BblasErrorK, first_index);
-			for (iter = 0; batch_iter < ; batch_iter++)
-			{
-				info[iter] = BblasErrorK;
-			}
-			return;
-		}
-		if (lda < max(1, lda)) {
-			xerbla_batch(func_name, BblasErrorlda, first_index);
-			for (iter = 0; batch_iter < ; batch_iter++)
-			{
-				info[iter] =  BblasErrorlda; 
-			}
-			return;
-		}
-		if (ldb < max(1, ldb)) {
-			xerbla_batch(func_name, BblasErrorldb, first_index); 
-			for (iter = 0; batch_iter < ; batch_iter++)
-			{
-				info[iter] = BblasErrorldb;
-			}
-			return;
-		}
-		if (ldc < max(1, m)) {
-			xerbla_batch(func_name, BblasErrorldc, first_index);
-			for (iter = 0; batch_iter < ; batch_iter++)
-			{
-				info[iter] = BblasErrorldc;
-			}
-			return;
-		}
-		// Skip subproblems where nothing needs to be done
-		if (m == 0 || n == 0 ||
-				((alpha == (bblas_complex64_t)0.0 || k == 0) &&
-				beta == (bblas_complex64_t)1.0 )) {
-			for (iter = 0; batch_iter < ; batch_iter++) {
-				info[iter] =  BblasSuccess;
-			}
-			return;
-		}
-		for (iter = 0; batch_iter < ; batch_iter++) {
-			// Call to cblas_zgemm 
-			cblas_zgemm(layout,
-				  	transa, transb,
-					m, n, k,
-					CBLAS_SADDR(alpha),
-					A[iter], lda,
-					B[iter], ldb,
-					CBLAS_SADDR(beta),
-					C[iter], ldc);
-			// Successful 
-			info[iter] = BblasSuccess;
-		} // END FIXED SIZE FOR LOOP 
+		return;
 	}
+	if ((transb != BblasNoTrans) &&
+			(transb != BblasTrans) &&
+			(transb != BblasConjTrans)) {
+		bblas_error("Illegal value of transb");
+		if (info[0] != BblasErrorsReportNone) {
+			bblas_set_info(info[0], &info[0], group_size, 5);
+		}
+		return;
+	}
+	if ( transa == BblasNoTrans ) { 
+		lda = m;
+	} 
+	else { 
+		lda = k;
+	}
+	if ( transb == BblasNoTrans ) { 
+		ldb = k;
+	} 
+	else { 
+		ldb = n;
+	}
+	if (m < 0) {
+		bblas_error("Illegal value of m");
+		if (info[0] != BblasErrorsReportNone) {
+			bblas_set_info(info[0], &info[0], group_size, 6);
+		}
+		return;
+	}
+	if (n < 0) {
+		bblas_error("Illegal value of n");
+		if (info[0] != BblasErrorsReportNone) {
+			bblas_set_info(info[0], &info[0], group_size, 7);
+		}
+		return;
+	}
+	if (k < 0) {
+		bblas_error("Illegal value of k");
+		if (info[0] != BblasErrorsReportNone) {
+			bblas_set_info(info[0], &info[0], group_size, 8);
+		}
+		return;
+	}
+	if (lda < imax(1, lda)) {
+		bblas_error("Illegal value of lda");
+		if (info[0] != BblasErrorsReportNone) {
+			bblas_set_info(info[0], &info[0], group_size, 9);
+		}
+		return;
+	}
+	if (ldb < imax(1, ldb)) {
+		bblas_error("Illegal value of ldb");
+		if (info[0] != BblasErrorsReportNone) {
+			bblas_set_info(info[0], &info[0], group_size, 10);
+		}
+		return;
+	}
+	if (ldc < imax(1, m)) {
+		bblas_error("Illegal value of ldc");
+		if (info[0] != BblasErrorsReportNone) {
+			bblas_set_info(info[0], &info[0], group_size, 11);
+		}
+		return;
+	}
+	// Skip subproblems where nothing needs to be done
+	if (m == 0 || n == 0 ||
+			((alpha == (bblas_complex64_t)0.0 || k == 0) &&
+			 beta == (bblas_complex64_t)1.0 )) {
+		for (iter = 0; iter < group_size; iter++) {
+			info[iter] =  0;
+		}
+		return;
+	}
+	for (iter = 0; iter < group_size; iter++) {
+		// Call to cblas_zgemm 
+		cblas_zgemm(layout,
+				transa, transb,
+				m, n, k,
+				CBLAS_SADDR(alpha),
+				A[iter], lda,
+				B[iter], ldb,
+				CBLAS_SADDR(beta),
+				C[iter], ldc);
+		// Successful 
+		info[iter] = 0;
+	} // END FIXED SIZE FOR LOOP 
+
 }
 #undef COMPLEX

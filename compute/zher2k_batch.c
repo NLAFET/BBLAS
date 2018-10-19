@@ -21,7 +21,7 @@
 #endif
 
 #include "cblas.h"
-#include "bblas_z.h"
+#include "bblas.h"
 
 #define COMPLEX
 
@@ -155,38 +155,49 @@ void blas_zher2k_batch( int group_count, const int *group_sizes,
 	// Local variables 
 	int group_iter;
 	int offset = 0;
-	char func_name[15] = "batch_zher2k";
+	int info_offset = offset;
 
 	// Check input arguments 
 	if (group_count < 0) {
-		xerbla_batch(func_name, BblasErrorGroupCount, -1);
+		bblas_error("Illegal value of group_count");
+		info[0] = 1;
 		return;
 	}
 
 	// Check group_size and call fixed batch computation 
 	for (group_iter = 0; group_iter < group_count; group_iter++) {
 		if (group_sizes[group_iter] < 0) {
-			xerbla_batch(func_name, BblasErrorGroupSize, group_iter);
-			info[group_iter] = BblasErrorGroupSize;
-			continue;
+			bblas_error("Illegal values of group_sizes");
+			if (info[0] != BblasErrorsReportNone) {
+				bblas_set_info(info[0], &info[0], group_sizes[group_iter], 2);
+			}
+			return;
 		}
+
+		if (group_iter != 0) {
+			if (info[0] == BblasErrorsReportAll) 
+				info_offset = offset;
+			else
+				info_offset = group_iter;
+		}
+		info[info_offset] = info[0];	
 
 		// Call to bblas_zher2k_batchf 
 		blas_zher2k_batchf (group_sizes[group_iter], 
-				layout,
-				uplo[group_iter],
-				trans[group_iter],
-				n[group_iter],
-				k[group_iter],
-				alpha[group_iter],
-				A+offset,
-				lda[group_iter],
-				B+offset,
-				ldb[group_iter],
-				beta[group_iter],
-				C+offset,
-				ldc[group_iter],
-				&info[group_iter]);    
+				    layout,
+				    uplo[group_iter],
+				    trans[group_iter],
+				    n[group_iter],
+				    k[group_iter],
+				    alpha[group_iter],
+				    A+offset,
+				    lda[group_iter],
+				    B+offset,
+				    ldb[group_iter],
+				    beta[group_iter],
+				    C+offset,
+				    ldc[group_iter],
+				    &info[info_offset]);    
 
 		offset += group_sizes[group_iter];    
 	}

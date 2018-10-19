@@ -21,7 +21,7 @@
 #endif
 
 #include "cblas.h"
-#include "bblas_z.h"
+#include "bblas.h"
 
 #define COMPLEX
 
@@ -139,45 +139,56 @@ void blas_zhemm_batch( int group_count, const int *group_sizes,
 			bblas_enum_t layout, const bblas_enum_t *side, const bblas_enum_t *uplo,
     			const int *m, const int *n, 
 			const bblas_complex64_t *alpha, bblas_complex64_t const *const *A, const int *lda, 
-    			 		 	 bblas_complex64_t const* const *B, const int *ldb, 
+    			 		 	        bblas_complex64_t const* const *B, const int *ldb, 
 			const bblas_complex64_t *beta,  bblas_complex64_t** C, const int *ldc, 
     			int *info)
 {
 	// Local variables 
 	int group_iter;
 	int offset = 0;
-	char func_name[15] = "batch_zhemm";
+	int info_offset = offset;
 
 	// Check input arguments 
 	if (group_count < 0) {
-		xerbla_batch(func_name, BblasErrorGroupCount, -1);
+		bblas_error("Illegal value of group_count");
+		info[0] = 1;
 		return;
 	}
 
 	// Check group_size and call fixed batch computation 
 	for (group_iter = 0; group_iter < group_count; group_iter++) {
 		if (group_sizes[group_iter] < 0) {
-			xerbla_batch(func_name, BblasErrorGroupSize, group_iter);
-			info[group_iter] = BblasErrorGroupSize;
-			continue;
+			bblas_error("Illegal values of group_sizes");
+			if (info[0] != BblasErrorsReportNone) {
+				bblas_set_info(info[0], &info[0], group_sizes[group_iter], 2);
+			}
+			return;
 		}
+
+		if (group_iter != 0) {
+			if (info[0] == BblasErrorsReportAll) 
+				info_offset = offset;
+			else
+				info_offset = group_iter;
+		}
+		info[info_offset] = info[0];	
 
 		// Call to bblas_zhemm_batchf 
 		blas_zhemm_batchf (group_sizes[group_iter], 
-				layout,
-				side[group_iter],
-				uplo[group_iter],
-				m[group_iter],
-				n[group_iter],
-				alpha[group_iter],
-				A+offset,
-				lda[group_iter],
-				B+offset,
-				ldb[group_iter],
-				beta[group_iter],
-				C+offset,
-				ldc[group_iter],
-				&info[group_iter]);    
+				   layout,
+				   side[group_iter],
+				   uplo[group_iter],
+				   m[group_iter],
+				   n[group_iter],
+				   alpha[group_iter],
+				   A+offset,
+				   lda[group_iter],
+				   B+offset,
+				   ldb[group_iter],
+				   beta[group_iter],
+				   C+offset,
+				   ldc[group_iter],
+				   &info[info_offset]);    
 
 		offset += group_sizes[group_iter];    
 	}

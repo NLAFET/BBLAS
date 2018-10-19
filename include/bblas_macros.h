@@ -44,12 +44,12 @@
 
 #define NAME_LENGTH 30 //!< Maximum length of routine name e.g. zgemm_batch
 
-#ifndef max
-#define max(a, b) ((a) > (b) ? (a) : (b)) //!< Take max of two numbers
+#ifndef imax
+#define imax(a, b) ((a) > (b) ? (a) : (b)) //!< Take max of two numbers
 #endif
 
-#ifndef min
-#define min(a, b) ((a) < (b) ? (a) : (b)) //!< Take min of two numbers
+#ifndef imin
+#define imin(a, b) ((a) < (b) ? (a) : (b)) //!< Take min of two numbers
 #endif
 
 /**
