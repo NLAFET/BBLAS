@@ -19,8 +19,8 @@ extern "C" {
 
 /******************************************************************************/
 #if defined(HAVE_MKL) || defined(BBLAS_WITH_MKL)
-#define lapack_complex_float plasma_complex32_t
-#define lapack_complex_double plasma_complex64_t
+#define lapack_complex_float bblas_complex32_t
+#define lapack_complex_double bblas_complex64_t
 #endif
 
 /***************************************************************************//**
