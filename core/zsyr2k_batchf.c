@@ -121,21 +121,16 @@
  * @sa ssyr2k_batchf
  *
  ******************************************************************************/
-void blas_zsyr2k_batchf(int group_size, 
-			bblas_enum_t layout, bblas_enum_t uplo, bblas_enum_t trans,
-    			int n, int k, 
-			bblas_complex64_t alpha, bblas_complex64_t const *const *A, int lda, 
-    			 		 	 bblas_complex64_t const* const *B, int ldb, 
-			const double  beta,  bblas_complex64_t** C, int ldc, 
-    			 int *info)
+void blas_zsyr2k_batchf(int group_size, bblas_enum_t layout, bblas_enum_t uplo,
+                        bblas_enum_t trans, int n, int k, 
+                        bblas_complex64_t alpha, bblas_complex64_t const *const *A, int lda,
+                                                 bblas_complex64_t const* const *B, int ldb,
+                        double  beta,            bblas_complex64_t            ** C, int ldc,
+                        int *info)
 {
-	// Local variables 
-	int iter;
-	int LDA,  LDB;
-
 	// Check input arguments 
 	if ((layout != BblasRowMajor) &&
-			(layout != BblasColMajor)) {
+        (layout != BblasColMajor)) {
 		bblas_error("Illegal value of layout");
 		if (info[0] != BblasErrorsReportNone) {
 			bblas_set_info(info[0], &info[0], group_size, 3);
@@ -150,7 +145,7 @@ void blas_zsyr2k_batchf(int group_size,
 		return;
 	}
 	if ((trans != BblasNoTrans) &&
-			(trans != BblasTrans) && (trans != BblasConjTrans)) {
+        (trans != BblasTrans) && (trans != BblasConjTrans)) {
 		bblas_error("Illegal value of trans");
 		if (info[0] != BblasErrorsReportNone) {
 			bblas_set_info(info[0], &info[0], group_size, 5);
@@ -171,22 +166,23 @@ void blas_zsyr2k_batchf(int group_size,
 		}
 		return;
 	}
-	if (trans == BblasNoTrans) {
-		LDA = n;
-		LDB = n;
-	} 
-	else {
-		LDA = k;
-		LDB = k;
-	}
-	if (lda < imax(1,LDA)) {
+    int am, bm;
+    if (trans == BblasNoTrans) {
+        am = n;
+        bm = n;
+    }
+    else {
+        am = k;
+        bm = k;
+    }
+    if (lda < imax(1, am)) {
 		bblas_error("Illegal value of lda");
 		if (info[0] != BblasErrorsReportNone) {
 			bblas_set_info(info[0], &info[0], group_size, 8);
 		}
 		return;
 	}
-	if (ldb < imax(1, LDB)) {
+	if (ldb < imax(1, bm)) {
 		bblas_error("Illegal value of ldb");
 		if (info[0] != BblasErrorsReportNone) {
 			bblas_set_info(info[0], &info[0], group_size, 9);
@@ -202,25 +198,21 @@ void blas_zsyr2k_batchf(int group_size,
 	}
 	// Skip subproblems where nothing needs to be done
 	if (n == 0 || k == 0 ||
-			(alpha == (bblas_complex64_t)0.0 || 
-			 beta == (bblas_complex64_t)1.0)) {
-		for (iter = 0; iter < group_size; iter++) {
+        (alpha == (bblas_complex64_t)0.0 || 
+         beta == (bblas_complex64_t)1.0)) {
+		for (int iter = 0; iter < group_size; iter++) {
 			info[iter] =  0;
 		}
 		return;
 	}
-	for (iter = 0; iter < group_size; iter++) {
-		// Call to cblas_zsyr2k
-		cblas_zsyr2k(layout,
-			     uplo, trans,
-			     n, k,
-			     CBLAS_SADDR(alpha),
-			     A[iter], lda,
-			     B[iter], ldb,
-			     CBLAS_SADDR(beta),
-			     C[iter], ldc);
-		// Successful 
-		info[iter] = 0;
-	} // END FIXED SIZE FOR LOOP 
+	for (int iter = 0; iter < group_size; iter++) {
+
+        cblas_zsyr2k(layout, uplo, trans,
+                     n, k,
+                     CBLAS_SADDR(alpha), A[iter], lda,
+                                         B[iter], ldb,
+                     CBLAS_SADDR(beta), C[iter], ldc);
+        info[iter] = 0;
+    }
 }
-#undef COMPLEX
+

@@ -1,30 +1,17 @@
 /**
- * @file zherk_batchf.c
  *
- * @brief BBLAS zherk_batchf double _Complex routine.
+ * @file
  *
- *  BBLAS is a software package provided by 
- *  Univ. of Manchester,
- *  Univ. of Tennessee.
+ *  BBLAS is a software package provided by:
+ *  University of Tennessee, US,
+ *  University of Manchester, UK.
  *
- * @author  Srikara Pranesh
- * @author  Mawussi Zounon
- * @date    2018-09-22
- *
- **/
-
-#ifndef DOXYGEN_SHOULD_SKIP_THIS
-/**
- * Code generation
  * @precisions normal z -> c
+ *
  **/
-#endif
-
 
 #include "cblas.h"
 #include "bblas.h"
-
-#define COMPLEX
 
 /***************************************************************************//**
  *
@@ -96,32 +83,36 @@
  * 		Array of int for error handling. On entry info[0] should have one of the 
  * 		following values
  *			- BblasErrorsReportAll    :  All errors will be specified on output.
- *						     Length of the array should be atleast
+ *						     Length of the array should be at least
  *						     (group_count*group_size).
  *			- BblasErrorsReportGroup  :  Single error from each group will be 
  *						     reported. Length of the array should 
- *						     be atleast to (group_count).
+ *						     be at least to (group_count).
  *			- BblasErrorsReportAny    :  Occurence of an error will be indicated
  *						     by a single integer value, and length 
- *						     of the array should be atleast 1.
+ *						     of the array should be at least 1.
  *			- BblasErrorsReportNone   :  No error will be reported on output, and
- *						     length of the array should be atleast 1.
+ *						     length of the array should be at least 1.
+ *******************************************************************************
+ *
+ * @retval BblasSuccess successful exit
+ *
+ *******************************************************************************
+ *
+ * @sa zherk_batchf
+ * @sa cherk_batchf
+ *
  ******************************************************************************/
 
-void blas_zherk_batchf(int group_size,
-		       bblas_enum_t layout, bblas_enum_t uplo, bblas_enum_t trans,
-		       int n, int k, 
-		       const double alpha, bblas_complex64_t const *const *A, int lda, 
-		       const double  beta,  bblas_complex64_t** C, int ldc, 
-		       int *info)
+void blas_zherk_batchf(int group_size, bblas_enum_t layout, bblas_enum_t uplo,
+                       bblas_enum_t trans, int n, int k,
+                       const double alpha, bblas_complex64_t const *const *A, int lda,
+                       const double beta, bblas_complex64_t             ** C, int ldc,
+                       int *info)
 {
-	// Local variables 
-	int iter;
-	int LDA;
-
 	// Check input arguments 
 	if ((layout != BblasRowMajor) &&
-			(layout != BblasColMajor)) {
+        (layout != BblasColMajor)) {
 		bblas_error("Illegal value of layout");
 		if (info[0] != BblasErrorsReportNone) {
 			bblas_set_info(info[0], &info[0], group_size, 3);
@@ -136,7 +127,7 @@ void blas_zherk_batchf(int group_size,
 		return;
 	}
 	if ((trans != BblasNoTrans) &&
-			(trans != BblasTrans) && (trans != BblasConjTrans)) {
+        (trans != BblasTrans) && (trans != BblasConjTrans)) {
 		bblas_error("Illegal value of trans");
 		if (info[0] != BblasErrorsReportNone) {
 			bblas_set_info(info[0], &info[0], group_size, 5);
@@ -157,21 +148,21 @@ void blas_zherk_batchf(int group_size,
 		}
 		return;
 	}
+    int am;
 	if (trans == BblasNoTrans) {
-		LDA = n;
+		am = n;
 	} 
 	else {
-		LDA = k;
+		am = k;
 	}
-	if (lda < imax(1, LDA)) {
+	if (lda < imax(1, am)) {
 		bblas_error("Illegal value of lda");
 		if (info[0] != BblasErrorsReportNone) {
 			bblas_set_info(info[0], &info[0], group_size, 8);
 		}
 		return;
 	}
-	if (ldc < imax(1, n))
-	{
+	if (ldc < imax(1, n)) {
 		bblas_error("Illegal value of ldc");
 		if (info[0] != BblasErrorsReportNone) {
 			bblas_set_info(info[0], &info[0], group_size, 9);
@@ -180,23 +171,20 @@ void blas_zherk_batchf(int group_size,
 	}
 	// Skip subproblems where nothing needs to be done 
 	if (n == 0   || ((k == 0 || alpha == (double)0.0) &&
-				(beta == (double)1.0))) {
-		for (iter = 0; iter < group_size; iter++) {
+                     (beta == (double)1.0))) {
+		for (int iter = 0; iter < group_size; iter++) {
 			info[iter] =  0;
 		}
 		return;
 	}
-	for (iter = 0; iter < group_size; iter++) {
-		// Call to cblas_zherk 
-		cblas_zherk(layout,
-			    uplo, trans,
-			    n, k,
-			    alpha,
-			    A[iter], lda,
-			    beta,
-			    C[iter], ldc);
-		// Successful 
-		info[iter] = 0;
-	} // END FIXED SIZE FOR LOOP 
+	for (int iter = 0; iter < group_size; iter++) {
+		cblas_zherk(layout, uplo, trans,
+                    n, k,
+                    alpha, A[iter], lda,
+                    beta,  C[iter], ldc);
+        info[iter] = 0;
+    }
 }
-#undef COMPLEX
+
+
+

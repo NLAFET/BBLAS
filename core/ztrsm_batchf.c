@@ -129,18 +129,13 @@
  * @sa strsm_batchf
  *
  ******************************************************************************/
-void blas_ztrsm_batchf(int group_size,
-		       bblas_enum_t layout, bblas_enum_t side, bblas_enum_t uplo,
-		       bblas_enum_t transa, bblas_enum_t diag,
-		       int m, int n, 
-		       bblas_complex64_t alpha, bblas_complex64_t const *const *A, int lda,
-		       bblas_complex64_t **B, int ldb,
-		       int *info)
+void blas_ztrsm_batchf(int group_size, bblas_enum_t layout, bblas_enum_t side,
+                       bblas_enum_t uplo, bblas_enum_t transa, bblas_enum_t diag,
+                       int m, int n, 
+                       bblas_complex64_t alpha, bblas_complex64_t const *const *A, int lda,
+                                                bblas_complex64_t             **B, int ldb,
+                       int *info)
 {
-	// Local variables 
-	int iter;
-	int LDA;
-
 	// Check input arguments 
 	if ((layout != BblasRowMajor) &&
 			(layout != BblasColMajor)) {
@@ -194,44 +189,41 @@ void blas_ztrsm_batchf(int group_size,
 		}
 		return;
 	}
+    int an;
 	if (side == BblasLeft) {
-		LDA = m;
+		an = m;
 	} 
 	else {
-		LDA = n;
+		an = n;
 	}
-	if (lda < imax(1, LDA)) {
-		bblas_error("Illegal value of lda");
-		if (info[0] != BblasErrorsReportNone) {
-			bblas_set_info(info[0], &info[0], group_size, 10);
-		}
-		return;
-	}
-	if (ldb < imax(1, m)) {
-		bblas_error("Illegal value of ldb");
-		if (info[0] != BblasErrorsReportNone) {
-			bblas_set_info(info[0], &info[0], group_size, 11);
-		}
-		return;
-	}
-	// Skip subproblems where nothing needs to be done 
-	if (imin(m, n) == 0) {
-		for (iter = 0; iter < group_size; iter++) {
-			info[iter] = 0;
-		}
-		return;
-	}
-	for (iter = 0; iter < group_size; iter++) {
-		// Call to cblas_ztrsm 
-		cblas_ztrsm(layout,
-			    side, uplo,
-			    transa, diag,
-			    m, n,
-			    CBLAS_SADDR(alpha),
-			    A[iter], lda,
-			    B[iter], ldb);
-		// Successful 
-		info[iter] = 0;
-	} // END FIXED SIZE FOR LOOP 
+    if (lda < imax(1, an)) {
+        bblas_error("Illegal value of lda");
+        if (info[0] != BblasErrorsReportNone) {
+            bblas_set_info(info[0], &info[0], group_size, 10);
+        }
+        return;
+    }
+    if (ldb < imax(1, m)) {
+        bblas_error("Illegal value of ldb");
+        if (info[0] != BblasErrorsReportNone) {
+            bblas_set_info(info[0], &info[0], group_size, 11);
+        }
+        return;
+    }
+    // Skip subproblems where nothing needs to be done 
+    if (imin(m, n) == 0) {
+        for (int iter = 0; iter < group_size; iter++) {
+            info[iter] = 0;
+        }
+        return;
+    }
+    for (int iter = 0; iter < group_size; iter++) {
+
+        cblas_ztrsm(layout, side, uplo,
+                    transa, diag,
+                    m, n,
+                    CBLAS_SADDR(alpha), A[iter], lda,
+                                        B[iter], ldb);
+        info[iter] = 0;
+    }
 }
-#undef COMPLEX

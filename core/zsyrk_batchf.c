@@ -107,20 +107,15 @@
  * @sa ssyrk_batchf
  *
  ******************************************************************************/
-void blas_zsyrk_batchf(int group_size,
-		      bblas_enum_t layout, bblas_enum_t uplo, bblas_enum_t trans,
-		      int n, int k, 
-		      const double alpha, bblas_complex64_t const *const *A, int lda, 
-		      const double  beta,  bblas_complex64_t** C, int ldc, 
-    		      int *info)
+void blas_zsyrk_batchf(int group_size, bblas_enum_t layout, bblas_enum_t uplo,
+                       bblas_enum_t trans, int n, int k,
+                       const double alpha, bblas_complex64_t const *const *A, int lda,
+                       const double beta,  bblas_complex64_t            ** C, int ldc,
+                       int *info)
 {
-	// Local variables  
-	int iter;
-	int LDA;
-
 	/* Check input arguments */
 	if ((layout != BblasRowMajor) &&
-			(layout != BblasColMajor)) {
+        (layout != BblasColMajor)) {
 		bblas_error("Illegal value of layout");
 		if (info[0] != BblasErrorsReportNone) {
 			bblas_set_info(info[0], &info[0], group_size, 3);
@@ -135,7 +130,7 @@ void blas_zsyrk_batchf(int group_size,
 		return;
 	}
 	if ((trans != BblasNoTrans) &&
-			(trans != BblasTrans) && (trans != BblasConjTrans)) {
+        (trans != BblasTrans) && (trans != BblasConjTrans)) {
 		bblas_error("Illegal value of trans");
 		if (info[0] != BblasErrorsReportNone) {
 			bblas_set_info(info[0], &info[0], group_size, 5);
@@ -156,13 +151,14 @@ void blas_zsyrk_batchf(int group_size,
 		}
 		return;
 	}
+    int am;
 	if (trans == BblasNoTrans) {
-		LDA = n;
+		am = n;
 	} 
 	else {
-		LDA = k;
+		am = k;
 	}
-	if (lda < imax(1, LDA)) {
+	if (lda < imax(1, am)) {
 		bblas_error("Illegal value of lda");
 		if (info[0] != BblasErrorsReportNone) {
 			bblas_set_info(info[0], &info[0], group_size, 8);
@@ -178,24 +174,20 @@ void blas_zsyrk_batchf(int group_size,
 	}
 	// Skip subproblems where nothing needs to be done 
 	if (n == 0 || (k == 0 ||
-				alpha == (bblas_complex64_t)0.0 ||
-				beta == (bblas_complex64_t)1.0)) {
-		for (iter = 0; iter < group_size; iter++) {
+                   alpha == (bblas_complex64_t)0.0 ||
+                   beta == (bblas_complex64_t)1.0)) {
+		for (int iter = 0; iter < group_size; iter++) {
 			info[iter] =  0;
 		}
 		return;
 	}
-	for (iter = 0; iter < group_size; iter++) {
-		// Call to cblas_zsyrk 
-		cblas_zsyrk(layout,
-			    uplo, trans,
-			    n, k,
-			    CBLAS_SADDR(alpha),
-			    A[iter], lda,
-			    CBLAS_SADDR(beta),
-			    C[iter], ldc);
-		// Successful 
-		info[iter] = 0;
-	} // END FIXED SIZE FOR LOOP 
+	for (int iter = 0; iter < group_size; iter++) {
+
+        cblas_zsyrk(layout, uplo, trans,
+                    n, k,
+                    CBLAS_SADDR(alpha), A[iter], lda,
+                    CBLAS_SADDR(beta),  C[iter], ldc);
+
+        info[iter] = 0;
+    }
 }
-#undef COMPLEX

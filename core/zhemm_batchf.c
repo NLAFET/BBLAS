@@ -93,16 +93,16 @@
  * 		Array of int for error handling. On entry info[0] should have one of the 
  * 		following values
  *			- BblasErrorsReportAll    :  All errors will be specified on output.
- *						     Length of the array should be atleast
+ *						     Length of the array should be at least
  *						     (group_count*group_size).
  *			- BblasErrorsReportGroup  :  Single error from each group will be 
  *						     reported. Length of the array should 
- *						     be atleast to (group_count).
+ *						     be at least to (group_count).
  *			- BblasErrorsReportAny    :  Occurence of an error will be indicated
  *						     by a single integer value, and length 
- *						     of the array should be atleast 1.
+ *						     of the array should be at least 1.
  *			- BblasErrorsReportNone   :  No error will be reported on output, and
- *						     length of the array should be atleast 1.
+ *						     length of the array should be at least 1.
  ******************************************************************************
  *
  * @retval BblasSuccess successful exit
@@ -113,22 +113,16 @@
  * @sa chemm_batchf
  *
  ******************************************************************************/
-void blas_zhemm_batchf(int group_size,
-		       bblas_enum_t layout, bblas_enum_t side, bblas_enum_t uplo,
-		       int m, int n, 
-		       bblas_complex64_t alpha, bblas_complex64_t const *const *A, int lda, 
-		       				bblas_complex64_t const* const *B, int ldb, 
-		       bblas_complex64_t beta,  bblas_complex64_t** C, int ldc, 
-		       int *info)
+void blas_zhemm_batchf(int group_size, bblas_enum_t layout, bblas_enum_t side,
+                       bblas_enum_t uplo, int m, int n,
+                       bblas_complex64_t alpha, bblas_complex64_t const *const *A, int lda,
+                                                bblas_complex64_t const* const *B, int ldb,
+                       bblas_complex64_t beta,  bblas_complex64_t            ** C, int ldc,
+                       int *info)
 {
-	// Local variables
-	int iter;
-	int LDA;
-
-	// Check input arguments
-	
+    // Check input arguments
 	if ((layout != BblasRowMajor) &&
-			(layout != BblasColMajor)) {
+        (layout != BblasColMajor)) {
 		bblas_error("Illegal value of layout");
 		if (info[0] != BblasErrorsReportNone) {
 			bblas_set_info(info[0], &info[0], group_size, 3);
@@ -163,13 +157,15 @@ void blas_zhemm_batchf(int group_size,
 		}
 		return;
 	}
+
+    int am;
 	if (side == BblasLeft) {
-		LDA = m;
+		am = m;
 	} 
 	else {
-		LDA = n;
+		am = n;
 	}
-	if (lda < imax(1, LDA)) {
+	if (lda < imax(1, am)) {
 		bblas_error("Illegal value of lda");
 		if (info[0] != BblasErrorsReportNone) {
 			bblas_set_info(info[0], &info[0], group_size, 8);
@@ -192,26 +188,19 @@ void blas_zhemm_batchf(int group_size,
 	}
 	// Skip subproblems where nothing needs to be done 
 	if (m == 0 || n == 0 ||
-			((alpha == (bblas_complex64_t)0.0) &&
-			 (beta == (bblas_complex64_t)1.0))) {
-		for (iter = 0; iter < group_size; iter++) {
+        ((alpha == (bblas_complex64_t)0.0) &&
+         (beta == (bblas_complex64_t)1.0))) {
+		for (int iter = 0; iter < group_size; iter++) {
 			info[iter] =  0;
 		}
 		return;
 	}
-	for (iter = 0; iter < group_size; iter++) {
-		// Call to cblas_zhemm 
-		cblas_zhemm(layout,
-			    side, uplo,
-			    m,n,
-			    CBLAS_SADDR(alpha),
-			    A[iter], lda,
-			    B[iter], ldb,
-			    CBLAS_SADDR(beta),
-			    C[iter], ldc);
-		// Successful
-		info[iter] = 0;
-	} // END FIXED SIZE FOR LOOP 
-
+	for (int iter = 0; iter < group_size; iter++) {
+        cblas_zhemm(layout, side, uplo,
+                    m, n,
+                    CBLAS_SADDR(alpha), A[iter], lda,
+                                        B[iter], ldb,
+                    CBLAS_SADDR(beta),  C[iter], ldc);
+        info[iter] = 0;
+	}
 }
-#undef COMPLEX
