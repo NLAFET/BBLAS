@@ -43,7 +43,7 @@
  * 	    - BblasColMajor: Column major format
  *
  * @param[in] uplo
- * 	    An array of length group_count-1, where uplo[i]
+ * 	    An array of length group_count, where uplo[i]
  *          specifies whether the upper or lower triangular part of
  *          the Hermitian matrices C[j]-s of i-th group are to be stored
  *  
@@ -53,7 +53,7 @@
  *                             Hermitian matrices C[j] are to be stored.
  *
  * @param[in] trans
- * 	    An array of size group_count-1, where 
+ * 	    An array of length group_count, where 
  * 	    for j-th matrix in i-th group
  *          - BblasNoTrans:
  *            \f[ C[j] = \alpha[i] A[j] \times B[j]^H
@@ -63,17 +63,17 @@
  *                  + conjg( \alpha[i] ) B[j]^H \times A[j] + \beta[i] C[j]. \f]
  *
  * @param[in] n
- *          An array of integers of size group count-1, where n[i] is 
+ *          An array of integers of length group count-1, where n[i] is 
  *          the order of the matrices C[j] in i-th group. n[i] >= 0.
  *
  * @param[in] k
- * 	    An array of integers of length group_count-1. For matrices
+ * 	    An array of integers of length group_count. For matrices
  * 	    in i-th group
  *          If trans = BblasNoTrans, number of columns of A[j]-s and B[j]-s matrices;
  *          if trans = BblasConjTrans, number of rows of A[j]-s and B[j]-s matrices.
  *
  * @param[in] alpha
- *          An array of scalars of length group_count-1.
+ *          An array of scalars of length group_count.
  *
  * @param[in] A
  * 	    A is an array of pointers to matrices A[0], A[1] .. A[batch_count-1]. 
@@ -81,16 +81,18 @@
  * 	    A[j] of size lda[i]-by-ka.
  *    	    If trans[i] = BblasNoTrans,   ka = k[i];
  *          if trans[i] = BblasConjTrans, ka = n[i].
+ * 	    batch_count=\sum_{i=1}^{group_count}group_sizes[i].
+ *
  *
  * @param[in] lda
- *          An array of integers of length group_count-1, 
+ *          An array of integers of length group_count, 
  *          are the leading dimension of the arrays A[j]
  *          in i-th group.
  *          If trans[i] = BblasNoTrans,   lda[i] >= max(1, n[i]);
  *          if trans[i] = BblasConjTrans, lda[i] >= max(1, k[i]).
  *
  * @param[in] beta
- *          An array of scalars of size group_count-1.
+ *          An array of scalars of length group_count.
  *
  * @param[in,out] C
  * 		C is an array of pointers to matrices C[0], C[1] .. C[batc_count-1].
@@ -98,9 +100,11 @@
  *          	ldc[i]-by-n[i].
  *          	On exit, the uplo[i] part of the matrix is overwritten
  *          	by the uplo[i] part of the updated matrix.
+ * 		batch_count=\sum_{i=1}^{group_count}group_sizes[i].
+ *
  *
  * @param[in] ldc
- *          An array of integers of length group_count-1. Where ldc[i]
+ *          An array of integers of length group_count. Where ldc[i]
  *          is the leading dimension of the arrays C[j] in i-th group. 
  *          ldc[i] >= max(1, n[i]).
  *
@@ -128,7 +132,7 @@
  * @sa cherk_batch
  *
  ******************************************************************************/
-void blas_zherk_batch( int group_count, const int *group_sizes,
+void blas_zherk_batch(int group_count, const int *group_sizes,
 		      bblas_enum_t layout, const bblas_enum_t *uplo, const bblas_enum_t *trans,
 		      const int *n, const int *k, 
 		      const double *alpha, bblas_complex64_t const *const *A, const int *lda, 

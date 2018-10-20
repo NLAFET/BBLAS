@@ -41,7 +41,7 @@
  * 	    - BblasColMajor: Column major format
  *
  * @param[in] side
- * 	    An array of size group_count. side[i]
+ * 	    An array of length group_count. side[i]
  *          Specifies whether the Hermitian matrices A[j]-s of i-th 
  *          group appear on the left or right in the operation as follows:
  *          - BblasLeft: \f[ C[j] = \alpha[i] \times A[j] \times B[j] + \beta[i] \times C[j] \f] 
@@ -76,6 +76,8 @@
  * 		matrix A[j] of size lda[i]-by-ka, where ka is m[i] when 
  * 		side[i] = BblasLeft, and is n[i] otherwise. Only the uplo 
  * 		triangular part is referenced.
+ *              batch_count=\sum_{i=1}^{group_count}group_sizes[i].
+ *
  *
  * @param[in] lda
  * 	    An array of length group_count, where lda[i] is
@@ -87,6 +89,7 @@
  * 	    where each element B[j] of i-th group is a pointer to a 
  * 	    matrix B[j] of size ldb[i]-by-n[i] matrix, where the leading 
  * 	    m[i]-by-n[i] part of the array B[j] must contain the matrix B[j].
+ *          batch_count=\sum_{i=1}^{group_count}group_sizes[i].
  *
  * @param[in] ldb
  * 	    An array of length group_count, where ldb[i] is
@@ -101,6 +104,7 @@
  * 		In i-th group each element C[j] is a pointer to a matrix C[j].
  *		On exit, each array C[j] of i-th group is overwritten 
  *              by the m[i]-by-n[i] updated matrix.
+ *              batch_count=\sum_{i=1}^{group_count}group_sizes[i].
  *
  * @param[in] ldc
  * 	    An array of integers of size group_count, which
@@ -131,13 +135,13 @@
  * @sa chemm_batch
  *
  ******************************************************************************/
-void blas_zhemm_batch( int group_count, const int *group_sizes,
-			bblas_enum_t layout, const bblas_enum_t *side, const bblas_enum_t *uplo,
-    			const int *m, const int *n, 
-			const bblas_complex64_t *alpha, bblas_complex64_t const *const *A, const int *lda, 
-    			 		 	        bblas_complex64_t const* const *B, const int *ldb, 
-			const bblas_complex64_t *beta,  bblas_complex64_t** C, const int *ldc, 
-    			int *info)
+void blas_zhemm_batch(int group_count, const int *group_sizes,
+		      bblas_enum_t layout, const bblas_enum_t *side, const bblas_enum_t *uplo,
+		      const int *m, const int *n, 
+		      const bblas_complex64_t *alpha, bblas_complex64_t const *const *A, const int *lda, 
+		      bblas_complex64_t const* const *B, const int *ldb, 
+		      const bblas_complex64_t *beta,  bblas_complex64_t** C, const int *ldc, 
+		      int *info)
 {
 	// Local variables 
 	int group_iter;

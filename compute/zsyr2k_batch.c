@@ -53,7 +53,7 @@
  *                            symmetric matrices C[j] are to be stored.
  *
  * @param[in] trans
- * 	    An array of size group_count-1, where 
+ * 	    An array of length group_count-1, where 
  * 	    for j-th matrix in i-th group
  *          - BblasNoTrans:
  *            \f[ C[i] = \alpha[i] A[j] \times B[j]^T + \alpha[i] B[j] \times A[j]^T + \beta[i] C[j]; \f]
@@ -61,7 +61,7 @@
  *            \f[ C[j] = \alpha[i] A[j]^T \times B[j] + \alpha[i] B[j]^T \times A[j] + \beta[i] C[j]. \f]
  *
  * @param[in] n
- *          An array of integers of size group count-1, where n[i] is 
+ *          An array of integers of length group count-1, where n[i] is 
  *          the order of the matrices C[j] in i-th group. n[i] >= 0.
  *
  * @param[in] k
@@ -79,6 +79,8 @@
  * 	    A[j] of size lda[i]-by-ka.
  *    	    If trans[i] = BblasNoTrans,   ka = k[i];
  *          if trans[i] = BblasTrans, ka = n[i].
+ * 	    batch_count=\sum_{i=1}^{group_count}group_sizes[i].
+ *
  *
  * @param[in] lda
  *          An array of integers of length group_count-1, 
@@ -93,6 +95,8 @@
  *          	ldb[i]-by-kb.
  *          	If trans[i] = BblasNoTrans,   kb = k[i];
  *          	if trans[i] = BblasTrans, kb = n[i].
+ * 		batch_count=\sum_{i=1}^{group_count}group_sizes[i].
+ *
  *
  * @param[in] ldb
  *          An array of integers of size group_count-1, are 
@@ -109,6 +113,8 @@
  *          	ldc[i]-by-n[i].
  *          	On exit, the uplo[i] part of the matrix is overwritten
  *          	by the uplo[i] part of the updated matrix.
+ * 		batch_count=\sum_{i=1}^{group_count}group_sizes[i].
+ *
  *
  * @param[in] ldc
  *          An array of integers of length group_count-1. Where ldc[i]
@@ -141,13 +147,13 @@
  * @sa ssyr2k_batch
  *
  ******************************************************************************/
-void blas_zsyr2k_batch( int group_count, const int *group_sizes, 
-			bblas_enum_t layout, const bblas_enum_t *uplo, const bblas_enum_t *trans,
-    			const int *n, const int *k, 
-			const bblas_complex64_t *alpha, bblas_complex64_t const *const *A, const int *lda, 
-    			 		 	        bblas_complex64_t const* const *B, const int *ldb, 
-			const double  *beta,  bblas_complex64_t** C, const int *ldc, 
-    			 int *info)
+void blas_zsyr2k_batch(int group_count, const int *group_sizes, 
+		       bblas_enum_t layout, const bblas_enum_t *uplo, const bblas_enum_t *trans,
+		       const int *n, const int *k, 
+		       const bblas_complex64_t *alpha, bblas_complex64_t const *const *A, const int *lda, 
+		       				       bblas_complex64_t const* const *B, const int *ldb, 
+		       const double  *beta,  bblas_complex64_t** C, const int *ldc, 
+		       int *info)
 
 {
 	// Local variables 

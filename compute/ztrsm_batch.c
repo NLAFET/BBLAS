@@ -35,10 +35,10 @@
  *******************************************************************************
  *
  * @param[in] group_count
- * 	    The number groups of matrices with fixed size.	  
+ * 	    The number groups of matrices.	  
  *
  * @param[in] group_sizes
- * 	    An array of integers of size group_count-1
+ * 	    An array of integers of length group_count-1
  * 	    denoting the number of matrices in each group.	
  * 
  * @param[in] layout
@@ -48,20 +48,20 @@
  * 	    - BblasColMajor: Column major format
  *
  * @param[in] side
- * 	    An array of size group_count-1, where for matrices of i-th group
+ * 	    An array of length group_count-1, where for matrices of i-th group
  *          specifies whether op( A[j] ) appears on the left or on the right of X[j]:
  *          - BblasLeft:  op( A[j] )*X[j] = B[j],
  *          - BblasRight: X[j]*op( A[j] ) = B[j].
  *
  * @param[in] uplo
- * 	    An array of size group_count-1, where for matrices of i-th group
+ * 	    An array of length group_count-1, where for matrices of i-th group
  *          specifies whether the matrices A[j]-s are upper triangular or lower
  *          triangular:
  *          - BblasUpper: Upper triangle of A[j] is stored;
  *          - BblasLower: Lower triangle of A[j] is stored.
  *
  * @param[in] transa
- * 	    An array of size group_count-1, where
+ * 	    An array of length group_count-1, where
  *          - BblasNoTrans:   A[j]-s in i-th group are not transposed,
  *          - BblasTrans:     A[j]-s in i-th group are transposed,
  *          - BblasConjTrans: A[j]-s in i-th group are conjugate transposed.
@@ -100,6 +100,7 @@
  *          strictly upper triangular part of A[j] is not referenced.
  *          If diag[i] = BblasUnit, the diagonal elements of A[j] are also not
  *          referenced and are assumed to be 1.
+ * 	    batch_count=\sum_{i=1}^{group_count}group_sizes[i].
  *
  * @param[in] lda
  * 	    An arrray of integers of length group_count-1, where
@@ -110,6 +111,7 @@
  * 	    B is an array of pointers to matrices B[0], B[1] .. B[batch_count-1], 
  *          On entry, for i-th group each B[j]-s are ldb[i]-by-n[i] right hand side matrix.
  *          On exit, if return value = 0, the ldb[i]-by-n[i] solution matrix X.
+ *	    batch_count=\sum_{i=1}^{group_count}group_sizes[i].
  *
  * @param[in] ldb
  * 	    An array of integers of length group_count-1, where
@@ -143,12 +145,12 @@
  *
  ******************************************************************************/
 void blas_ztrsm_batch(int group_count, const int *group_sizes,
-			bblas_enum_t layout, const bblas_enum_t *side, const bblas_enum_t *uplo,
-    			const bblas_enum_t *transa, const bblas_enum_t *diag,
-    			const int *m, const int *n, 
-			const bblas_complex64_t *alpha, bblas_complex64_t const *const *A, const int *lda,
-    			bblas_complex64_t **B, const int *ldb,
-			int *info)
+		      bblas_enum_t layout, const bblas_enum_t *side, const bblas_enum_t *uplo,
+		      const bblas_enum_t *transa, const bblas_enum_t *diag,
+		      const int *m, const int *n, 
+		      const bblas_complex64_t *alpha, bblas_complex64_t const *const *A, const int *lda,
+		      bblas_complex64_t **B, const int *ldb,
+		      int *info)
 
 {
 	// Local variables 

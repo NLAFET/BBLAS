@@ -127,8 +127,8 @@ void blas_zsymm_batchf( int group_size,
 	int LDA;
 
 	// Check input arguments 
-	if ((layout != CblasRowMajor) &&
-			(layout != CblasColMajor)) {
+	if ((layout != BblasRowMajor) &&
+			(layout != BblasColMajor)) {
 		bblas_error("Illegal value of layout");
 		if (info[0] != BblasErrorsReportNone) {
 			bblas_set_info(info[0], &info[0], group_size, 3);

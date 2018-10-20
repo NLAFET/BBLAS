@@ -45,6 +45,9 @@ extern "C" {
 enum {
     BblasInvalid       = -1,
 
+    BblasRowMajor      = 101,
+    BblasColMajor      = 102,
+
     BblasNoTrans       = 111,
     BblasTrans         = 112,
     BblasConjTrans     = 113,

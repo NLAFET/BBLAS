@@ -108,20 +108,20 @@
  *						     length of the array should be atleast 1.
  ******************************************************************************/
 
-void blas_zherk_batchf( int group_size,
-		      bblas_enum_t layout, bblas_enum_t uplo, bblas_enum_t trans,
-		      int n, int k, 
-		      const double alpha, bblas_complex64_t const *const *A, int lda, 
-		      const double  beta,  bblas_complex64_t** C, int ldc, 
-    		      int *info)
+void blas_zherk_batchf(int group_size,
+		       bblas_enum_t layout, bblas_enum_t uplo, bblas_enum_t trans,
+		       int n, int k, 
+		       const double alpha, bblas_complex64_t const *const *A, int lda, 
+		       const double  beta,  bblas_complex64_t** C, int ldc, 
+		       int *info)
 {
 	// Local variables 
 	int iter;
 	int LDA;
 
 	// Check input arguments 
-	if ((layout != CblasRowMajor) &&
-			(layout != CblasColMajor)) {
+	if ((layout != BblasRowMajor) &&
+			(layout != BblasColMajor)) {
 		bblas_error("Illegal value of layout");
 		if (info[0] != BblasErrorsReportNone) {
 			bblas_set_info(info[0], &info[0], group_size, 3);
@@ -189,12 +189,12 @@ void blas_zherk_batchf( int group_size,
 	for (iter = 0; iter < group_size; iter++) {
 		// Call to cblas_zherk 
 		cblas_zherk(layout,
-				uplo, trans,
-				n, k,
-				alpha,
-				A[iter], lda,
-				beta,
-				C[iter], ldc);
+			    uplo, trans,
+			    n, k,
+			    alpha,
+			    A[iter], lda,
+			    beta,
+			    C[iter], ldc);
 		// Successful 
 		info[iter] = 0;
 	} // END FIXED SIZE FOR LOOP 
