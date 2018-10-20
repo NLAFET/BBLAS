@@ -1,29 +1,18 @@
 /**
- * @file ztrsm_batchf.c
  *
- * @brief BBLAS ztrsm_batchf double _Complex routine.
+ * @file
  *
- * BBLAS is a software package provided by 
- * Univ. of Manchester,
- * Univ. of Tennessee.
+ *  PLASMA is a software package provided by:
+ *  University of Tennessee, US,
+ *  University of Manchester, UK.
  *
- * @author  Srikara Pranesh
- * @author  Mawussi Zounon
- * @date    2018-09-22
+ * @precisions normal z -> s d c
  *
  **/
-
-#ifndef DOXYGEN_SHOULD_SKIP_THIS
-/**
- * Code generation
- * @precisions normal z -> c d s
- **/
-#endif
 
 #include "cblas.h"
 #include "bblas.h"
 
-#define COMPLEX
 
 /***************************************************************************//**
  *
@@ -128,8 +117,18 @@
  *						     of the array should be atleast 1.
  *			- BblasErrorsReportNone   :  No error will be reported on output, and
  *						     length of the array should be atleast 1.
+ ******************************************************************************
+ *
+ * @retval BblasSuccess successful exit
+ *
+ *******************************************************************************
+ *
+ * @sa ztrsm_batchf
+ * @sa ctrsm_batchf
+ * @sa dtrsm_batchf
+ * @sa strsm_batchf
+ *
  ******************************************************************************/
-
 void blas_ztrsm_batchf(int group_size,
 			bblas_enum_t layout, bblas_enum_t side, bblas_enum_t uplo,
     			bblas_enum_t transa, bblas_enum_t diag,

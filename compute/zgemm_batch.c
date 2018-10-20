@@ -1,37 +1,24 @@
 /**
- * @file blas_zgemm_batch.c
  *
- *  @brief BBLAS blas_zgemm_batch double _Complex routine.
+ * @file
  *
- *  BBLAS is a software package provided by 
- *  Univ. of Manchester,
- *  Univ. of Tennessee.
+ *  PLASMA is a software package provided by:
+ *  University of Tennessee, US,
+ *  University of Manchester, UK.
  *
- * @version 1.0.0
- * @author  Srikara Pranesh
- * @author  Mawussi Zounon
- * @date    2018-10-08
+ * @precisions normal z -> s d c
  *
  **/
-
-#ifndef DOXYGEN_SHOULD_SKIP_THIS
-/**
- * Code generation
- * @precisions normal z -> c d s
- **/
-#endif
 
 #include "cblas.h"
 #include "bblas.h"
 
-#define COMPLEX
-
-/*****************************************************************************
+/***************************************************************************//**
  *
- * @ingroup gemm_batch  
+ * @ingroup gemm_batch
  *
  * blas_zgemm_batch is a batch version of zgemm. It performs 
- * matrix-matrix multiplication 
+ * matrix-matrix multiplication
  *
  *  \f[ C[i] = \alpha[i] [op( A[i] )\times op( B[i] )] + \beta[i] C[i], \f]
  *
@@ -150,6 +137,17 @@
  *						     of the array should be atleast 1.
  *			- BblasErrorsReportNone   :  No error will be reported on output, and
  *						     length of the array should be atleast 1.
+ ******************************************************************************
+ *
+ * @retval BblasSuccess successful exit
+ *
+ *******************************************************************************
+ *
+ * @sa zgemm_batch
+ * @sa cgemm_batch
+ * @sa dgemm_batch
+ * @sa sgemm_batch
+ *
  ******************************************************************************/
 void blas_zgemm_batch( int group_count, const int *group_sizes,
 		bblas_enum_t layout, const bblas_enum_t *transa, const bblas_enum_t *transb,

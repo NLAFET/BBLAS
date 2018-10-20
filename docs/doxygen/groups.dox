@@ -1,0 +1,94 @@
+/**
+
+------------------------------------------------------------
+@defgroup group_batched_blas                Batched BLAS
+@brief    Batched BLAS group API functions.
+          Standard Batched BLAS routines
+@{
+
+    @defgroup group_blas3          : Standard Batched matrix-matrix operations,
+    @brief   Batched matrix-matrix operations that perform on many groups of different size matrices.
+
+    @{
+        @defgroup gemm_batch       gemm_batch:  Batched general matrix multiply: C[i] = A[i]B[i] + C[i]
+        @brief    \f$ C[i] = \alpha[i] \;op(A[i]) \;op(B[i]) + \beta[i] C[i] \f$
+
+        @defgroup hemm_batch       hemm_batch: Batched hermitian matrix multiply
+        @brief    \f$ C[i] = \alpha[i] A[i] B[i] + \beta[i] C[i] \f$
+               or \f$ C[i] = \alpha[i] B[i] A[i] + \beta C[i] \f$ where \f$ A[i] \f$ are hermitian
+
+        @defgroup herk_batch       herk_batch:  Batched hermitian rank k update
+        @brief    \f$ C[i] = \alpha[i] A[i] A[i]^T + \beta[i] C[i] \f$ where \f$ C[i] \f$ are hermitian
+
+        @defgroup her2k_batch      her2k_batch: Batched hermitian rank 2k update
+        @brief    \f$ C[i] = \alpha[i] A[i] B[i]^T + \alpha[i] B[i] A[i]^T + \beta[i] C[i] \f$ where \f$ C[i] \f$ are Hermitian
+
+        @defgroup symm_batch       symm_batch:  Batched symmetric matrix multiply
+        @brief    \f$ C[i] = \alpha[i] A[i] B[i] + \beta[i] C[i] \f$
+               or \f$ C[i] = \alpha[i] B[i] A[i] + \beta[i] C[i] \f$ where \f$ A[i] \f$ are symmetric
+
+        @defgroup syrk_batch       syrk_batch: Batched symmetric rank k update
+        @brief    \f$ C[i] = \alpha[i] A[i] A[i]^T + \beta[i] C[i] \f$ where \f$ C[i] \f$ are symmetric
+
+        @defgroup syr2k_batch      syr2k_batch: Batched symmetric rank 2k update
+        @brief    \f$ C[i] = \alpha[i] A[i] B[i]^T + \alpha[i] B[i] A[i]^T + \beta[i] C[i] \f$ where \f$ C[i] \f$ are symmetric
+
+        @defgroup trmm_batch       trmm_batch: Batched triangular matrix multiply
+        @brief    \f$ B[i] = \alpha[i] \;op(A[i])\; B[i] \f$
+               or \f$ B[i] = \alpha[i] B[i] \;op(A[i])   \f$ where \f$ A[i] \f$ are triangular
+
+        @defgroup trsm_batch       trsm_batch: Batched triangular solve matrix
+        @brief    \f$ C[i] = op(A[i])^{-1} B[i]   \f$
+               or \f$ C[i] = B[i] \;op(A[i])^{-1} \f$ where \f$ A[i] \f$ are triangular
+
+    @}
+
+@}
+
+------------------------------------------------------------
+@defgroup fixed_api                 Fixed Batched BLAS API
+@brief    Fixed Batched BLAS functions.
+
+@{
+
+    @defgroup core_batched_blas            : Fixed Batched matrix-matrix operations,
+    @brief    Fixed Batched matrix-matrix operations that perform on problems of same size.
+
+    @{
+        @defgroup gemm_batchf       gemm_batchf:  Batch of same size general  matrix multiply: C[i] = A[i]B[i] + C[i]
+        @brief    \f$ C[i] = \alpha[i] \;op(A[i]) \;op(B[i]) + \beta[i] C[i] \f$
+
+        @defgroup hemm_batchf       hemm_batchf: Batch of same size hermitian matrix multiply
+        @brief    \f$ C[i] = \alpha[i] A[i] B[i] + \beta[i] C[i] \f$
+               or \f$ C[i] = \alpha[i] B[i] A[i] + \beta C[i] \f$ where \f$ A[i] \f$ are hermitian
+
+        @defgroup herk_batchf       herk_batchf:  Batch of same size hermitian rank k update
+        @brief    \f$ C[i] = \alpha[i] A[i] A[i]^T + \beta[i] C[i] \f$ where \f$ C[i] \f$ are hermitian
+
+        @defgroup her2k_batchf      her2k_batchf: Batch of same size hermitian rank 2k update
+        @brief    \f$ C[i] = \alpha[i] A[i] B[i]^T + \alpha[i] B[i] A[i]^T + \beta[i] C[i] \f$ where \f$ C[i] \f$ are Hermitian
+
+        @defgroup symm_batchf       symm_batchf:  Batch of same size symmetric matrix multiply
+        @brief    \f$ C[i] = \alpha[i] A[i] B[i] + \beta[i] C[i] \f$
+               or \f$ C[i] = \alpha[i] B[i] A[i] + \beta[i] C[i] \f$ where \f$ A[i] \f$ are symmetric
+
+        @defgroup syrk_batchf       syrk_batchf: Batch of same size symmetric rank k update
+        @brief    \f$ C[i] = \alpha[i] A[i] A[i]^T + \beta[i] C[i] \f$ where \f$ C[i] \f$ are symmetric
+
+        @defgroup syr2k_batchf      syr2k_batchf: Batch of same size symmetric rank 2k update
+        @brief    \f$ C[i] = \alpha[i] A[i] B[i]^T + \alpha[i] B[i] A[i]^T + \beta[i] C[i] \f$ where \f$ C[i] \f$ are symmetric
+
+        @defgroup trmm_batchf       trmm_batchf: Batch of same size triangular matrix multiply
+        @brief    \f$ B[i] = \alpha[i] \;op(A[i])\; B[i] \f$
+               or \f$ B[i] = \alpha[i] B[i] \;op(A[i])   \f$ where \f$ A[i] \f$ are triangular
+
+        @defgroup trsm_batchf       trsm_batchf: Batch of same size triangular solve matrix
+        @brief    \f$ C[i] = op(A[i])^{-1} B[i]   \f$
+               or \f$ C[i] = B[i] \;op(A[i])^{-1} \f$ where \f$ A[i] \f$ are triangular
+
+    @}
+
+
+
+@}
+*/

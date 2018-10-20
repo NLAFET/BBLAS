@@ -1,35 +1,21 @@
 /**
- * @file zgemm_batchf.c
  *
- *  @brief BBLAS zgemm_batchf double _Complex routine.
+ * @file
  *
- *  BBLAS is a software package provided by 
- *  Univ. of Manchester,
- *  Univ. of Tennessee.
+ *  PLASMA is a software package provided by:
+ *  University of Tennessee, US,
+ *  University of Manchester, UK.
  *
- *
- * 
- * @author  Srikara Pranesh
- * @author  Mawussi Zounon
- * @date    2018-09-18
+ * @precisions normal z -> s d c
  *
  **/
 
-#ifndef DOXYGEN_SHOULD_SKIP_THIS
-/**
- * Code generation
- * @precisions normal z -> c d s
- **/
-#endif
-
-#include "bblas.h"
 #include "cblas.h"
+#include "bblas.h"
 
-#define COMPLEX
-
-/*****************************************************************************
+/***************************************************************************//**
  *
- * @ingroup gemm_batchf  
+ * @ingroup gemm_batchf
  *
  * zgemm_batchf is a batch version of zgemm. It performs 
  * matrix-matrix multiplication of matrices, where all the
@@ -134,6 +120,16 @@
  *						     of the array should be atleast 1.
  *			- BblasErrorsReportNone   :  No error will be reported on output, and
  *						     length of the array should be atleast 1.
+ ********************************************************************************
+ * @retval BblasSuccess successful exit
+ *
+ *******************************************************************************
+ *
+ * @sa zgemm_batchf
+ * @sa cgemm_batchf
+ * @sa dgemm_batchf
+ * @sa sgemm_batchf
+ *
  ******************************************************************************/
 void blas_zgemm_batchf (int group_size, 
 			bblas_enum_t layout, bblas_enum_t transa, bblas_enum_t transb,

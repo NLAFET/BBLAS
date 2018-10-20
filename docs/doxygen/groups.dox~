@@ -1,0 +1,263 @@
+/**
+
+------------------------------------------------------------
+@defgroup group_batched_blas                Batched BLAS
+@brief    Batched BLAS group API functions.
+          Standard Batched BLAS routines
+@{
+
+    @defgroup group_blas3           Level 3: Batched matrix-matrix operations, O(n^3) work
+    @brief   Batched matrix-matrix operations that perform \f$ O(n^3) \f$ work on \f$ O(n^2) \f$ data.
+              These benefit from cache reuse, since many operations can be
+              performed for every read from main memory.
+    @{
+        @defgroup gemm_batch       gemm_batch:  Batched general matrix multiply: C[i] = A[i]B[i] + C[i]
+        @brief    \f$ C[i] = \alpha[i] \;op(A[i]) \;op(B[i]) + \beta[i] C[i] \f$
+
+        @defgroup hemm_batch       hemm_batch: Batched hermitian matrix multiply
+        @brief    \f$ C = \alpha A B + \beta C \f$
+               or \f$ C = \alpha B A + \beta C \f$ where \f$ A \f$ is Hermitian
+
+        @defgroup herk       herk:  Hermitian rank k update
+        @brief    \f$ C = \alpha A A^T + \beta C \f$ where \f$ C \f$ is Hermitian
+
+        @defgroup her2k      her2k: Hermitian rank 2k update
+        @brief    \f$ C = \alpha A B^T + \alpha B A^T + \beta C \f$ where \f$ C \f$ is Hermitian
+
+        @defgroup symm       symm:  Symmetric matrix multiply
+        @brief    \f$ C = \alpha A B + \beta C \f$
+               or \f$ C = \alpha B A + \beta C \f$ where \f$ A \f$ is symmetric
+
+        @defgroup syrk       syrk:  Symmetric rank k update
+        @brief    \f$ C = \alpha A A^T + \beta C \f$ where \f$ C \f$ is symmetric
+
+        @defgroup syr2k      syr2k: Symmetric rank 2k update
+        @brief    \f$ C = \alpha A B^T + \alpha B A^T + \beta C \f$ where \f$ C \f$ is symmetric
+
+        @defgroup trmm       trmm:  Triangular matrix multiply
+        @brief    \f$ B = \alpha \;op(A)\; B \f$
+               or \f$ B = \alpha B \;op(A)   \f$ where \f$ A \f$ is triangular
+
+        @defgroup trsm       trsm:  Triangular solve matrix
+        @brief    \f$ C = op(A)^{-1} B   \f$
+               or \f$ C = B \;op(A)^{-1} \f$ where \f$ A \f$ is triangular
+
+        @defgroup trtri      trtri: Triangular inverse; used in getri, potri
+        @brief    \f$ A = A^{-1} \f$ where \f$ A \f$ is triangular
+    @}
+
+    @defgroup group_larf            Householder reflectors
+    @{
+        @defgroup larf       larf:  Apply Householder reflector to general matrix
+        @defgroup larfy      larfy: Apply Householder reflector to symmetric/Hermitian matrix
+        @defgroup larfg      larfg: Generate Householder reflector
+        @defgroup larfb      larfb: Apply block of Householder reflectors (Level 3)
+    @}
+
+    @defgroup group_mixed           Precision conversion
+    @{
+        @defgroup lag2       _lag2_: Converts general    matrix between single and double
+        @defgroup lat2       _lat2_: Converts triangular matrix between single and double
+    @}
+
+    @defgroup group_norms           Matrix norms
+    @{
+        @defgroup lange      lange:    General matrix norm
+        @brief 1, Frobenius, or Infinity norm; or largest element
+
+        @defgroup lanhe      lansy/he: Symmetric/Hermitian matrix norm
+        @brief 1, Frobenius, or Infinity norm; or largest element
+
+        @defgroup lantr      lantr:    Triangular matrix norm
+        @brief 1, Frobenius, or Infinity norm; or largest element
+    @}
+@}
+
+------------------------------------------------------------
+@defgroup core_blas                 Core BLAS and Auxiliary (single core)
+@brief    Core BLAS and Auxiliary functions.
+          Standard BLAS and LAPACK auxiliary routines are grouped by
+          amount of work into Level 1, 2, 3.
+@{
+    @defgroup core_blas0            Level 0: element operations, O(1) work
+    @brief    Operations on single elements.
+    @{
+        @defgroup core_cabs1        cabs1: Complex 1-norm absolute value
+        @brief    \f$ |real(alpha)| + |imag(alpha)| \f$
+    @}
+
+    @defgroup core_blas1            Level 1: vectors operations, O(n) work
+    @brief    Vector operations that perform \f$ O(n) \f$ work on \f$ O(n) \f$ data.
+              These are memory bound, since every operation requires a memory read or write.
+    @{
+        @defgroup core_asum         asum:  Sum vector
+        @brief    \f$ \sum_i |x_i| \f$
+
+        @defgroup core_axpy         axpy:  Add vectors
+        @brief    \f$ y = \alpha x + y \f$
+
+        @defgroup core_copy         copy:  Copy vector
+        @brief    \f$ y = x \f$
+
+        @defgroup core__dot         dot:   Dot (inner) product
+        @brief    \f$ x^T y \f$
+               or \f$ x^H y \f$
+
+        @defgroup core_iamax        iamax: Find max element
+        @brief    \f$ \text{argmax}_i\; |x_i| \f$
+
+        @defgroup core_iamin        iamin: Find min element
+        @brief    \f$ \text{argmin}_i\; |x_i| \f$
+
+        @defgroup core_nrm2         nrm2:  Vector 2 norm
+        @brief    \f$ ||x||_2 \f$
+
+        @defgroup core_rot          rot:   Apply Givens rotation
+
+        @defgroup core_rotg         rotg:  Generate Givens rotation
+
+        @defgroup core_scal         scal:  Scale vector
+        @brief    \f$ x = \alpha x \f$
+
+        @defgroup core_swap         swap:  Swap vectors
+        @brief    \f$ x <=> y \f$
+    @}
+
+    @defgroup core_blas2            Level 2: matrix-vector operations, O(n^2) work
+    @brief    Matrix operations that perform \f$ O(n^2) \f$ work on \f$ O(n^2) \f$ data.
+              These are memory bound, since every operation requires a memory read or write.
+    @{
+        @defgroup core_geadd        geadd: Add matrices
+        @brief    \f$ B = \alpha A + \beta B \f$
+
+        @defgroup core_gemv         gemv:       General matrix-vector multiply
+        @brief    \f$ y = \alpha Ax + \beta y \f$
+
+        @defgroup core_ger          ger:        General matrix rank 1 update
+        @brief    \f$ A = \alpha xy^T + A \f$
+
+        @defgroup core_hemv         hemv:    Hermitian matrix-vector multiply
+        @brief    \f$ y = \alpha Ax + \beta y \f$
+
+        @defgroup core_her          her:     Hermitian rank 1 update
+        @brief    \f$ A = \alpha xx^T + A \f$
+
+        @defgroup core_her2         her2:    Hermitian rank 2 update
+        @brief    \f$ A = \alpha xy^T + \alpha yx^T + A \f$
+
+        @defgroup core_symv         symv:    Symmetric matrix-vector multiply
+        @brief    \f$ y = \alpha Ax + \beta y \f$
+
+        @defgroup core_syr          syr:     Symmetric rank 1 update
+        @brief    \f$ A = \alpha xx^T + A \f$
+
+        @defgroup core_syr2         syr2:    Symmetric rank 2 update
+        @brief    \f$ A = \alpha xy^T + \alpha yx^T + A \f$
+
+        @defgroup core_trmv         trmv:       Triangular matrix-vector multiply
+        @brief    \f$ x = Ax \f$
+
+        @defgroup core_trsv         trsv:       Triangular matrix-vector solve
+        @brief    \f$ x = op(A^{-1})\; b \f$
+
+        @defgroup core_lacpy        lacpy:  Copy matrix
+        @brief    \f$ B = A \f$
+
+        @defgroup core_lascl        lascl:  Scale matrix by scalar
+        @brief    \f$ A = \alpha A \f$
+
+        @defgroup core_lascl2       lascl2: Scale matrix by diagonal
+        @brief    \f$ A = D A \f$
+
+        @defgroup core_laset        laset:  Set matrix to constants
+        @brief    \f$ A_{ij} = \f$ diag    if \f$ i=j \f$;
+                  \f$ A_{ij} = \f$ offdiag otherwise.
+    @}
+
+    @defgroup core_blas3            Level 3: matrix-matrix operations, O(n^3) work
+    @brief    Matrix-matrix operations that perform \f$ O(n^3) \f$ work on \f$ O(n^2) \f$ data.
+              These benefit from cache reuse, since many operations can be
+              performed for every read from main memory.
+    @{
+        @defgroup core_gemm         gemm:  General matrix multiply: C = AB + C
+        @brief    \f$ C = \alpha \;op(A) \;op(B) + \beta C \f$
+
+        @defgroup core_hemm         hemm:  Hermitian matrix multiply
+        @brief    \f$ C = \alpha A B + \beta C \f$
+               or \f$ C = \alpha B A + \beta C \f$ where \f$ A \f$ is Hermitian
+
+        @defgroup core_herk         herk:  Hermitian rank k update
+        @brief    \f$ C = \alpha A A^T + \beta C \f$ where \f$ C \f$ is Hermitian
+
+        @defgroup core_her2k        her2k: Hermitian rank 2k update
+        @brief    \f$ C = \alpha A B^T + \alpha B A^T + \beta C \f$ where \f$ C \f$ is Hermitian
+
+        @defgroup core_symm         symm:  Symmetric matrix multiply
+        @brief    \f$ C = \alpha A B + \beta C \f$
+               or \f$ C = \alpha B A + \beta C \f$ where \f$ A \f$ is symmetric
+
+        @defgroup core_syrk         syrk:  Symmetric rank k update
+        @brief    \f$ C = \alpha A A^T + \beta C \f$ where \f$ C \f$ is symmetric
+
+        @defgroup core_syr2k        syr2k: Symmetric rank 2k update
+        @brief    \f$ C = \alpha A B^T + \alpha B A^T + \beta C \f$ where \f$ C \f$ is symmetric
+
+        @defgroup core_trmm         trmm:  Triangular matrix multiply
+        @brief    \f$ B = \alpha \;op(A)\; B \f$
+               or \f$ B = \alpha B \;op(A)   \f$ where \f$ A \f$ is triangular
+
+        @defgroup core_trsm         trsm:  Triangular solve matrix
+        @brief    \f$ C = op(A)^{-1} B   \f$
+               or \f$ C = B \;op(A)^{-1} \f$ where \f$ A \f$ is triangular
+
+        @defgroup core_trtri        trtri: Triangular inverse; used in getri, potri
+        @brief    \f$ A = A^{-1} \f$ where \f$ A \f$ is triangular
+    @}
+
+    @defgroup core_group_larf       Householder reflectors
+    @{
+        @defgroup core_larf         larf:  Apply Householder reflector to general matrix
+        @defgroup core_larfy        larfy: Apply Householder reflector to symmetric/Hermitian matrix
+        @defgroup core_larfg        larfg: Generate Householder reflector
+        @defgroup core_larfb        larfb: Apply block of Householder reflectors (Level 3)
+    @}
+
+    @defgroup core_mixed            Precision conversion
+    @{
+        @defgroup core_lag2         _lag2_: Converts general    matrix between single and double
+        @defgroup core_lat2         _lat2_: Converts triangular matrix between single and double
+    @}
+
+    @defgroup core_norms            Matrix norms
+    @{
+        @defgroup core_lange        lange: General matrix norm
+        @brief 1, Frobenius, or Infinity norm; or largest element
+
+        @defgroup core_lanhe        lanhe: Hermitian matrix norm
+        @brief 1, Frobenius, or Infinity norm; or largest element
+
+        @defgroup core_lansy        lansy: Symmetric matrix norm
+        @brief 1, Frobenius, or Infinity norm; or largest element
+
+        @defgroup core_lantr        lantr: Triangular matrix norm
+        @brief 1, Frobenius, or Infinity norm; or largest element
+    @}
+
+    @defgroup core_solvers          Linear system solvers
+    @{
+        @defgroup core_potrf        potrf: Cholesky factorization
+        @defgroup core_geqrt        geqrt: QR factorization of a tile
+        @defgroup core_tsqrt        tsqrt: QR factorization of a rectangular matrix of two tiles
+        @defgroup core_unmqr        unmqr: Apply Householder reflectors from QR to a tile
+        @defgroup core_tsmqr        tsmqr: Apply Householder reflectors from QR to a rectangular matrix of two tiles
+        @defgroup core_gelqt        gelqt: LQ factorization of a tile
+        @defgroup core_tslqt        tslqt: LQ factorization of a rectangular matrix of two tiles
+        @defgroup core_unmlq        unmlq: Apply Householder reflectors from LQ to a tile
+        @defgroup core_tsmlq        tsmlq: Apply Householder reflectors from LQ to a rectangular matrix of two tiles
+        @defgroup core_pamm         pamm: Updating a matrix using two tiles
+        @defgroup core_parfb        parfb: Apply Householder reflectors to a rectangular matrix of two tiles
+    @}
+@}
+
+@}
+*/

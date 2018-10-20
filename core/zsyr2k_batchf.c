@@ -1,33 +1,21 @@
 /**
- * @file zsyr2k_batchf.c
  *
- *  @brief BBLAS zsyr2k_batchf  for double _Complex routine.
+ * @file
  *
- *  BBLAS is a software package provided by 
- *  Univ. of Manchester,
- *  Univ. of Tennessee.
+ *  PLASMA is a software package provided by:
+ *  University of Tennessee, US,
+ *  University of Manchester, UK.
  *
- * @author  Srikara Pranesh
- * @author  Mawussi Zounon
- * @date    2018-09-22
+ * @precisions normal z -> s d c
  *
  **/
-
-#ifndef DOXYGEN_SHOULD_SKIP_THIS
-/**
- * Code generation
- * @precisions normal z -> c d s
- **/
-#endif
 
 #include "cblas.h"
 #include "bblas.h"
 
-#define COMPLEX
-
 /***************************************************************************//**
  *
- * @ingroup syr2k_batchf
+ * @ingroup syr2k_batchf 
  *
  *  Performs one of the batch symmetric rank 2k operations
  *
@@ -121,8 +109,18 @@
  *						     of the array should be atleast 1.
  *			- BblasErrorsReportNone   :  No error will be reported on output, and
  *						     length of the array should be atleast 1.
+ ******************************************************************************
+ *
+ * @retval  BblasSuccess successful exit
+ *
+ *******************************************************************************
+ *
+ * @sa zsyr2k_batchf
+ * @sa csyr2k_batchf
+ * @sa dsyr2k_batchf
+ * @sa ssyr2k_batchf
+ *
  ******************************************************************************/
-
 void blas_zsyr2k_batchf( int group_size, 
 			bblas_enum_t layout, bblas_enum_t uplo, bblas_enum_t trans,
     			int n, int k, 
