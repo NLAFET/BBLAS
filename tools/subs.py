@@ -57,7 +57,6 @@ def title( table ):
 # ===========================================================================
 # BLAS and LAPACK routines need both lower and uppercase, for example:
 # in filenames:              zgetrf.cpp
-# in magma_zlapack.h:        FORTRAN_NAME( zaxpy, ZAXAPY )
 # in doxygen documentation:  ZGETRF computes ...
 # BLAS also needs Titlecase: cublasZaxpy
 # The easiest way to maintain this is to separate these lists here,
@@ -383,8 +382,7 @@ subs = {
 
     # ----- Constants
     # See note in "normal" section below about ConjTrans
-    ('MagmaTrans',           'Magma_ConjTrans'     ),
-    ('PlasmaTrans',          'Plasma_ConjTrans'    ),
+    ('BblasTrans',          'Bblas_ConjTrans'    ),
 
     # ----- BLAS & LAPACK
     ]
@@ -393,23 +391,11 @@ subs = {
     + upper( blas_mixed )  # e.g., DGEMM
     + [
 
-    # ----- PLASMA / MAGMA data types
-    ('double',               'magmaDoubleComplex'  ),
-    ('float',                'magmaFloatComplex'   ),
-    ('double',               'plasma_complex64_t'  ),
-    ('float',                'plasma_complex32_t'  ),
-    ('PlasmaRealDouble',     'PlasmaComplexDouble' ),
-    ('PlasmaRealFloat',      'PlasmaComplexFloat'  ),
-
-    # ----- PLASMA / MAGMA functions, alphabetic order
-    ('ddesc2ge',             'zdesc2ge'            ),
-    ('dge2desc',             'zge2desc'            ),
-    ('ddesc2pb',             'zdesc2pb'            ),
-    ('dpb2desc',             'zpb2desc'            ),
-    ('sdesc2ge',             'cdesc2ge'            ),
-    ('sdesc2pb',             'cdesc2pb'            ),
-    ('sge2desc',             'cge2desc'            ),
-    ('spb2desc',             'cpb2desc'            ),
+    # ----- BBLAS data types
+    ('double',               'bblas_complex64_t'  ),
+    ('float',                'bblas_complex32_t'  ),
+    ('BblasRealDouble',     'BblasComplexDouble' ),
+    ('BblasRealFloat',      'BblasComplexFloat'  ),
 
     # ----- header files
     (r'_ds\.h\b',           r'_zc\.h\b'            ),
@@ -421,8 +407,8 @@ subs = {
     # See note in "normal" section below
     #('LAPACKE_d',            'LAPACKE_z'           ),
     #('LAPACKE_s',            'LAPACKE_c',          ),
-    #('plasma_d',             'plasma_z'            ),
-    #('plasma_s',             'plasma_c'            ),
+    #('bblas_d',             'bblas_z'            ),
+    #('bblas_s',             'bblas_c'            ),
 
     # ----- Fortran examples
     ('real\(',               'complex\(',          ),
@@ -461,7 +447,7 @@ subs = {
     # \b regexp here avoids conjugate -> conjfugate, and fabs -> fabsf -> fabsff.
     # Note r for raw string literals, otherwise \b is a bell character.
     # The \b is deleted from replacement strings.
-    # conj() and fabs() are overloaded in MAGMA, so don't need substitution.
+    # conj() and fabs() are overloaded, so don't need substitution.
     (r'',                   r'',                    r'\bconjf\b',           r'\bconj\b'            ),
     (r'\bfabsf\b',          r'\bfabs\b',            r'\bfabsf\b',           r'\bfabs\b'            ),
     (r'\bfabsf\b',          r'\bfabs\b',            r'\bcabsf\b',           r'\bcabs\b'            ),
@@ -473,10 +459,9 @@ subs = {
     # must be a valid option to real-precision functions.
     # E.g., dgemm( ConjTrans, ConjTrans, ... ) should be valid; if ConjTrans is
     # converted, then dgemm will have 2 Trans cases and no ConjTrans case.
-    # Only for zlarfb and zunm*, convert it using special Magma_ConjTrans and Plasma_ConjTrans
+    # Only for zlarfb and zunm*, convert it using special  Bblas_ConjTrans
     # aliases.
-    ('MagmaTrans',           'MagmaTrans',           'Magma_ConjTrans',      'Magma_ConjTrans'     ),
-    ('PlasmaTrans',          'PlasmaTrans',          'Plasma_ConjTrans',     'Plasma_ConjTrans'    ),
+    ('BblasTrans',          'BblasTrans',          'Bblas_ConjTrans',     'Bblas_ConjTrans'    ),
 
     # ----- BLAS & LAPACK
     ]
@@ -487,31 +472,13 @@ subs = {
     + upper( lapack )  # e.g., DGETRF
     + [
 
-    # ----- PLASMA / MAGMA constants
-    ('PlasmaRealFloat',      'PlasmaRealDouble',     'PlasmaComplexFloat',   'PlasmaComplexDouble' ),
+    # ----- BBLAS constants
+    ('BblasRealFloat',      'BblasRealDouble',     'BblasComplexFloat',   'BblasComplexDouble' ),
 
-    # ----- PLASMA / MAGMA data types
-    ('float',                'double',               'magmaFloatComplex',    'magmaDoubleComplex'  ),
-    ('float',                'double',               'plasma_complex32_t',   'plasma_complex64_t'  ),
+    # ----- BBLAS data types
+    ('float',                'double',               'bblas_complex32_t',   'bblas_complex64_t'  ),
     ('float',                'double',               'float',                'double'              ),
 
-    # ----- PLASMA / MAGMA functions, alphabetic order
-    ('sy2sb',                'sy2sb',                'he2hb',                'he2hb'               ),
-
-    ('psdesc2ge',            'pddesc2ge',            'pcdesc2ge',            'pzdesc2ge'           ),
-    ('psge2desc',            'pdge2desc',            'pcge2desc',            'pzge2desc'           ),
-    ('sdesc2ge',             'ddesc2ge',             'cdesc2ge',             'zdesc2ge'            ),
-    ('sge2desc',             'dge2desc',             'cge2desc',             'zge2desc'            ),
-
-    ('psdesc2pb',            'pddesc2pb',            'pcdesc2pb',            'pzdesc2pb'           ),
-    ('pspb2desc',            'pdpb2desc',            'pcpb2desc',            'pzpb2desc'           ),
-    ('sdesc2pb',             'ddesc2pb',             'cdesc2pb',             'zdesc2pb'            ),
-    ('spb2desc',             'dpb2desc',             'cpb2desc',             'zpb2desc'            ),
-
-    ('psdesc2tr',            'pddesc2tr',            'pcdesc2tr',            'pzdesc2tr'           ),
-    ('pstr2desc',            'pdtr2desc',            'pctr2desc',            'pztr2desc'           ),
-    ('sdesc2tr',             'ddesc2tr',             'cdesc2tr',             'zdesc2tr'            ),
-    ('str2desc',             'dtr2desc',             'ctr2desc',             'ztr2desc'            ),
 
     # ----- header files
     (r'_s\.h\b',            r'_d\.h\b',             r'_c\.h\b',             r'_z\.h\b'             ),
@@ -526,7 +493,7 @@ subs = {
     #('internal_s',           'internal_d',           'internal_c',           'internal_z'          ),
     #('INTERNAL_S_H',         'INTERNAL_D_H',         'INTERNAL_C_H',         'INTERNAL_Z_H'        ),
     #('LAPACKE_s',            'LAPACKE_d',            'LAPACKE_c',            'LAPACKE_z'           ),
-    #('plasma_s',             'plasma_d',             'plasma_c',             'plasma_z'            ),
+    #('bblas_s',             'bblas_d',             'bblas_c',             'bblas_z'            ),
     #('TEST_S',               'TEST_D',               'TEST_C',               'TEST_Z'              ),
     #('test_s',               'test_d',               'test_c',               'test_z'              ),
 
