@@ -85,7 +85,27 @@ static inline void bblas_set_info(int error_flag, int *info,
         break;
     default :
         bblas_error("illegal value of info");
-        info[0] = code;
+        info[0] = -1;
+    }
+}
+
+static inline void bblas_success(int error_flag, int *info,
+                                  int batch_count) {
+    switch (error_flag) {
+    case BblasErrorsReportAll :
+        for( int i=0; i < batch_count; i++) {
+            info[i] = 0;
+        }
+        break;
+    case BblasErrorsReportGroup :
+        info[0] = 0;
+        break;
+    case BblasErrorsReportAny :
+        info[0] = 0;
+        break;
+    default :
+        bblas_error("illegal value of info");
+        info[0] = -1;
     }
 }
     

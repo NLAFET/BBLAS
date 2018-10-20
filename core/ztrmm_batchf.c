@@ -189,9 +189,9 @@ void blas_ztrmm_batchf(int group_size, bblas_enum_t layout, bblas_enum_t side,
 		}
 		return;
 	}
-    int an;
+	int an; 
 	if (side == BblasLeft) {
-		am = m;
+		an = m;
 	} 
 	else {
 		an = n;
@@ -210,21 +210,18 @@ void blas_ztrmm_batchf(int group_size, bblas_enum_t layout, bblas_enum_t side,
 		}
 		return;
 	}
-	// Skip subproblems where nothing needs to be done 
-	if (imin(m, n) == 0) {
-		for (int iter = 0; iter < group_size; iter++) {
-			info[iter] =  0;
-		}
-		return;
-	}
 	for (int iter = 0; iter < group_size; iter++) {
-
 		cblas_ztrmm(layout, side, uplo,
-                    transa, diag,
-                    m, n,
-                    CBLAS_SADDR(alpha), A[iter], lda,
-                                        B[iter], ldb);
-        info[iter] = 0;
-    }
+			    transa, diag,
+			    m, n,
+			    CBLAS_SADDR(alpha), A[iter], lda,
+			    			B[iter], ldb);
+		// BblasSuccess
+		if (info[0] == BblasErrorsReportAll)
+			info[iter] = 0;
+	}
+	// BblasSuccess
+	if (info[0] != BblasErrorsReportAll)
+		info[0] = 0;
 }
 

@@ -186,21 +186,17 @@ void blas_zhemm_batchf(int group_size, bblas_enum_t layout, bblas_enum_t side,
 		}
 		return;
 	}
-	// Skip subproblems where nothing needs to be done 
-	if (m == 0 || n == 0 ||
-        ((alpha == (bblas_complex64_t)0.0) &&
-         (beta == (bblas_complex64_t)1.0))) {
-		for (int iter = 0; iter < group_size; iter++) {
-			info[iter] =  0;
-		}
-		return;
-	}
 	for (int iter = 0; iter < group_size; iter++) {
-        cblas_zhemm(layout, side, uplo,
-                    m, n,
-                    CBLAS_SADDR(alpha), A[iter], lda,
-                                        B[iter], ldb,
-                    CBLAS_SADDR(beta),  C[iter], ldc);
-        info[iter] = 0;
+		cblas_zhemm(layout, side, uplo,
+				m, n,
+				CBLAS_SADDR(alpha), A[iter], lda,
+						    B[iter], ldb,
+				CBLAS_SADDR(beta),  C[iter], ldc);
+		// BblasSuccess
+		if (info[0] == BblasErrorsReportAll)
+			info[iter] = 0;
 	}
+	// BblasSuccess
+	if (info[0] != BblasErrorsReportAll)
+		info[0] = 0;
 }

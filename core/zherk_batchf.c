@@ -169,21 +169,18 @@ void blas_zherk_batchf(int group_size, bblas_enum_t layout, bblas_enum_t uplo,
 		}
 		return;
 	}
-	// Skip subproblems where nothing needs to be done 
-	if (n == 0   || ((k == 0 || alpha == (double)0.0) &&
-                     (beta == (double)1.0))) {
-		for (int iter = 0; iter < group_size; iter++) {
-			info[iter] =  0;
-		}
-		return;
-	}
 	for (int iter = 0; iter < group_size; iter++) {
 		cblas_zherk(layout, uplo, trans,
                     n, k,
                     alpha, A[iter], lda,
                     beta,  C[iter], ldc);
-        info[iter] = 0;
-    }
+		// BblasSuccess
+		if (info[0] == BblasErrorsReportAll)
+			info[iter] = 0;
+	}
+	// BblasSuccess
+	if (info[0] != BblasErrorsReportAll)
+		info[0] = 0;
 }
 
 

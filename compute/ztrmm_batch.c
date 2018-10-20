@@ -176,12 +176,18 @@ void blas_ztrmm_batch(int group_count, const int *group_sizes,
 			return;
 		}
 
-		if (group_iter != 0) {
-			if (info[0] == BblasErrorsReportAll) 
-				info_offset = offset;
-			else
-				info_offset = group_iter;
+		// Skip the group where nothing needs to be done
+		if (imin(m[group_iter], n[group_iter]) == 0) {
+			bblas_success(info[0], &info[0], group_sizes[group_iter]);
+			return;
 		}
+
+		if (info[0] == BblasErrorsReportAll) 
+			info_offset = offset;
+		else if (info[0] == BblasErrorsReportGroup)
+			info_offset = group_iter;	
+		else 
+			info_offset = 0;
 		info[info_offset] = info[0];	
 
 		// Call to blas_zher2k_batchf 
