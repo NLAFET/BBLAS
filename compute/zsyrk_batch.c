@@ -132,13 +132,9 @@ void blas_zsyrk_batch(int group_count, const int *group_sizes,
 		      bblas_enum_t layout, const bblas_enum_t *uplo, const bblas_enum_t *trans,
 		      const int *n, const int *k, 
 		      const double *alpha, bblas_complex64_t const *const *A, const int *lda, 
-		      const double  *beta,  bblas_complex64_t** C, const int *ldc, 
+		      const double  *beta, bblas_complex64_t		** C, const int *ldc, 
     		      int *info)
 {
-	// Local variables 
-	int group_iter;
-	int offset = 0;
-    int info_offset = offset;
 
 	// Check input arguments 
 	if (group_count < 0) {
@@ -147,8 +143,10 @@ void blas_zsyrk_batch(int group_count, const int *group_sizes,
 		return;
 	}
 
+	int offset = 0;
+	int info_offset = offset;
 	// Check group_size and call fixed batch computation 
-	for (group_iter = 0; group_iter < group_count; group_iter++) {
+	for (int group_iter = 0; group_iter < group_count; group_iter++) {
 		if (group_sizes[group_iter] < 0) {
 			bblas_error("Illegal values of group_sizes");
 			if (info[0] != BblasErrorsReportNone) {
@@ -165,23 +163,14 @@ void blas_zsyrk_batch(int group_count, const int *group_sizes,
 		}
 		info[info_offset] = info[0];	
 
-		// Call to bblas_zsyrk_batchf 
-		blas_zsyrk_batchf (group_sizes[group_iter], 
-				   layout,
-				   uplo[group_iter],
-				   trans[group_iter],
-				   n[group_iter],
-				   k[group_iter],
-				   alpha[group_iter],
-				   A+offset,
-				   lda[group_iter],
-				   beta[group_iter],
-				   C+offset,
-				   ldc[group_iter],
-				   &info[info_offset]);    
+		// Call to blas_zsyrk_batchf 
+		blas_zsyrk_batchf(group_sizes[group_iter], 
+				  layout, uplo[group_iter], trans[group_iter],
+				  n[group_iter], k[group_iter],
+				  alpha[group_iter], A+offset, lda[group_iter], 
+				  beta[group_iter],  C+offset, ldc[group_iter],
+				  &info[info_offset]);    
 
 		offset += group_sizes[group_iter];    
 	}
 }
-#undef COMPLEX
-
