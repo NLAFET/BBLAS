@@ -146,16 +146,11 @@ void blas_zsymm_batch(int group_count, const int *group_sizes,
 		      const int *m, const int *n, 
 		      const bblas_complex64_t *alpha, bblas_complex64_t const *const *A, const int *lda, 
 		      				      bblas_complex64_t const* const *B, const int *ldb, 
-		      const bblas_complex64_t *beta,  bblas_complex64_t** C, const int *ldc, 
+		      const bblas_complex64_t *beta,  bblas_complex64_t		   ** C, const int *ldc, 
 		      int *info)
 
 
 {
-	// Local variables 
-	int group_iter;
-	int offset = 0;
-	int info_offset = offset;
-
 	// Check input arguments 
 	if (group_count < 0) {
 		bblas_error("Illegal value of group_count");
@@ -163,8 +158,10 @@ void blas_zsymm_batch(int group_count, const int *group_sizes,
 		return;
 	}
 
+	int offset = 0;
+	int info_offset = offset;
 	// Check group_size and call fixed batch computation 
-	for (group_iter = 0; group_iter < group_count; group_iter++) {
+	for (int group_iter = 0; group_iter < group_count; group_iter++) {
 		if (group_sizes[group_iter] < 0) {
 			bblas_error("Illegal values of group_sizes");
 			if (info[0] != BblasErrorsReportNone) {
@@ -181,24 +178,15 @@ void blas_zsymm_batch(int group_count, const int *group_sizes,
 		}
 		info[info_offset] = info[0];	
 
-		// Call to bblas_zsymm_batchf 
-		blas_zsymm_batchf (group_sizes[group_iter], 
-				   layout,
-				   side[group_iter],
-				   uplo[group_iter],
-				   m[group_iter],
-				   n[group_iter],
-				   alpha[group_iter],
-				   A+offset,
-				   lda[group_iter],
-				   B+offset,
-				   ldb[group_iter],
-				   beta[group_iter],
-				   C+offset,
-				   ldc[group_iter],
-				   &info[info_offset]);    
+		// Call to blas_zsymm_batchf 
+		blas_zsymm_batchf(group_sizes[group_iter], 
+				  layout, side[group_iter], uplo[group_iter],
+				  m[group_iter], n[group_iter], 
+				  alpha[group_iter], A+offset, lda[group_iter],
+						     B+offset, ldb[group_iter],
+				  beta[group_iter],  C+offset, ldc[group_iter],
+				  &info[info_offset]);    
 
 		offset += group_sizes[group_iter];    
 	}
 }
-#undef COMPLEX

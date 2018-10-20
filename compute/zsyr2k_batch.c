@@ -15,7 +15,7 @@
 
 /***************************************************************************//**
  *
- * @ingroup syr2k_batchf 
+ * @ingroup syr2k_batch 
  *
  *  Performs one of the symmetric rank 2k operations on a group of matrices, .
  *
@@ -152,14 +152,10 @@ void blas_zsyr2k_batch(int group_count, const int *group_sizes,
 		       const int *n, const int *k, 
 		       const bblas_complex64_t *alpha, bblas_complex64_t const *const *A, const int *lda, 
 		       				       bblas_complex64_t const* const *B, const int *ldb, 
-		       const double  *beta,  bblas_complex64_t** C, const int *ldc, 
+		       const double  		*beta, bblas_complex64_t	    ** C, const int *ldc, 
 		       int *info)
 
 {
-	// Local variables 
-	int group_iter;
-	int offset = 0;
-	int info_offset = offset;
 
 	// Check input arguments 
 	if (group_count < 0) {
@@ -168,8 +164,10 @@ void blas_zsyr2k_batch(int group_count, const int *group_sizes,
 		return;
 	}
 
+	int offset = 0;
+	int info_offset = offset;
 	// Check group_size and call fixed batch computation 
-	for (group_iter = 0; group_iter < group_count; group_iter++) {
+	for (int group_iter = 0; group_iter < group_count; group_iter++) {
 		if (group_sizes[group_iter] < 0) {
 			bblas_error("Illegal values of group_sizes");
 			if (info[0] != BblasErrorsReportNone) {
@@ -186,22 +184,14 @@ void blas_zsyr2k_batch(int group_count, const int *group_sizes,
 		}
 		info[info_offset] = info[0];	
 
-		// Call to bblas_zher2k_batchf 
-		blas_zsyr2k_batchf (group_sizes[group_iter], 
-				    layout,
-				    uplo[group_iter],
-				    trans[group_iter],
-				    n[group_iter],
-				    k[group_iter],
-				    alpha[group_iter],
-				    A+offset,
-				    lda[group_iter],
-				    B+offset,
-				    ldb[group_iter],
-				    beta[group_iter],
-				    C+offset,
-				    ldc[group_iter],
-				    &info[info_offset]);    
+		// Call to blas_zher2k_batchf 
+		blas_zsyr2k_batchf(group_sizes[group_iter], 
+				   layout, uplo[group_iter], trans[group_iter],
+				   n[group_iter], k[group_iter],
+				   alpha[group_iter], A+offset, lda[group_iter],
+				   		      B+offset, ldb[group_iter],
+				   beta[group_iter],  C+offset, ldc[group_iter],
+				   &info[info_offset]);    
 
 		offset += group_sizes[group_iter];    
 	}
