@@ -110,16 +110,16 @@
  * 		Array of int for error handling. On entry info[0] should have one of the 
  * 		following values
  *			- BblasErrorsReportAll    :  All errors will be specified on output.
- *						     Length of the array should be atleast
+ *						     Length of the array should be at least
  *						     \sum_{i=0}^{group_count-1}group_size[i].
  *			- BblasErrorsReportGroup  :  Single error from each group will be 
  *						     reported. Length of the array should 
- *						     be atleast group_count.
+ *						     be at least group_count.
  *			- BblasErrorsReportAny    :  Occurence of an error will be indicated
  *						     by a single integer value, and length 
- *						     of the array should be atleast 1.
+ *						     of the array should be at least 1.
  *			- BblasErrorsReportNone   :  No error will be reported on output, and
- *						     length of the array should be atleast 1.
+ *						     length of the array should be at least 1.
  ********************************************************************************
  * @retval BblasSuccess successful exit
  *
