@@ -33,7 +33,7 @@
  *
  *******************************************************************************
  * @param[in] group_count
- * 	    The number groups of matrices with fixed size.	  
+ * 	    The number groups of matrices.	  
  *
  * @param[in] group_sizes
  * 	    The number of matrices in each group.	
@@ -45,13 +45,13 @@
  * 	    - BblasColMajor: Column major format
  *
  * @param[in] side
- * 	    An array of group_count-1, for matrices of i-th group it
+ * 	    An array of length group_count-1, for matrices of i-th group it
  *          specifies whether op( A[j] ) appears on the left or on the right of B[j]:
  *          - BblasLeft:  alpha[i]*op( A[j] )*B[j]
  *          - BblasRight: alpha[i]*B[j]*op( A[j] )
  *
  * @param[in] uplo
- * 	    An array of length group_count, where uplo[i]
+ * 	    An array of length group_count-1, where uplo[i]
  *          specifies whether the upper or lower triangular part of
  *          the symmetric matrices A[j]-s of i-th group are to be referenced 
  *          
@@ -61,7 +61,7 @@
  *                            symmetric matrices A[j] is to be referenced.
  *
  * @param[in] transa
- * 	    An array of size group_count-1, where
+ * 	    An array of length group_count-1, where
  *          - BblasNoTrans:   A[j]-s in i-th group are not transposed,
  *          - BblasTrans:     A[j]-s in i-th group are transposed,
  *          - BblasConjTrans: A[j]-s in i-th group are conjugate transposed.
@@ -98,6 +98,8 @@
  *          	lower triangular matrix, and the strictly upper triangular part of
  *          	A[j] is not referenced. If diag = BblasUnit, the diagonal elements of
  *          	A[j] are also not referenced and are assumed to be 1.
+ * 		batch_count=\sum_{i=1}^{group_count}group_sizes[i].
+ *
  *
  * @param[in] lda
  * 	    An array of integers of length group_count-1, where lda[i]
@@ -111,6 +113,8 @@
  *          	On entry, the matrices B[j] are of dimension ldb[i]-by-n[i].
  *          	On exit, the result of a triangular matrix-matrix multiply
  *          	( alpha[i]*op(A[j])*B[j] ) or ( alpha[i]*B[j]*op(A[j]) ).
+ * 		batch_count=\sum_{i=1}^{group_count}group_sizes[i].
+ *
  *
  * @param[in] ldb
  * 	    An array of integers of length group_count-1, where ldb[i]
@@ -143,13 +147,13 @@
  * @sa strmm_batch
  *
  ******************************************************************************/
-void blas_ztrmm_batch( int group_count, const int *group_sizes,
-			bblas_enum_t layout, const bblas_enum_t *side, const bblas_enum_t *uplo,
-    			const bblas_enum_t *transa, const bblas_enum_t *diag,
-    			const int *m, const int *n, 
-			const bblas_complex64_t *alpha, bblas_complex64_t const *const *A, const int *lda,
-    			bblas_complex64_t **B, int const *ldb,
-			 int *info)
+void blas_ztrmm_batch(int group_count, const int *group_sizes,
+		      bblas_enum_t layout, const bblas_enum_t *side, const bblas_enum_t *uplo,
+		      const bblas_enum_t *transa, const bblas_enum_t *diag,
+		      const int *m, const int *n, 
+		      const bblas_complex64_t *alpha, bblas_complex64_t const *const *A, const int *lda,
+		      bblas_complex64_t **B, int const *ldb,
+		      int *info)
 
 
 {

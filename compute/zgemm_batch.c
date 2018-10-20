@@ -13,14 +13,14 @@
 #include "cblas.h"
 #include "bblas.h"
 
-/***************************************************************************//**
+/*****************************************************************************
  *
  * @ingroup gemm_batch
  *
  * blas_zgemm_batch is a batch version of zgemm. It performs 
  * matrix-matrix multiplication
  *
- *  \f[ C[i] = \alpha[i] [op( A[i] )\times op( B[i] )] + \beta[i] C[i], \f]
+ *  \f[ C[i] = \alpha[i] [op( A[i] ) \times op( B[i] )] + \beta[i] C[i], \f]
  *
  *  where op( X ) is one of:
  *    \f[ op( X ) = X,   \f]
@@ -46,24 +46,24 @@
  * 	    - BblasColMajor: Column major format
  *
  * @param[in] transa
- * 	    An array of size group_count-1, where
+ * 	    An array of length group_count, where
  *          - BblasNoTrans:   A[j]-s in i-th group are not transposed,
  *          - BblasTrans:     A[j]-s in i-th group are transposed,
  *          - BblasConjTrans: A[j]-s in i-th group are conjugate transposed.
  *
  * @param[in] transb
- * 	    An array of size group_count, where
+ * 	    An array of length group_count, where
  *          - BblasNoTrans:   B[j]-s in the i-th group are not transposed,
- *          - BblasTrans:     B[j]-s in the i-th group are  transposed,
+ *          - BblasTrans:     B[j]-s in the i-th group are transposed,
  *          - BblasConjTrans: B[j]-s in the i-th group are conjugate transposed.
  *
  * @param[in] m
- *          An array of integers of size group count, where m[i] is 
+ *          An array of integers of length group_count, where m[i] is 
  *          the number of rows of matrices op( A[j] ) and of matrices 
  *          C[j] in i-th group. m[i] >= 0.
  *
  * @param[in] n
- *          An array of integers of size group count, where n[i] is 
+ *          An array of integers of length group_count, where n[i] is 
  *          the number of columns of matrices op( B[j] ) and C[j] in 
  *          i-th group. n[i] >= 0.
  *
@@ -73,11 +73,11 @@
  *          in i-th group. k[i] >= 0.
  *
  * @param[in] alpha
- *          An array of scalars of length group-count.
+ *          An array of scalars of length group_count.
  *
  * @param[in] A
  * 		A is an array of pointers to matrices A[0], A[1] .. A[batch_count-1]. 
- * 		In i-th group each element A[j] is a pointer to a matrix of 
+ * 		If in i-th group, each element A[j] is a pointer to a matrix of 
  * 		dimension lda[i]-by-ka[i], where ka[i] is k[i] when transa[i] = 
  * 		BblasNoTrans, and is m[i] otherwise. When using transa[i] = 
  * 		BblasNoTrans the leading m[i]-by-k[i] part of A[j] 
@@ -86,20 +86,20 @@
  * 		batch_count=\sum_{i=1}^{group_count}group_sizes[i].
  *
  * @param[in] lda
- * 	    An array of integers of size group_count, which
+ * 	    An array of integers of length group_count, which
  * 	    denotes the leading dimension of the arrays A[j]-s
  * 	    in i-th group. When transa[i] = BblasNoTrans, 
  * 	    lda[i] >= max(1,m[i]), otherwise, lda[i] >= max(1,k[i]).
  *
  * @param[in] B
  * 		B is an array of pointers to matrices B[0], B[1],..,B[batch_count-1].
- * 		In i-th group each element B[j] is a pointer to a matrix
+ * 		If in i-th group, each element B[j] is a pointer to a matrix
  * 		of dimension lda[i]-by-kb, where kb is n[i] when transb[i] = 
  * 		BblasNoTrans, and is k[i] otherwise. When using transb[i] = 
  * 		BblasNoTrans the leading k[i]-by-n[i] part of B[j] 
  * 		must contain the matrix elements, otherwise the leading  
  * 		n[i]-by-k[i] part of B[j] must contain the matrix elements.
- ** 		batch_count=\sum_{i=1}^{group_count}group_sizes[i].
+ * 		batch_count=\sum_{i=1}^{group_count}group_sizes[i].
  *
  * @param[in] ldb
  * 	    An array of integers of size group_count, which 
@@ -118,7 +118,7 @@
  *		where j=0,1,...,group_sizes[i-1].
  *
  * @param[in] ldc
- * 	    An array of integers of size group_count, which
+ * 	    An array of integers of length group_count, which
  *          denotes the leading dimension of the arrays C[j]
  *          in i-th group. ldc[i] >= max(1,m[i]).
  *
