@@ -131,20 +131,20 @@
  * @sa sgemm_batchf
  *
  ******************************************************************************/
-void blas_zgemm_batchf (int group_size, 
-			bblas_enum_t layout, bblas_enum_t transa, bblas_enum_t transb,
-			int m,  int n, int k,
-			bblas_complex64_t alpha, bblas_complex64_t const *const *A, int lda,
-						 bblas_complex64_t const* const *B, int ldb, 
-			bblas_complex64_t beta,  bblas_complex64_t** C, int ldc, 
-			int *info)
+void blas_zgemm_batchf(int group_size, 
+		       bblas_enum_t layout, bblas_enum_t transa, bblas_enum_t transb,
+		       int m,  int n, int k,
+		       bblas_complex64_t alpha, bblas_complex64_t const *const *A, int lda,
+		       				bblas_complex64_t const* const *B, int ldb, 
+		       bblas_complex64_t beta,  bblas_complex64_t** C, int ldc, 
+		       int *info)
 {
 	// Local variables
 	int iter;
 
 	// Check input arguments 
-	if ((layout != CblasRowMajor) &&
-			(layout != CblasColMajor)) {
+	if ((layout != BblasRowMajor) &&
+			(layout != BblasColMajor)) {
 		bblas_error("Illegal value of layout");
 		if (info[0] != BblasErrorsReportNone) {
 			bblas_set_info(info[0], &info[0], group_size, 3);
@@ -235,13 +235,13 @@ void blas_zgemm_batchf (int group_size,
 	for (iter = 0; iter < group_size; iter++) {
 		// Call to cblas_zgemm 
 		cblas_zgemm(layout,
-				transa, transb,
-				m, n, k,
-				CBLAS_SADDR(alpha),
-				A[iter], lda,
-				B[iter], ldb,
-				CBLAS_SADDR(beta),
-				C[iter], ldc);
+			    transa, transb,
+			    m, n, k,
+			    CBLAS_SADDR(alpha),
+			    A[iter], lda,
+			    B[iter], ldb,
+			    CBLAS_SADDR(beta),
+			    C[iter], ldc);
 		// Successful 
 		info[iter] = 0;
 	} // END FIXED SIZE FOR LOOP 

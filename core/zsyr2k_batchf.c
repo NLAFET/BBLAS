@@ -121,7 +121,7 @@
  * @sa ssyr2k_batchf
  *
  ******************************************************************************/
-void blas_zsyr2k_batchf( int group_size, 
+void blas_zsyr2k_batchf(int group_size, 
 			bblas_enum_t layout, bblas_enum_t uplo, bblas_enum_t trans,
     			int n, int k, 
 			bblas_complex64_t alpha, bblas_complex64_t const *const *A, int lda, 
@@ -134,8 +134,8 @@ void blas_zsyr2k_batchf( int group_size,
 	int LDA,  LDB;
 
 	// Check input arguments 
-	if ((layout != CblasRowMajor) &&
-			(layout != CblasColMajor)) {
+	if ((layout != BblasRowMajor) &&
+			(layout != BblasColMajor)) {
 		bblas_error("Illegal value of layout");
 		if (info[0] != BblasErrorsReportNone) {
 			bblas_set_info(info[0], &info[0], group_size, 3);
