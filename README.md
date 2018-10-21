@@ -39,11 +39,11 @@ The main folders & files
 
 * **include**: contains header files
 
-* **make.inc**: a configuration file to specify a C/C++ compiler,
+* _make.inc_: a configuration file to specify a C/C++ compiler,
                 compilation flags and a BLAS library. The default
                 configuration should work when MKL is installed.
 
-* **Makefile**: the Makefile, normally, it should  not be modified.
+* _Makefile_: the Makefile, normally, it should  not be modified.
 
 Compilation 
 ===========
