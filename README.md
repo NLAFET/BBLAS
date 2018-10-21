@@ -1,23 +1,13 @@
-.
-     _|/   _|/  |      \    __|
-     _|\   _|\  |     _ \ \__ \
-    __ /_ __ / ____|_/  _\____/
-
-* * *
-
 **Batched Basic Linear Algebra Subroutines**
+
+**University of Manchester (UK)**
 
 **University of Tennessee (US)**
 
-**University of Manchester (UK)**
 
 * * *
 
 [Download BBLAS Software](https://github.com/NLAFET/downloads/bblas-1.0.tar.gz)
-
-* * *
-
-[TOC]
 
 * * *
 
@@ -60,7 +50,7 @@ Compilation
 After the configuration of **make.inc**, the compilation is very simple:
 
 *  **make [all]**     --  make lib test
-*  ** make lib**      --  make lib/libbblas.{a,so} lib/libcore.{a,so}
+*  **make lib**      --  make lib/libbblas.{a,so} lib/libcore.{a,so}
 *  **make test**      --  make test/test
 *  **make docs**      --  make docs/html
 *  **make generate**  --  generate precisions
