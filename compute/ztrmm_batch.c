@@ -160,7 +160,7 @@ void blas_ztrmm_batch(int group_count, const int *group_sizes,
 	// Check input arguments 
 	if (group_count < 0) {
 		bblas_error("Illegal value of group_count");
-		info[0] = 1;
+		info[0] = -1;
 		return;
 	}
 
@@ -181,7 +181,7 @@ void blas_ztrmm_batch(int group_count, const int *group_sizes,
 
 		if (group_sizes[group_iter] < 0) {
 			bblas_error("Illegal values of group_sizes");
-			info[0] = 2;
+			info[0] = -2;
 			return;
 		}
 
