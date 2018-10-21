@@ -7,7 +7,7 @@
 
 * * *
 
-[Download BBLAS Software](https://github.com/NLAFET/downloads/bblas-1.0.tar.gz)
+[Download BBLAS Software](https://github.com/NLAFET/BBLAS/archive/master.zip)
 
 * * *
 
