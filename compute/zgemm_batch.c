@@ -128,10 +128,10 @@
  * 		following values
  *			- BblasErrorsReportAll    :  All errors will be specified on output.
  *						     Length of the array should be atleast
- *						     \sum_{i=0}^{group_count-1}group_sizes[i].
+ *						     \sum_{i=0}^{group_count-1}group_sizes[i]+1.
  *			- BblasErrorsReportGroup  :  Single error from each group will be 
  *						     reported. Length of the array should 
- *						     be atleast group_count.
+ *						     be atleast group_count+1.
  *			- BblasErrorsReportAny    :  Occurence of an error will be indicated
  *						     by a single integer value, and length 
  *						     of the array should be atleast 1.
@@ -167,13 +167,22 @@ void blas_zgemm_batch(int group_count, const int *group_sizes,
 
 	int offset = 0;
 	int info_offset = 0;
+	int info_init = 0;
+	int info_option = info[0];
 	// Check group_size and call fixed batch computation 
 	for (int group_iter = 0; group_iter < group_count; group_iter++) {
+
+		if (info_option == BblasErrorsReportAll) 
+			info_offset = offset+1;
+		else if (info_option == BblasErrorsReportGroup)
+			info_offset = group_iter+1;	
+		else 
+			info_offset = 0;
+		info[info_offset] = info_option;	
+
 		if (group_sizes[group_iter] < 0) {
 			bblas_error("Illegal values of group_sizes");
-			if (info[0] != BblasErrorsReportNone) {
-				bblas_set_info(info[0], &info[0], group_sizes[group_iter], 2);
-			}
+			info[0] = 2;
 			return;
 		}
 
@@ -181,18 +190,11 @@ void blas_zgemm_batch(int group_count, const int *group_sizes,
 		if (m[group_iter] == 0 || n[group_iter] == 0 ||
 				((alpha[group_iter] == (bblas_complex64_t)0.0 || 
 				  k[group_iter] == 0) && 
-				 beta[group_iter] == (bblas_complex64_t)1.0 )) {
-			bblas_success(info[0], &info[0], group_sizes[group_iter]);
-			return;
+				 beta[group_iter] == (bblas_complex64_t)1.0 ) ||
+				group_sizes[group_iter] == 0) {
+			bblas_success(info_option, &info[info_offset], group_sizes[group_iter]);
+			continue;
 		}
-
-		if (info[0] == BblasErrorsReportAll) 
-			info_offset = offset;
-		else if (info[0] == BblasErrorsReportGroup)
-			info_offset = group_iter;	
-		else 
-			info_offset = 0;
-		info[info_offset] = info[0];	
 
 		// Call to blas_zgemm_batchf 
 		blas_zgemm_batchf(group_sizes[group_iter], 
@@ -201,7 +203,11 @@ void blas_zgemm_batch(int group_count, const int *group_sizes,
 				  alpha[group_iter], A+offset, lda[group_iter],
 						     B+offset, ldb[group_iter],
 				  beta[group_iter],  C+offset, ldc[group_iter],
-				  &info[info_offset]);    
+				  &info[info_offset]);   
+
+		// check for errors in batchf function
+		if (info[info_offset] != info_init)
+			info[0] = info[info_offset];	
 
 		offset += group_sizes[group_iter];    
 	}
