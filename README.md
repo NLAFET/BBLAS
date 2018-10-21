@@ -7,7 +7,7 @@
 
 * * *
 
-[Download BBLAS Software](https://github.com/NLAFET/downloads/bblas-1.0.tar.gz)
+[Download BBLAS Software](https://github.com/NLAFET/BBLAS/archive/master.zip)
 
 * * *
 
@@ -53,8 +53,12 @@ Requirements
 OR
 
 * **Netlib BLAS** no optimized BLAS routines, available at [BLAS-3.8.0.tgz](http://www.netlib.org/blas/blas-3.8.0.tgz)
-* **Netlib LAPACK** no optimized LAPACK routines, available at [LAPACK-3.8.0.tgz](http://www.netlib.org/lapack/lapack-3.8.0.tgz)
- 
+* **Netlib LAPACK** no optimized LAPACK routines, available at [LAPACK-3.8.0.tgz](http://www.netlib.org/lapack/lapack-3.8.0.tar.gz)
+
+#### Doxygen for documentation 
+* **Doxygen** can be install on Unix systems by _sudo apt-get install doxygen_ or
+downloaded on [the doxygen page](http://www.doxygen.org/download.html).
+
 Compilation 
 ===========
 After the configuration of **make.inc**, the compilation is very simple:
@@ -74,17 +78,12 @@ Citing
 
 Feel free to use the following publications to reference BBLAS:
 
-* Azzam Haidar, Ahmad Abdelfattah, Mawussi Zounon, Stanimire Tomov, Jack J. Dongarra:
-  **A Guide for Achieving High Performance with Very Small Matrices on GPU:
-  A Case Study of Batched LU and Cholesky Factorizations.**
-  *IEEE Trans. Parallel Distrib. Syst. 29(5): 973-984 (2018)*.
-
-* Jack J. Dongarra, Sven Hammarling, Nicholas J. Higham,
+* Jack  Dongarra, Sven Hammarling, Nicholas J. Higham,
   Samuel D. Relton, Mawussi Zounon:
   **Optimized Batched Linear Algebra for Modern Architectures.**
   *Euro-Par 2017: 511-522*.
 
-* Jack J. Dongarra, Sven Hammarling, Nicholas J. Higham,
+* Jack  Dongarra, Sven Hammarling, Nicholas J. Higham,
   Samuel D. Relton, Pedro Valero-Lara, Mawussi Zounon:
   **The Design and Performance of Batched BLAS on Modern High-Performance Computing Systems**,
   *ICCS 2017: 495-504*
