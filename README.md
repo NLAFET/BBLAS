@@ -45,6 +45,16 @@ The main folders & files
 
 * _Makefile_: the Makefile, normally, it should  not be modified.
 
+Requirements
+===========
+#### BLAS & LAPACK
+* **MKL** is now free for academics (students and researchers) available at [https://software.intel.com/en-us/articles/free-mkl](https://software.intel.com/en-us/articles/free-mkl)
+
+OR
+
+* **Netlib BLAS** no optimized BLAS routines, available at [BLAS-3.8.0.tgz](http://www.netlib.org/blas/blas-3.8.0.tgz)
+* **Netlib LAPACK** no optimized LAPACK routines, available at [LAPACK-3.8.0.tgz](http://www.netlib.org/lapack/lapack-3.8.0.tgz)
+ 
 Compilation 
 ===========
 After the configuration of **make.inc**, the compilation is very simple:
