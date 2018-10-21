@@ -115,14 +115,14 @@ void blas_zherk_batchf(int group_size, bblas_enum_t layout, bblas_enum_t uplo,
         (layout != BblasColMajor)) {
 		bblas_error("Illegal value of layout");
 		if (info[0] != BblasErrorsReportNone) {
-			bblas_set_info(info[0], &info[0], group_size, 3);
+			bblas_set_info(info[0], &info[0], group_size, 1);
 		}
 		return;
 	}
 	if ((uplo != BblasUpper) && (uplo != BblasLower)) {
 		bblas_error("Illegal value of uplo");
 		if (info[0] != BblasErrorsReportNone) {
-			bblas_set_info(info[0], &info[0], group_size, 4);
+			bblas_set_info(info[0], &info[0], group_size, 2);
 		}
 		return;
 	}
@@ -130,21 +130,21 @@ void blas_zherk_batchf(int group_size, bblas_enum_t layout, bblas_enum_t uplo,
         (trans != BblasTrans) && (trans != BblasConjTrans)) {
 		bblas_error("Illegal value of trans");
 		if (info[0] != BblasErrorsReportNone) {
-			bblas_set_info(info[0], &info[0], group_size, 5);
+			bblas_set_info(info[0], &info[0], group_size, 3);
 		}
 		return;
 	}
 	if (n < 0) {
 		bblas_error("Illegal value of n");
 		if (info[0] != BblasErrorsReportNone) {
-			bblas_set_info(info[0], &info[0], group_size, 6);
+			bblas_set_info(info[0], &info[0], group_size, 4);
 		}
 		return;
 	}
 	if (k < 0) {
 		bblas_error("Illegal value of k");
 		if (info[0] != BblasErrorsReportNone) {
-			bblas_set_info(info[0], &info[0], group_size, 7);
+			bblas_set_info(info[0], &info[0], group_size, 5);
 		}
 		return;
 	}
@@ -158,14 +158,14 @@ void blas_zherk_batchf(int group_size, bblas_enum_t layout, bblas_enum_t uplo,
 	if (lda < imax(1, am)) {
 		bblas_error("Illegal value of lda");
 		if (info[0] != BblasErrorsReportNone) {
-			bblas_set_info(info[0], &info[0], group_size, 8);
+			bblas_set_info(info[0], &info[0], group_size, 6);
 		}
 		return;
 	}
 	if (ldc < imax(1, n)) {
 		bblas_error("Illegal value of ldc");
 		if (info[0] != BblasErrorsReportNone) {
-			bblas_set_info(info[0], &info[0], group_size, 9);
+			bblas_set_info(info[0], &info[0], group_size, 7);
 		}
 		return;
 	}
