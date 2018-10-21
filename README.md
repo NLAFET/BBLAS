@@ -99,7 +99,7 @@ Primary funding for BBLAS was provided  the European Union grant:
 People
 ======
 
-The following people listed by alphabetical contributed to the implementation of the of BBLAS reference implementation:
+The following people listed in alphabetical order contributed to the BBLAS reference implementation:
 
 * Jack Dongarra
 * Mark Gates
