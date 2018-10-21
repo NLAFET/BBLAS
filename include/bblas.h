@@ -11,6 +11,7 @@
 #ifndef BBLAS_H
 #define BBLAS_H
 
+#include "core.h"
 #include "bblas_z.h"
 #include "bblas_s.h"
 #include "bblas_d.h"

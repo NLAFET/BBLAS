@@ -12,7 +12,7 @@
 #ifndef BBLAS_Z_H
 #define BBLAS_Z_H
 
-#include "bblas_types.h"
+#include "core_z.h"
 
 void blas_zgemm_batch(int group_count, const int *group_sizes,
                       bblas_enum_t layout, const bblas_enum_t *transa, const bblas_enum_t *transb,

@@ -1,6 +1,6 @@
-# PLASMA example make.inc, using Intel MKL and gcc
+# BBLAS example make.inc, using Intel MKL and gcc
 #
-# PLASMA is a software package provided by:
+# BBLAS is a software package provided by:
 # University of Tennessee, US,
 # University of Manchester, UK.
 

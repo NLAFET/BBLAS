@@ -9,7 +9,6 @@
  * @precisions normal z -> c
  *
  **/
-#include "cblas.h"
 #include "bblas.h"
 
 

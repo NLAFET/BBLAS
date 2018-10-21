@@ -110,6 +110,24 @@ bblas_enum_t bblas_storev_const(char lapack_char);
 bblas_enum_t bblas_trans_const(char lapack_char);
 bblas_enum_t bblas_uplo_const(char lapack_char);
 
+/******************************************************************************/
+static inline int imin(int a, int b)
+{
+    if (a < b)
+        return a;
+    else
+        return b;
+}
+
+/******************************************************************************/
+static inline int imax(int a, int b)
+{
+    if (a > b)
+        return a;
+    else
+        return b;
+}
+
 #ifdef __cplusplus
 }  // extern "C"
 #endif
