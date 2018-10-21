@@ -78,11 +78,6 @@ Citing
 
 Feel free to use the following publications to reference BBLAS:
 
-* Azzam Haidar, Ahmad Abdelfattah, Mawussi Zounon, Stanimire Tomov, Jack J. Dongarra:
-  **A Guide for Achieving High Performance with Very Small Matrices on GPU:
-  A Case Study of Batched LU and Cholesky Factorizations.**
-  *IEEE Trans. Parallel Distrib. Syst. 29(5): 973-984 (2018)*.
-
 * Jack J. Dongarra, Sven Hammarling, Nicholas J. Higham,
   Samuel D. Relton, Mawussi Zounon:
   **Optimized Batched Linear Algebra for Modern Architectures.**
