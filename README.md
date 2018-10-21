@@ -53,7 +53,7 @@ Requirements
 OR
 
 * **Netlib BLAS** no optimized BLAS routines, available at [BLAS-3.8.0.tgz](http://www.netlib.org/blas/blas-3.8.0.tgz)
-* **Netlib LAPACK** no optimized LAPACK routines, available at [LAPACK-3.8.0.tgz](http://www.netlib.org/lapack/lapack-3.8.0.gz)
+* **Netlib LAPACK** no optimized LAPACK routines, available at [LAPACK-3.8.0.tgz](http://www.netlib.org/lapack/lapack-3.8.0.tar.gz)
 
 #### Doxygen for documentation 
 * **Doxygen** can be install on Unix systems by _sudo apt-get install doxygen_ or
