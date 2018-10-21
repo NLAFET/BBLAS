@@ -189,10 +189,10 @@ void blas_zgemm_batch(int group_count, const int *group_sizes,
 		if (info[0] == BblasErrorsReportAll) 
 			info_offset = offset;
 		else if (info[0] == BblasErrorsReportGroup)
-			info_offset = group_iter;	
+			info_offset = group_iter;
 		else 
 			info_offset = 0;
-		info[info_offset] = info[0];	
+		info[info_offset] = info[0];
 
 		// Call to blas_zgemm_batchf 
 		blas_zgemm_batchf(group_sizes[group_iter], 
@@ -201,8 +201,8 @@ void blas_zgemm_batch(int group_count, const int *group_sizes,
 				  alpha[group_iter], A+offset, lda[group_iter],
 						     B+offset, ldb[group_iter],
 				  beta[group_iter],  C+offset, ldc[group_iter],
-				  &info[info_offset]);    
+				  &info[info_offset]);
 
-		offset += group_sizes[group_iter];    
+		offset += group_sizes[group_iter];
 	}
 }
