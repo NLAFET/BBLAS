@@ -56,7 +56,7 @@ OR
 * **Netlib LAPACK** no optimized LAPACK routines, available at [LAPACK-3.8.0.tgz](http://www.netlib.org/lapack/lapack-3.8.0.tgz)
 
 #### Doxygen for documentation 
-**Doxygen** can be install on Unix systems by _sudo apt-get install doxygen_ or
+* **Doxygen** can be install on Unix systems by _sudo apt-get install doxygen_ or
 downloaded on [the doxygen page](http://www.doxygen.org/download.html).
 
 Compilation 
