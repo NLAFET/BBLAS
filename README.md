@@ -78,12 +78,12 @@ Citing
 
 Feel free to use the following publications to reference BBLAS:
 
-* Jack J. Dongarra, Sven Hammarling, Nicholas J. Higham,
+* Jack  Dongarra, Sven Hammarling, Nicholas J. Higham,
   Samuel D. Relton, Mawussi Zounon:
   **Optimized Batched Linear Algebra for Modern Architectures.**
   *Euro-Par 2017: 511-522*.
 
-* Jack J. Dongarra, Sven Hammarling, Nicholas J. Higham,
+* Jack  Dongarra, Sven Hammarling, Nicholas J. Higham,
   Samuel D. Relton, Pedro Valero-Lara, Mawussi Zounon:
   **The Design and Performance of Batched BLAS on Modern High-Performance Computing Systems**,
   *ICCS 2017: 495-504*
