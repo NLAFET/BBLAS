@@ -20,9 +20,9 @@ egrep -h '^ *@defgroup' docs/doxygen/groups.dox | \
     perl -pe 's/^ *\@defgroup +(\w+).*/\@group $1/;' | \
     sort > defgroup
 
-which opendiff > /dev/null
+which diff > /dev/null
 if [ $? == 0 ]; then
-    opendiff ingroup defgroup
+    diff ingroup defgroup
 else
     diff ingroup defgroup
 fi

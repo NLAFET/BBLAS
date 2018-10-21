@@ -4,7 +4,7 @@
 # and a few potential bugs. As it uses regular expressions, it may have
 # both false positives and false negatives.
 #
-# Usage: from top level of plasma directory:
+# Usage: from top level of BBLAS directory:
 # ./tools/checklist.py [files]
 #
 # If no files given, checks all files currently in Mercurial.
@@ -220,12 +220,12 @@ def process( fname ):
               help="Might be using Matlab-style A'. Please use A^H or A^T. (This is really hard to search for.)" )
 
         grep( lines, r"'",
-              exclude=r"'[a-zA-Z=:+]'|'\\0'|LAPACK's|PLASMA's|can't",
+              exclude=r"'[a-zA-Z=:+]'|'\\0'|LAPACK's|BBLAS's|can't",
               help="Might be using Matlab-style A'. Please use A^H or A^T. (Second search.)" )
 
         grep( lines, r"@ingroup",
-              exclude=r'@ingroup (plasma|core)_[^z]\w+',
-              help="Use @ingroup (plasma|core)_{routine}, without precision: e.g., plasma_gemm.\n"
+              exclude=r'@ingroup (blas|core)_[^z]\w+',
+              help="Use @ingroup (blas|core)_{routine}, without precision: e.g., blas_gemm_batch.\n"
                   +"      See docs/doxygen/groups.dox for available groups.\n"
                   +"    " )
 

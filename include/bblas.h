@@ -16,5 +16,4 @@
 #include "bblas_d.h"
 #include "bblas_c.h"
 #include "bblas_error.h"
-#include "bblas_macros.h"
 #endif        // BBLAS_H

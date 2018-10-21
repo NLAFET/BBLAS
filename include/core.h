@@ -109,11 +109,11 @@ static const char *lapack_constants[] = {
 };
 
 /***************************************************************************//**
- * @retval LAPACK character constant corresponding to PLASMA constant
- * @ingroup plasma_const
+ * @retval LAPACK character constant corresponding to BBLAS constant
+ * @ingroup bblas_const
  ******************************************************************************/
-static inline char lapack_const(int plasma_const) {
-    return lapack_constants[plasma_const][0];
+static inline char lapack_const(int bblas_const) {
+    return lapack_constants[bblas_const][0];
 }
 
 #ifdef __cplusplus
