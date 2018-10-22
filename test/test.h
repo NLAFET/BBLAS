@@ -25,7 +25,7 @@ typedef enum {
     PARAM_SUCCESS, // success indicator
     PARAM_ERROR,   // numerical error
     PARAM_TIME,    // time to solution
-    PARAM_GFLOPS,  // GFLOPS rate
+    PARAM_MFLOPS,  // GFLOPS rate
 
     //------------------------------------------------------
     // tester parameters
@@ -49,18 +49,15 @@ typedef enum {
     PARAM_DIAG,    // non-unit or unit diagonal
 
     // numeric params
-    PARAM_DIM,     // M, N, K dimensions
-    PARAM_NRHS,    // number of RHS
     PARAM_NG,      // number of group
-    PARAM_GS,      // first group size
-    PARAM_ALPHA,   // scalar alpha
-    PARAM_BETA,    // scalar beta
-    PARAM_PADA,    // padding of A
-    PARAM_PADB,    // padding of B
-    PARAM_PADC,    // padding of C
-    PARAM_ZEROCOL, // if positive, a column of zeros inserted at that index
+    PARAM_GS,      // first group size    
     PARAM_INCM,    // matrix size increment from one group to another
     PARAM_INCG,    // group size increment
+    PARAM_DIM,     // M, N, K dimensions
+    PARAM_NRHS,    // number of RHS
+    PARAM_ALPHA,   // scalar alpha
+    PARAM_BETA,    // scalar beta
+
 
     //------------------------------------------------------
     // Keep at the end!

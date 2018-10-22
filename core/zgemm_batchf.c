@@ -223,7 +223,7 @@ void blas_zgemm_batchf(int group_size, bblas_enum_t layout, bblas_enum_t transa,
                     m, n, k,
                     CBLAS_SADDR(alpha), A[iter], lda,
                                         B[iter], ldb,
-                    CBLAS_SADDR(beta),  C[iter], ldc);	
+                    CBLAS_SADDR(beta),  C[iter], ldc);
 		// BblasSuccess
 		if (info[0] == BblasErrorsReportAll)
 			info[iter] = 0;

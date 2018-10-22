@@ -110,8 +110,8 @@ static param_desc_t ParamDesc[] = {
     {"time",               "Time",         9,     false,
      "time to solution"},
 
-    {"gflops",             "Gflop/s",      9,     false,
-     "GFLOPS rate"},
+    {"mflops",             "Mflop/s",      9,     false,
+     "MFLOPS rate"},
 
     //------------------------------------------------------
     // tester parameters
@@ -157,45 +157,32 @@ static param_desc_t ParamDesc[] = {
     {"--diag=[n|u]",       "diag",         6,     true,
      "non-unit diagonal or unit diagonal [default: n]"},
 
+    {"--ng=",              "ng",           6,     true,
+     "The number groups of matrices [default: 10]"},
+    
+    {"--gs=",              "gs",          6,     true,
+     "The number matrices in the first group [default: 100]"},
+ 
+    {"--incg=",              "incg",      6,     true,
+     "group size increment [default: 10]"},
+
+    {"--incm=",            "incm",         6,     true,
+     "matrix size increment [default: 1]"},
+
     {"--dim=",             "Dimensions",   6,     true,
      "M x N x K dimensions of group matrices [default: 1000 x 1000 x 1000]\n"
      INDENT "M, N, K can each be a single value or a range.\n"
      INDENT "N and K are optional; if not given, N=M and K=N.\n"
      INDENT "Ex: --dim=100:300:100x64 is 100x64x64, 200x64x64, 300x64x64."},
 
-
     {"--nrhs=",            "nrhs",         6,     true,
      "NHRS dimension (number of columns) [default: 1000]"},
-
-    {"--alpha=",           "alpha",        14,    true,
+    
+    {"--alpha=",           "alpha",       14,    true,
      "scalar alpha"},
-
-    {"--beta=",            "beta",         14,    true,
+    
+    {"--beta=",            "beta",        14,    true,
      "scalar beta"},
-
-    {"--pada=",            "padA",         4,     true,
-     "padding added to lda [default: 0]"},
-
-    {"--padb=",            "padB",         4,     true,
-     "padding added to ldb [default: 0]"},
-
-    {"--padc=",            "padC",         4,     true,
-     "padding added to ldc [default: 0]"},
-
-    {"--zerocol=",         "zerocol",      7,     true,
-     "if positive, a column of zeros inserted at that index [default: -1]"},
-
-    {"--incm=",            "incm",         3,     true,
-     "matrix size increment [default: 1]"},
-
-    {"--ng=",              "ng",           3,     true,
-     "The number groups of matrices [default: 10]"},
-
-    {"--gs=",              "gs",          3,     true,
-     "The number matrices in the first group [default: 100]"},
-
-    {"--incg=",              "incg",      3,     true,
-     "group size increment [default: 10]"},
 
 
     { NULL }  // last entry
@@ -316,7 +303,7 @@ void print_routine_usage(const char *name, param_value_t pval[])
             case PARAM_SUCCESS:
             case PARAM_ERROR:
             case PARAM_TIME:
-            case PARAM_GFLOPS:
+            case PARAM_MFLOPS:
                 break;
 
             default:
@@ -436,10 +423,6 @@ int test_routine(const char *name, param_value_t pval[], bool test)
             case PARAM_GS:
             case PARAM_NG:
             case PARAM_NRHS:
-            case PARAM_PADA:
-            case PARAM_PADB:
-            case PARAM_PADC:
-            case PARAM_ZEROCOL:
             case PARAM_INCM:
             case PARAM_INCG:
                 printf("  %*d", ParamDesc[i].width, pval[i].i);
@@ -447,7 +430,7 @@ int test_routine(const char *name, param_value_t pval[], bool test)
 
             // double parameters
             case PARAM_TIME:
-            case PARAM_GFLOPS:
+            case PARAM_MFLOPS:
                 printf("  %*.4f", ParamDesc[i].width, pval[i].d);
                 break;
 
@@ -484,7 +467,7 @@ void run_routine(const char *name, param_value_t pval[], bool run)
     pval[PARAM_SUCCESS].used = true;
     pval[PARAM_ERROR  ].used = true;
     pval[PARAM_TIME   ].used = true;
-    pval[PARAM_GFLOPS ].used = true;
+    pval[PARAM_MFLOPS ].used = true;
 
     bool found = false;
     for (int i = 0; routines[i].name != NULL; ++i) {
@@ -599,15 +582,6 @@ void param_read(int argc, char **argv, param_t param[])
         else if (param_starts_with(argv[i], "--gs="))
             err = param_scan_int(strchr(argv[i], '=')+1, &param[PARAM_GS]);
 
-        else if (param_starts_with(argv[i], "--pada="))
-            err = param_scan_int(strchr(argv[i], '=')+1, &param[PARAM_PADA]);
-        else if (param_starts_with(argv[i], "--padb="))
-            err = param_scan_int(strchr(argv[i], '=')+1, &param[PARAM_PADB]);
-        else if (param_starts_with(argv[i], "--padc="))
-            err = param_scan_int(strchr(argv[i], '=')+1, &param[PARAM_PADC]);
-
-        else if (param_starts_with(argv[i], "--zerocol="))
-            err = param_scan_int(strchr(argv[i], '=')+1, &param[PARAM_ZEROCOL]);
         else if (param_starts_with(argv[i], "--incm="))
             err = param_scan_int(strchr(argv[i], '=')+1, &param[PARAM_INCM]);
         else if (param_starts_with(argv[i], "--incg="))
@@ -687,16 +661,6 @@ void param_read(int argc, char **argv, param_t param[])
         param_add_int(10, &param[PARAM_NG]);
     if (param[PARAM_GS].num == 0)
         param_add_int(100, &param[PARAM_GS]);
-
-    if (param[PARAM_PADA].num == 0)
-        param_add_int(0, &param[PARAM_PADA]);
-    if (param[PARAM_PADB].num == 0)
-        param_add_int(0, &param[PARAM_PADB]);
-    if (param[PARAM_PADC].num == 0)
-        param_add_int(0, &param[PARAM_PADC]);
-
-    if (param[PARAM_ZEROCOL].num == 0)
-        param_add_int(-1, &param[PARAM_ZEROCOL]);
     if (param[PARAM_INCM].num == 0)
         param_add_int(1, &param[PARAM_INCM]);
     if (param[PARAM_INCG].num == 0)
