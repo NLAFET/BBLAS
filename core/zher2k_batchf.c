@@ -196,10 +196,10 @@ void blas_zher2k_batchf(int group_size, bblas_enum_t layout, bblas_enum_t uplo,
 	}
 	for (int iter = 0; iter < group_size; iter++) {
 		cblas_zher2k(layout, uplo, trans,
-                     n, k,
-                     CBLAS_SADDR(alpha), A[iter], lda,
-                                         B[iter], ldb,
-                                   beta, C[iter], ldc);
+                     	     n, k,
+			     CBLAS_SADDR(alpha), A[iter], lda,
+			     			 B[iter], ldb,
+			     beta, C[iter], ldc);
 		// BblasSuccess
 		if (info[0] == BblasErrorsReportAll)
 			info[iter] = 0;

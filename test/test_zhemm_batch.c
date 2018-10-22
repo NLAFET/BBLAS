@@ -68,8 +68,8 @@ void test_zhemm_batch(param_value_t param[], bool run)
 	bblas_enum_t side[group_count]; 
 	bblas_enum_t uplo[group_count];
 	for (int i = 0; i < group_count; ++i) {
-		side[i] = param[PARAM_SIDE].c;
-		uplo[i] = param[PARAM_UPLO].c;
+		side[i] = bblas_side_const(param[PARAM_SIDE].c);
+		uplo[i] = bblas_uplo_const(param[PARAM_UPLO].c);
 	}
 
 	int m[group_count]; 
