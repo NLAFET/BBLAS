@@ -45,10 +45,10 @@ struct routines_t routines[] =
     { "cher2k_batch", test_cher2k_batch }, 
     { "", NULL }, 
 
-    /* { "zherk_batch", test_zherk_batch }, */
-    /* { "", NULL }, */
-    /* { "cherk_batch", test_cherk_batch }, */
-    /* { "", NULL }, */
+    { "zherk_batch", test_zherk_batch }, 
+    { "", NULL }, 
+    { "cherk_batch", test_cherk_batch }, 
+    { "", NULL },
 
 
     { "zsymm_batch", test_zsymm_batch }, 
