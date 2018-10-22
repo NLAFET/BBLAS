@@ -61,10 +61,10 @@ struct routines_t routines[] =
     { "csyr2k_batch", test_csyr2k_batch }, 
     { "ssyr2k_batch", test_ssyr2k_batch }, 
 
-    /* { "zsyrk_batch", test_zsyrk_batch }, */
-    /* { "dsyrk_batch", test_dsyrk_batch }, */
-    /* { "csyrk_batch", test_csyrk_batch }, */
-    /* { "ssyrk_batch", test_ssyrk_batch }, */
+    { "zsyrk_batch", test_zsyrk_batch }, 
+    { "dsyrk_batch", test_dsyrk_batch }, 
+    { "csyrk_batch", test_csyrk_batch }, 
+    { "ssyrk_batch", test_ssyrk_batch }, 
 
 
     /* { "ztrmm_batch", test_ztrmm_batch }, */
