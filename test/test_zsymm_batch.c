@@ -44,7 +44,7 @@ void test_zsymm_batch(param_value_t param[], bool run)
 	param[PARAM_INCG   ].used = true;
 	param[PARAM_SIDE   ].used = true;
 	param[PARAM_UPLO   ].used = true;
-	param[PARAM_INFO ].used = true;
+	param[PARAM_INFO   ].used = true;
 	param[PARAM_DIM    ].used = PARAM_USE_M | PARAM_USE_N;
 	param[PARAM_ALPHA  ].used = true;
 	param[PARAM_BETA   ].used = true;
