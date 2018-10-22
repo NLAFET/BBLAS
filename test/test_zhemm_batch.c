@@ -323,6 +323,4 @@ void test_zhemm_batch(param_value_t param[], bool run)
 	free(Am);
 	free(Bm);
 	free(Cm);
-
-
 }
