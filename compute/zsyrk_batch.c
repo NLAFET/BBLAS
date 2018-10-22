@@ -130,8 +130,8 @@
 void blas_zsyrk_batch(int group_count, const int *group_sizes,
 		      bblas_enum_t layout, const bblas_enum_t *uplo, const bblas_enum_t *trans,
 		      const int *n, const int *k, 
-		      const double *alpha, bblas_complex64_t const *const *A, const int *lda, 
-		      const double  *beta, bblas_complex64_t		** C, const int *ldc, 
+		      const bblas_complex64_t *alpha, bblas_complex64_t const *const *A, const int *lda, 
+		      const bblas_complex64_t  *beta, bblas_complex64_t		   ** C, const int *ldc, 
     		      int *info)
 {
 

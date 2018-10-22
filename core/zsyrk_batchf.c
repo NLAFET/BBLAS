@@ -108,8 +108,8 @@
  ******************************************************************************/
 void blas_zsyrk_batchf(int group_size, bblas_enum_t layout, bblas_enum_t uplo,
                        bblas_enum_t trans, int n, int k,
-                       const double alpha, bblas_complex64_t const *const *A, int lda,
-                       const double beta,  bblas_complex64_t            ** C, int ldc,
+                       const bblas_complex64_t alpha, bblas_complex64_t const *const *A, int lda,
+                       const bblas_complex64_t beta,  bblas_complex64_t            ** C, int ldc,
                        int *info)
 {
 	/* Check input arguments */
