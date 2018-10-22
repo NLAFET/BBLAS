@@ -6,7 +6,7 @@
  *  University of Manchester, UK,
  *  University of Tennessee, US.
  *
- * @precisions normal z -> s d c
+ * @precisions normal z -> c
  *
  **/
 #include "test.h"
@@ -25,7 +25,7 @@
 
 /***************************************************************************//**
  *
- * @brief Tests BATCHED ZSYMM.
+ * @brief Tests BATCHED ZHEMM.
  *
  * @param[in,out] param - array of parameters
  * @param[in]     run - whether to run test
@@ -33,7 +33,7 @@
  * Sets used flags in param indicating parameters that are used.
  * If run is true, also runs test and stores output parameters.
  ******************************************************************************/
-void test_zsymm_batch(param_value_t param[], bool run)
+void test_zhemm_batch(param_value_t param[], bool run)
 {
 	//================================================================
 	// Mark which parameters are used.
@@ -236,7 +236,8 @@ void test_zsymm_batch(param_value_t param[], bool run)
 	//================================================================
 	bblas_time_t start = gettime();
 
-	blas_zsymm_batch(group_count, (const int *)group_sizes,
+
+	blas_zhemm_batch(group_count, (const int *)group_sizes,
 			BblasColMajor, (const bblas_enum_t *)side, (const bblas_enum_t *)uplo,
 			(const int *)m, (const int *)n, 
 			(const bblas_complex64_t *)alpha, (bblas_complex64_t const *const *)A, (const int *)lda, 
@@ -251,11 +252,10 @@ void test_zsymm_batch(param_value_t param[], bool run)
 
 	double flops = 0;
 	for (int group_iter = 0; group_iter < group_count; group_iter++) {
-		flops += flops_zsymm(side[group_iter], m[group_iter], n[group_iter])
+		flops += flops_zhemm(side[group_iter], m[group_iter], n[group_iter])
 			*group_sizes[group_iter];
 	}
 	param[PARAM_MFLOPS].d = flops / time / 1e6;
-
 
 	//=====================================================================
 	// Test Batched API results by comparing to regular mutiple blas calls .
@@ -270,7 +270,7 @@ void test_zsymm_batch(param_value_t param[], bool run)
 			group_end += group_sizes[group_iter];
 			for (int matrix_iter= group_start; matrix_iter < group_end; matrix_iter++) {
 
-				cblas_zsymm(CblasColMajor,
+				cblas_zhemm(CblasColMajor,
 						(CBLAS_SIDE) side[group_iter], (CBLAS_UPLO) uplo[group_iter],
 						m[group_iter], n[group_iter],
 						CBLAS_SADDR(alpha[group_iter]), A[group_iter], lda[group_iter],
