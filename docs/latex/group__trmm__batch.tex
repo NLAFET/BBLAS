@@ -1,0 +1,474 @@
+\hypertarget{group__trmm__batch}{}\section{trmm\+\_\+batch\+: Batched triangular matrix multiply}
+\label{group__trmm__batch}\index{trmm\+\_\+batch\+: Batched triangular matrix multiply@{trmm\+\_\+batch\+: Batched triangular matrix multiply}}
+
+
+$ B[i] = \alpha[i] \;op(A[i])\; B[i] $ or $ B[i] = \alpha[i] B[i] \;op(A[i]) $ where $ A[i] $ are triangular  
+
+
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__trmm__batch_ga0f7874ec940542213e4676fdb45fad49}{blas\+\_\+ctrmm\+\_\+batch} (int group\+\_\+count, const int $\ast$group\+\_\+sizes, bblas\+\_\+enum\+\_\+t layout, const bblas\+\_\+enum\+\_\+t $\ast$side, const bblas\+\_\+enum\+\_\+t $\ast$uplo, const bblas\+\_\+enum\+\_\+t $\ast$transa, const bblas\+\_\+enum\+\_\+t $\ast$diag, const int $\ast$m, const int $\ast$n, const bblas\+\_\+complex32\+\_\+t $\ast$alpha, bblas\+\_\+complex32\+\_\+t const $\ast$const $\ast$A, const int $\ast$lda, bblas\+\_\+complex32\+\_\+t $\ast$$\ast$B, int const $\ast$ldb, int $\ast$info)
+\item 
+void \hyperlink{group__trmm__batch_ga8b6216cfe24af976ee344f94dacd6e9d}{blas\+\_\+dtrmm\+\_\+batch} (int group\+\_\+count, const int $\ast$group\+\_\+sizes, bblas\+\_\+enum\+\_\+t layout, const bblas\+\_\+enum\+\_\+t $\ast$side, const bblas\+\_\+enum\+\_\+t $\ast$uplo, const bblas\+\_\+enum\+\_\+t $\ast$transa, const bblas\+\_\+enum\+\_\+t $\ast$diag, const int $\ast$m, const int $\ast$n, const double $\ast$alpha, double const $\ast$const $\ast$A, const int $\ast$lda, double $\ast$$\ast$B, int const $\ast$ldb, int $\ast$info)
+\item 
+void \hyperlink{group__trmm__batch_ga2c83d184ed54d501cdcc35bccdee8306}{blas\+\_\+strmm\+\_\+batch} (int group\+\_\+count, const int $\ast$group\+\_\+sizes, bblas\+\_\+enum\+\_\+t layout, const bblas\+\_\+enum\+\_\+t $\ast$side, const bblas\+\_\+enum\+\_\+t $\ast$uplo, const bblas\+\_\+enum\+\_\+t $\ast$transa, const bblas\+\_\+enum\+\_\+t $\ast$diag, const int $\ast$m, const int $\ast$n, const float $\ast$alpha, float const $\ast$const $\ast$A, const int $\ast$lda, float $\ast$$\ast$B, int const $\ast$ldb, int $\ast$info)
+\item 
+void \hyperlink{group__trmm__batch_ga86c0ac5ca43a5fe047386a17dae5c55f}{blas\+\_\+ztrmm\+\_\+batch} (int group\+\_\+count, const int $\ast$group\+\_\+sizes, bblas\+\_\+enum\+\_\+t layout, const bblas\+\_\+enum\+\_\+t $\ast$side, const bblas\+\_\+enum\+\_\+t $\ast$uplo, const bblas\+\_\+enum\+\_\+t $\ast$transa, const bblas\+\_\+enum\+\_\+t $\ast$diag, const int $\ast$m, const int $\ast$n, const bblas\+\_\+complex64\+\_\+t $\ast$alpha, bblas\+\_\+complex64\+\_\+t const $\ast$const $\ast$A, const int $\ast$lda, bblas\+\_\+complex64\+\_\+t $\ast$$\ast$B, int const $\ast$ldb, int $\ast$info)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+$ B[i] = \alpha[i] \;op(A[i])\; B[i] $ or $ B[i] = \alpha[i] B[i] \;op(A[i]) $ where $ A[i] $ are triangular 
+
+
+
+\subsection{Function Documentation}
+\index{trmm\+\_\+batch\+: Batched triangular matrix multiply@{trmm\+\_\+batch\+: Batched triangular matrix multiply}!blas\+\_\+ctrmm\+\_\+batch@{blas\+\_\+ctrmm\+\_\+batch}}
+\index{blas\+\_\+ctrmm\+\_\+batch@{blas\+\_\+ctrmm\+\_\+batch}!trmm\+\_\+batch\+: Batched triangular matrix multiply@{trmm\+\_\+batch\+: Batched triangular matrix multiply}}
+\subsubsection[{\texorpdfstring{blas\+\_\+ctrmm\+\_\+batch(int group\+\_\+count, const int $\ast$group\+\_\+sizes, bblas\+\_\+enum\+\_\+t layout, const bblas\+\_\+enum\+\_\+t $\ast$side, const bblas\+\_\+enum\+\_\+t $\ast$uplo, const bblas\+\_\+enum\+\_\+t $\ast$transa, const bblas\+\_\+enum\+\_\+t $\ast$diag, const int $\ast$m, const int $\ast$n, const bblas\+\_\+complex32\+\_\+t $\ast$alpha, bblas\+\_\+complex32\+\_\+t const $\ast$const $\ast$\+A, const int $\ast$lda, bblas\+\_\+complex32\+\_\+t $\ast$$\ast$\+B, int const $\ast$ldb, int $\ast$info)}{blas_ctrmm_batch(int group_count, const int *group_sizes, bblas_enum_t layout, const bblas_enum_t *side, const bblas_enum_t *uplo, const bblas_enum_t *transa, const bblas_enum_t *diag, const int *m, const int *n, const bblas_complex32_t *alpha, bblas_complex32_t const *const *A, const int *lda, bblas_complex32_t **B, int const *ldb, int *info)}}]{\setlength{\rightskip}{0pt plus 5cm}void blas\+\_\+ctrmm\+\_\+batch (
+\begin{DoxyParamCaption}
+\item[{int}]{group\+\_\+count, }
+\item[{const int $\ast$}]{group\+\_\+sizes, }
+\item[{bblas\+\_\+enum\+\_\+t}]{layout, }
+\item[{const bblas\+\_\+enum\+\_\+t $\ast$}]{side, }
+\item[{const bblas\+\_\+enum\+\_\+t $\ast$}]{uplo, }
+\item[{const bblas\+\_\+enum\+\_\+t $\ast$}]{transa, }
+\item[{const bblas\+\_\+enum\+\_\+t $\ast$}]{diag, }
+\item[{const int $\ast$}]{m, }
+\item[{const int $\ast$}]{n, }
+\item[{const bblas\+\_\+complex32\+\_\+t $\ast$}]{alpha, }
+\item[{bblas\+\_\+complex32\+\_\+t const $\ast$const $\ast$}]{A, }
+\item[{const int $\ast$}]{lda, }
+\item[{bblas\+\_\+complex32\+\_\+t $\ast$$\ast$}]{B, }
+\item[{int const $\ast$}]{ldb, }
+\item[{int $\ast$}]{info}
+\end{DoxyParamCaption}
+)}\hypertarget{group__trmm__batch_ga0f7874ec940542213e4676fdb45fad49}{}\label{group__trmm__batch_ga0f7874ec940542213e4676fdb45fad49}
+Performs a triangular batch matrix-\/matrix multiply of the form
+
+\[B[i] = \alpha [op( A[i] ) \times B[i]] \], if side = Bblas\+Left or \[B[i] = \alpha [B[i] \times op( A[i]) ] \], if side = Bblas\+Right
+
+for a group of matrices, and op( X ) is one of\+: \begin{DoxyVerb}    - op(A[i]) = A[i]   or
+    - op(A[i]) = A[i]^T or
+    - op(A[i]) = A[i]^H
+\end{DoxyVerb}
+
+
+alpha\mbox{[}i\mbox{]}-\/s are scalars, B\mbox{[}i\mbox{]}-\/s are m-\/by-\/n matrices and A\mbox{[}i\mbox{]}-\/s are a unit or non-\/unit, upper or lower triangular matrix.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em group\+\_\+count} & The number groups of matrices.\\
+\hline
+\mbox{\tt in}  & {\em group\+\_\+sizes} & The number of matrices in each group.\\
+\hline
+\mbox{\tt in}  & {\em layout} & Specifies if the matrix is stored in row major or column major format\+:
+\begin{DoxyItemize}
+\item Bblas\+Row\+Major\+: Row major format
+\item Bblas\+Col\+Major\+: Column major format
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em side} & An array of length group\+\_\+count-\/1, for matrices of i-\/th group it specifies whether op( A\mbox{[}j\mbox{]} ) appears on the left or on the right of B\mbox{[}j\mbox{]}\+:
+\begin{DoxyItemize}
+\item Bblas\+Left\+: alpha\mbox{[}i\mbox{]}$\ast$op( A\mbox{[}j\mbox{]} )$\ast$B\mbox{[}j\mbox{]}
+\item Bblas\+Right\+: alpha\mbox{[}i\mbox{]}$\ast$B\mbox{[}j\mbox{]}$\ast$op( A\mbox{[}j\mbox{]} )
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em uplo} & An array of length group\+\_\+count-\/1, where uplo\mbox{[}i\mbox{]} specifies whether the upper or lower triangular part of the symmetric matrices A\mbox{[}j\mbox{]}-\/s of i-\/th group are to be referenced\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyItemize}
+\item Bblas\+Lower\+: Only the lower triangular part of the symmetric matrices A\mbox{[}j\mbox{]} is to be referenced.
+\item Bblas\+Upper\+: Only the upper triangular part of the symmetric matrices A\mbox{[}j\mbox{]} is to be referenced.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em transa} & An array of length group\+\_\+count-\/1, where
+\begin{DoxyItemize}
+\item Bblas\+No\+Trans\+: A\mbox{[}j\mbox{]}-\/s in i-\/th group are not transposed,
+\item Bblas\+Trans\+: A\mbox{[}j\mbox{]}-\/s in i-\/th group are transposed,
+\item Bblas\+Conj\+Trans\+: A\mbox{[}j\mbox{]}-\/s in i-\/th group are conjugate transposed.
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em diag} & An array of length group\+\_\+count-\/1, which specifies whether or not A\mbox{[}j\mbox{]}-\/s of i-\/th group are unit triangular\+:
+\begin{DoxyItemize}
+\item Bblas\+Non\+Unit\+: A\mbox{[}j\mbox{]}-\/s are non-\/unit triangular;
+\item Bblas\+Unit\+: A\mbox{[}j\mbox{]}-\/s are unit triangular.
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em m} & An array integers of length group\+\_\+count-\/1, which specified the number of rows of matrices B\mbox{[}j\mbox{]} in i-\/th group. m\mbox{[}i\mbox{]} $>$= 0.\\
+\hline
+\mbox{\tt in}  & {\em n} & An array integers of length group\+\_\+count-\/1, which specified the number of columns of matrices B\mbox{[}j\mbox{]} in i-\/th group. n\mbox{[}i\mbox{]} $>$= 0.\\
+\hline
+\mbox{\tt in}  & {\em alpha} & An array of length group\+\_\+count-\/1, where alpha\mbox{[}i\mbox{]} is a scalar.\\
+\hline
+\mbox{\tt in}  & {\em A} & A is an array of pointers to matrices A\mbox{[}0\mbox{]}, A\mbox{[}1\mbox{]} .. A\mbox{[}batch\+\_\+count-\/1\mbox{]}, where for i-\/th group each element A\mbox{[}j\mbox{]} is a pointer to a triangular matrix of dimension lda\mbox{[}i\mbox{]}-\/by-\/k, where k is m\mbox{[}i\mbox{]} when side=\textquotesingle{}L\textquotesingle{} or \textquotesingle{}l\textquotesingle{} and k is n\mbox{[}i\mbox{]} when when side=\textquotesingle{}R\textquotesingle{} or \textquotesingle{}r\textquotesingle{}. If uplo = Bblas\+Upper, the leading k-\/by-\/k upper triangular part of the array A\mbox{[}j\mbox{]} contains the upper triangular matrix, and the strictly lower triangular part of A\mbox{[}j\mbox{]} is not referenced. If uplo = Bblas\+Lower, the leading k-\/by-\/k lower triangular part of the array A\mbox{[}j\mbox{]} contains the lower triangular matrix, and the strictly upper triangular part of A\mbox{[}j\mbox{]} is not referenced. If diag = Bblas\+Unit, the diagonal elements of A\mbox{[}j\mbox{]} are also not referenced and are assumed to be 1. batch\+\_\+count=\{i=1\}$^\wedge$\{group\+\_\+count\}group\+\_\+sizes\mbox{[}i\mbox{]}.\\
+\hline
+\mbox{\tt in}  & {\em lda} & An array of integers of length group\+\_\+count-\/1, where lda\mbox{[}i\mbox{]} denotes the leading dimension of the arrays A\mbox{[}j\mbox{]} of i-\/th group. When side=\textquotesingle{}L\textquotesingle{} or \textquotesingle{}l\textquotesingle{}, lda\mbox{[}i\mbox{]} $>$= max(1,m\mbox{[}i\mbox{]}), when side=\textquotesingle{}R\textquotesingle{} or \textquotesingle{}r\textquotesingle{} then lda\mbox{[}i\mbox{]} $>$= max(1,n\mbox{[}i\mbox{]}).\\
+\hline
+\mbox{\tt in}  & {\em B} & B is an array of pointers to matrices B\mbox{[}0\mbox{]}, B\mbox{[}1\mbox{]},..,B\mbox{[}batch\+\_\+count-\/1\mbox{]}, where for i-\/th group each element B\mbox{[}j\mbox{]} is a pointer to a matrix. On entry, the matrices B\mbox{[}j\mbox{]} are of dimension ldb\mbox{[}i\mbox{]}-\/by-\/n\mbox{[}i\mbox{]}. On exit, the result of a triangular matrix-\/matrix multiply ( alpha\mbox{[}i\mbox{]}$\ast$op(A\mbox{[}j\mbox{]})$\ast$B\mbox{[}j\mbox{]} ) or ( alpha\mbox{[}i\mbox{]}$\ast$B\mbox{[}j\mbox{]}$\ast$op(A\mbox{[}j\mbox{]}) ). batch\+\_\+count=\{i=1\}$^\wedge$\{group\+\_\+count\}group\+\_\+sizes\mbox{[}i\mbox{]}.\\
+\hline
+\mbox{\tt in}  & {\em ldb} & An array of integers of length group\+\_\+count-\/1, where ldb\mbox{[}i\mbox{]} is the leading dimension of the arrays B\mbox{[}j\mbox{]} of i-\/th group. ldb\mbox{[}i\mbox{]} $>$= max(1,m\mbox{[}i\mbox{]}).\\
+\hline
+\mbox{\tt in,out}  & {\em info} & Array of int for error handling. On entry info\mbox{[}0\mbox{]} should have one of the following values
+\begin{DoxyItemize}
+\item Bblas\+Errors\+Report\+All \+: All errors will be specified on output. Length of the array should be atleast \{i=1\}$^\wedge$\{group\+\_\+count-\/1\}group\+\_\+sizes\mbox{[}i\mbox{]}.
+\item Bblas\+Errors\+Report\+Group \+: Single error from each group will be reported. Length of the array should be atleast (group\+\_\+count).
+\item Bblas\+Errors\+Report\+Any \+: Occurence of an error will be indicated by a single integer value, and length of the array should be atleast 1.
+\item Bblas\+Errors\+Report\+None \+: No error will be reported on output, and length of the array should be atleast 1.
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Bblas\+Success} & successful exit\\
+\hline
+\end{DoxyRetVals}
+\begin{DoxySeeAlso}{See also}
+ctrmm\+\_\+batch 
+
+ctrmm\+\_\+batch 
+
+dtrmm\+\_\+batch 
+
+strmm\+\_\+batch 
+\end{DoxySeeAlso}
+\index{trmm\+\_\+batch\+: Batched triangular matrix multiply@{trmm\+\_\+batch\+: Batched triangular matrix multiply}!blas\+\_\+dtrmm\+\_\+batch@{blas\+\_\+dtrmm\+\_\+batch}}
+\index{blas\+\_\+dtrmm\+\_\+batch@{blas\+\_\+dtrmm\+\_\+batch}!trmm\+\_\+batch\+: Batched triangular matrix multiply@{trmm\+\_\+batch\+: Batched triangular matrix multiply}}
+\subsubsection[{\texorpdfstring{blas\+\_\+dtrmm\+\_\+batch(int group\+\_\+count, const int $\ast$group\+\_\+sizes, bblas\+\_\+enum\+\_\+t layout, const bblas\+\_\+enum\+\_\+t $\ast$side, const bblas\+\_\+enum\+\_\+t $\ast$uplo, const bblas\+\_\+enum\+\_\+t $\ast$transa, const bblas\+\_\+enum\+\_\+t $\ast$diag, const int $\ast$m, const int $\ast$n, const double $\ast$alpha, double const $\ast$const $\ast$\+A, const int $\ast$lda, double $\ast$$\ast$\+B, int const $\ast$ldb, int $\ast$info)}{blas_dtrmm_batch(int group_count, const int *group_sizes, bblas_enum_t layout, const bblas_enum_t *side, const bblas_enum_t *uplo, const bblas_enum_t *transa, const bblas_enum_t *diag, const int *m, const int *n, const double *alpha, double const *const *A, const int *lda, double **B, int const *ldb, int *info)}}]{\setlength{\rightskip}{0pt plus 5cm}void blas\+\_\+dtrmm\+\_\+batch (
+\begin{DoxyParamCaption}
+\item[{int}]{group\+\_\+count, }
+\item[{const int $\ast$}]{group\+\_\+sizes, }
+\item[{bblas\+\_\+enum\+\_\+t}]{layout, }
+\item[{const bblas\+\_\+enum\+\_\+t $\ast$}]{side, }
+\item[{const bblas\+\_\+enum\+\_\+t $\ast$}]{uplo, }
+\item[{const bblas\+\_\+enum\+\_\+t $\ast$}]{transa, }
+\item[{const bblas\+\_\+enum\+\_\+t $\ast$}]{diag, }
+\item[{const int $\ast$}]{m, }
+\item[{const int $\ast$}]{n, }
+\item[{const double $\ast$}]{alpha, }
+\item[{double const $\ast$const $\ast$}]{A, }
+\item[{const int $\ast$}]{lda, }
+\item[{double $\ast$$\ast$}]{B, }
+\item[{int const $\ast$}]{ldb, }
+\item[{int $\ast$}]{info}
+\end{DoxyParamCaption}
+)}\hypertarget{group__trmm__batch_ga8b6216cfe24af976ee344f94dacd6e9d}{}\label{group__trmm__batch_ga8b6216cfe24af976ee344f94dacd6e9d}
+Performs a triangular batch matrix-\/matrix multiply of the form
+
+\[B[i] = \alpha [op( A[i] ) \times B[i]] \], if side = Bblas\+Left or \[B[i] = \alpha [B[i] \times op( A[i]) ] \], if side = Bblas\+Right
+
+for a group of matrices, and op( X ) is one of\+: \begin{DoxyVerb}    - op(A[i]) = A[i]   or
+    - op(A[i]) = A[i]^T or
+    - op(A[i]) = A[i]^T
+\end{DoxyVerb}
+
+
+alpha\mbox{[}i\mbox{]}-\/s are scalars, B\mbox{[}i\mbox{]}-\/s are m-\/by-\/n matrices and A\mbox{[}i\mbox{]}-\/s are a unit or non-\/unit, upper or lower triangular matrix.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em group\+\_\+count} & The number groups of matrices.\\
+\hline
+\mbox{\tt in}  & {\em group\+\_\+sizes} & The number of matrices in each group.\\
+\hline
+\mbox{\tt in}  & {\em layout} & Specifies if the matrix is stored in row major or column major format\+:
+\begin{DoxyItemize}
+\item Bblas\+Row\+Major\+: Row major format
+\item Bblas\+Col\+Major\+: Column major format
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em side} & An array of length group\+\_\+count-\/1, for matrices of i-\/th group it specifies whether op( A\mbox{[}j\mbox{]} ) appears on the left or on the right of B\mbox{[}j\mbox{]}\+:
+\begin{DoxyItemize}
+\item Bblas\+Left\+: alpha\mbox{[}i\mbox{]}$\ast$op( A\mbox{[}j\mbox{]} )$\ast$B\mbox{[}j\mbox{]}
+\item Bblas\+Right\+: alpha\mbox{[}i\mbox{]}$\ast$B\mbox{[}j\mbox{]}$\ast$op( A\mbox{[}j\mbox{]} )
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em uplo} & An array of length group\+\_\+count-\/1, where uplo\mbox{[}i\mbox{]} specifies whether the upper or lower triangular part of the symmetric matrices A\mbox{[}j\mbox{]}-\/s of i-\/th group are to be referenced\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyItemize}
+\item Bblas\+Lower\+: Only the lower triangular part of the symmetric matrices A\mbox{[}j\mbox{]} is to be referenced.
+\item Bblas\+Upper\+: Only the upper triangular part of the symmetric matrices A\mbox{[}j\mbox{]} is to be referenced.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em transa} & An array of length group\+\_\+count-\/1, where
+\begin{DoxyItemize}
+\item Bblas\+No\+Trans\+: A\mbox{[}j\mbox{]}-\/s in i-\/th group are not transposed,
+\item Bblas\+Trans\+: A\mbox{[}j\mbox{]}-\/s in i-\/th group are transposed,
+\item Bblas\+Conj\+Trans\+: A\mbox{[}j\mbox{]}-\/s in i-\/th group are conjugate transposed.
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em diag} & An array of length group\+\_\+count-\/1, which specifies whether or not A\mbox{[}j\mbox{]}-\/s of i-\/th group are unit triangular\+:
+\begin{DoxyItemize}
+\item Bblas\+Non\+Unit\+: A\mbox{[}j\mbox{]}-\/s are non-\/unit triangular;
+\item Bblas\+Unit\+: A\mbox{[}j\mbox{]}-\/s are unit triangular.
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em m} & An array integers of length group\+\_\+count-\/1, which specified the number of rows of matrices B\mbox{[}j\mbox{]} in i-\/th group. m\mbox{[}i\mbox{]} $>$= 0.\\
+\hline
+\mbox{\tt in}  & {\em n} & An array integers of length group\+\_\+count-\/1, which specified the number of columns of matrices B\mbox{[}j\mbox{]} in i-\/th group. n\mbox{[}i\mbox{]} $>$= 0.\\
+\hline
+\mbox{\tt in}  & {\em alpha} & An array of length group\+\_\+count-\/1, where alpha\mbox{[}i\mbox{]} is a scalar.\\
+\hline
+\mbox{\tt in}  & {\em A} & A is an array of pointers to matrices A\mbox{[}0\mbox{]}, A\mbox{[}1\mbox{]} .. A\mbox{[}batch\+\_\+count-\/1\mbox{]}, where for i-\/th group each element A\mbox{[}j\mbox{]} is a pointer to a triangular matrix of dimension lda\mbox{[}i\mbox{]}-\/by-\/k, where k is m\mbox{[}i\mbox{]} when side=\textquotesingle{}L\textquotesingle{} or \textquotesingle{}l\textquotesingle{} and k is n\mbox{[}i\mbox{]} when when side=\textquotesingle{}R\textquotesingle{} or \textquotesingle{}r\textquotesingle{}. If uplo = Bblas\+Upper, the leading k-\/by-\/k upper triangular part of the array A\mbox{[}j\mbox{]} contains the upper triangular matrix, and the strictly lower triangular part of A\mbox{[}j\mbox{]} is not referenced. If uplo = Bblas\+Lower, the leading k-\/by-\/k lower triangular part of the array A\mbox{[}j\mbox{]} contains the lower triangular matrix, and the strictly upper triangular part of A\mbox{[}j\mbox{]} is not referenced. If diag = Bblas\+Unit, the diagonal elements of A\mbox{[}j\mbox{]} are also not referenced and are assumed to be 1. batch\+\_\+count=\{i=1\}$^\wedge$\{group\+\_\+count\}group\+\_\+sizes\mbox{[}i\mbox{]}.\\
+\hline
+\mbox{\tt in}  & {\em lda} & An array of integers of length group\+\_\+count-\/1, where lda\mbox{[}i\mbox{]} denotes the leading dimension of the arrays A\mbox{[}j\mbox{]} of i-\/th group. When side=\textquotesingle{}L\textquotesingle{} or \textquotesingle{}l\textquotesingle{}, lda\mbox{[}i\mbox{]} $>$= max(1,m\mbox{[}i\mbox{]}), when side=\textquotesingle{}R\textquotesingle{} or \textquotesingle{}r\textquotesingle{} then lda\mbox{[}i\mbox{]} $>$= max(1,n\mbox{[}i\mbox{]}).\\
+\hline
+\mbox{\tt in}  & {\em B} & B is an array of pointers to matrices B\mbox{[}0\mbox{]}, B\mbox{[}1\mbox{]},..,B\mbox{[}batch\+\_\+count-\/1\mbox{]}, where for i-\/th group each element B\mbox{[}j\mbox{]} is a pointer to a matrix. On entry, the matrices B\mbox{[}j\mbox{]} are of dimension ldb\mbox{[}i\mbox{]}-\/by-\/n\mbox{[}i\mbox{]}. On exit, the result of a triangular matrix-\/matrix multiply ( alpha\mbox{[}i\mbox{]}$\ast$op(A\mbox{[}j\mbox{]})$\ast$B\mbox{[}j\mbox{]} ) or ( alpha\mbox{[}i\mbox{]}$\ast$B\mbox{[}j\mbox{]}$\ast$op(A\mbox{[}j\mbox{]}) ). batch\+\_\+count=\{i=1\}$^\wedge$\{group\+\_\+count\}group\+\_\+sizes\mbox{[}i\mbox{]}.\\
+\hline
+\mbox{\tt in}  & {\em ldb} & An array of integers of length group\+\_\+count-\/1, where ldb\mbox{[}i\mbox{]} is the leading dimension of the arrays B\mbox{[}j\mbox{]} of i-\/th group. ldb\mbox{[}i\mbox{]} $>$= max(1,m\mbox{[}i\mbox{]}).\\
+\hline
+\mbox{\tt in,out}  & {\em info} & Array of int for error handling. On entry info\mbox{[}0\mbox{]} should have one of the following values
+\begin{DoxyItemize}
+\item Bblas\+Errors\+Report\+All \+: All errors will be specified on output. Length of the array should be atleast \{i=1\}$^\wedge$\{group\+\_\+count-\/1\}group\+\_\+sizes\mbox{[}i\mbox{]}.
+\item Bblas\+Errors\+Report\+Group \+: Single error from each group will be reported. Length of the array should be atleast (group\+\_\+count).
+\item Bblas\+Errors\+Report\+Any \+: Occurence of an error will be indicated by a single integer value, and length of the array should be atleast 1.
+\item Bblas\+Errors\+Report\+None \+: No error will be reported on output, and length of the array should be atleast 1.
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Bblas\+Success} & successful exit\\
+\hline
+\end{DoxyRetVals}
+\begin{DoxySeeAlso}{See also}
+dtrmm\+\_\+batch 
+
+ctrmm\+\_\+batch 
+
+dtrmm\+\_\+batch 
+
+strmm\+\_\+batch 
+\end{DoxySeeAlso}
+\index{trmm\+\_\+batch\+: Batched triangular matrix multiply@{trmm\+\_\+batch\+: Batched triangular matrix multiply}!blas\+\_\+strmm\+\_\+batch@{blas\+\_\+strmm\+\_\+batch}}
+\index{blas\+\_\+strmm\+\_\+batch@{blas\+\_\+strmm\+\_\+batch}!trmm\+\_\+batch\+: Batched triangular matrix multiply@{trmm\+\_\+batch\+: Batched triangular matrix multiply}}
+\subsubsection[{\texorpdfstring{blas\+\_\+strmm\+\_\+batch(int group\+\_\+count, const int $\ast$group\+\_\+sizes, bblas\+\_\+enum\+\_\+t layout, const bblas\+\_\+enum\+\_\+t $\ast$side, const bblas\+\_\+enum\+\_\+t $\ast$uplo, const bblas\+\_\+enum\+\_\+t $\ast$transa, const bblas\+\_\+enum\+\_\+t $\ast$diag, const int $\ast$m, const int $\ast$n, const float $\ast$alpha, float const $\ast$const $\ast$\+A, const int $\ast$lda, float $\ast$$\ast$\+B, int const $\ast$ldb, int $\ast$info)}{blas_strmm_batch(int group_count, const int *group_sizes, bblas_enum_t layout, const bblas_enum_t *side, const bblas_enum_t *uplo, const bblas_enum_t *transa, const bblas_enum_t *diag, const int *m, const int *n, const float *alpha, float const *const *A, const int *lda, float **B, int const *ldb, int *info)}}]{\setlength{\rightskip}{0pt plus 5cm}void blas\+\_\+strmm\+\_\+batch (
+\begin{DoxyParamCaption}
+\item[{int}]{group\+\_\+count, }
+\item[{const int $\ast$}]{group\+\_\+sizes, }
+\item[{bblas\+\_\+enum\+\_\+t}]{layout, }
+\item[{const bblas\+\_\+enum\+\_\+t $\ast$}]{side, }
+\item[{const bblas\+\_\+enum\+\_\+t $\ast$}]{uplo, }
+\item[{const bblas\+\_\+enum\+\_\+t $\ast$}]{transa, }
+\item[{const bblas\+\_\+enum\+\_\+t $\ast$}]{diag, }
+\item[{const int $\ast$}]{m, }
+\item[{const int $\ast$}]{n, }
+\item[{const float $\ast$}]{alpha, }
+\item[{float const $\ast$const $\ast$}]{A, }
+\item[{const int $\ast$}]{lda, }
+\item[{float $\ast$$\ast$}]{B, }
+\item[{int const $\ast$}]{ldb, }
+\item[{int $\ast$}]{info}
+\end{DoxyParamCaption}
+)}\hypertarget{group__trmm__batch_ga2c83d184ed54d501cdcc35bccdee8306}{}\label{group__trmm__batch_ga2c83d184ed54d501cdcc35bccdee8306}
+Performs a triangular batch matrix-\/matrix multiply of the form
+
+\[B[i] = \alpha [op( A[i] ) \times B[i]] \], if side = Bblas\+Left or \[B[i] = \alpha [B[i] \times op( A[i]) ] \], if side = Bblas\+Right
+
+for a group of matrices, and op( X ) is one of\+: \begin{DoxyVerb}    - op(A[i]) = A[i]   or
+    - op(A[i]) = A[i]^T or
+    - op(A[i]) = A[i]^T
+\end{DoxyVerb}
+
+
+alpha\mbox{[}i\mbox{]}-\/s are scalars, B\mbox{[}i\mbox{]}-\/s are m-\/by-\/n matrices and A\mbox{[}i\mbox{]}-\/s are a unit or non-\/unit, upper or lower triangular matrix.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em group\+\_\+count} & The number groups of matrices.\\
+\hline
+\mbox{\tt in}  & {\em group\+\_\+sizes} & The number of matrices in each group.\\
+\hline
+\mbox{\tt in}  & {\em layout} & Specifies if the matrix is stored in row major or column major format\+:
+\begin{DoxyItemize}
+\item Bblas\+Row\+Major\+: Row major format
+\item Bblas\+Col\+Major\+: Column major format
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em side} & An array of length group\+\_\+count-\/1, for matrices of i-\/th group it specifies whether op( A\mbox{[}j\mbox{]} ) appears on the left or on the right of B\mbox{[}j\mbox{]}\+:
+\begin{DoxyItemize}
+\item Bblas\+Left\+: alpha\mbox{[}i\mbox{]}$\ast$op( A\mbox{[}j\mbox{]} )$\ast$B\mbox{[}j\mbox{]}
+\item Bblas\+Right\+: alpha\mbox{[}i\mbox{]}$\ast$B\mbox{[}j\mbox{]}$\ast$op( A\mbox{[}j\mbox{]} )
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em uplo} & An array of length group\+\_\+count-\/1, where uplo\mbox{[}i\mbox{]} specifies whether the upper or lower triangular part of the symmetric matrices A\mbox{[}j\mbox{]}-\/s of i-\/th group are to be referenced\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyItemize}
+\item Bblas\+Lower\+: Only the lower triangular part of the symmetric matrices A\mbox{[}j\mbox{]} is to be referenced.
+\item Bblas\+Upper\+: Only the upper triangular part of the symmetric matrices A\mbox{[}j\mbox{]} is to be referenced.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em transa} & An array of length group\+\_\+count-\/1, where
+\begin{DoxyItemize}
+\item Bblas\+No\+Trans\+: A\mbox{[}j\mbox{]}-\/s in i-\/th group are not transposed,
+\item Bblas\+Trans\+: A\mbox{[}j\mbox{]}-\/s in i-\/th group are transposed,
+\item Bblas\+Conj\+Trans\+: A\mbox{[}j\mbox{]}-\/s in i-\/th group are conjugate transposed.
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em diag} & An array of length group\+\_\+count-\/1, which specifies whether or not A\mbox{[}j\mbox{]}-\/s of i-\/th group are unit triangular\+:
+\begin{DoxyItemize}
+\item Bblas\+Non\+Unit\+: A\mbox{[}j\mbox{]}-\/s are non-\/unit triangular;
+\item Bblas\+Unit\+: A\mbox{[}j\mbox{]}-\/s are unit triangular.
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em m} & An array integers of length group\+\_\+count-\/1, which specified the number of rows of matrices B\mbox{[}j\mbox{]} in i-\/th group. m\mbox{[}i\mbox{]} $>$= 0.\\
+\hline
+\mbox{\tt in}  & {\em n} & An array integers of length group\+\_\+count-\/1, which specified the number of columns of matrices B\mbox{[}j\mbox{]} in i-\/th group. n\mbox{[}i\mbox{]} $>$= 0.\\
+\hline
+\mbox{\tt in}  & {\em alpha} & An array of length group\+\_\+count-\/1, where alpha\mbox{[}i\mbox{]} is a scalar.\\
+\hline
+\mbox{\tt in}  & {\em A} & A is an array of pointers to matrices A\mbox{[}0\mbox{]}, A\mbox{[}1\mbox{]} .. A\mbox{[}batch\+\_\+count-\/1\mbox{]}, where for i-\/th group each element A\mbox{[}j\mbox{]} is a pointer to a triangular matrix of dimension lda\mbox{[}i\mbox{]}-\/by-\/k, where k is m\mbox{[}i\mbox{]} when side=\textquotesingle{}L\textquotesingle{} or \textquotesingle{}l\textquotesingle{} and k is n\mbox{[}i\mbox{]} when when side=\textquotesingle{}R\textquotesingle{} or \textquotesingle{}r\textquotesingle{}. If uplo = Bblas\+Upper, the leading k-\/by-\/k upper triangular part of the array A\mbox{[}j\mbox{]} contains the upper triangular matrix, and the strictly lower triangular part of A\mbox{[}j\mbox{]} is not referenced. If uplo = Bblas\+Lower, the leading k-\/by-\/k lower triangular part of the array A\mbox{[}j\mbox{]} contains the lower triangular matrix, and the strictly upper triangular part of A\mbox{[}j\mbox{]} is not referenced. If diag = Bblas\+Unit, the diagonal elements of A\mbox{[}j\mbox{]} are also not referenced and are assumed to be 1. batch\+\_\+count=\{i=1\}$^\wedge$\{group\+\_\+count\}group\+\_\+sizes\mbox{[}i\mbox{]}.\\
+\hline
+\mbox{\tt in}  & {\em lda} & An array of integers of length group\+\_\+count-\/1, where lda\mbox{[}i\mbox{]} denotes the leading dimension of the arrays A\mbox{[}j\mbox{]} of i-\/th group. When side=\textquotesingle{}L\textquotesingle{} or \textquotesingle{}l\textquotesingle{}, lda\mbox{[}i\mbox{]} $>$= max(1,m\mbox{[}i\mbox{]}), when side=\textquotesingle{}R\textquotesingle{} or \textquotesingle{}r\textquotesingle{} then lda\mbox{[}i\mbox{]} $>$= max(1,n\mbox{[}i\mbox{]}).\\
+\hline
+\mbox{\tt in}  & {\em B} & B is an array of pointers to matrices B\mbox{[}0\mbox{]}, B\mbox{[}1\mbox{]},..,B\mbox{[}batch\+\_\+count-\/1\mbox{]}, where for i-\/th group each element B\mbox{[}j\mbox{]} is a pointer to a matrix. On entry, the matrices B\mbox{[}j\mbox{]} are of dimension ldb\mbox{[}i\mbox{]}-\/by-\/n\mbox{[}i\mbox{]}. On exit, the result of a triangular matrix-\/matrix multiply ( alpha\mbox{[}i\mbox{]}$\ast$op(A\mbox{[}j\mbox{]})$\ast$B\mbox{[}j\mbox{]} ) or ( alpha\mbox{[}i\mbox{]}$\ast$B\mbox{[}j\mbox{]}$\ast$op(A\mbox{[}j\mbox{]}) ). batch\+\_\+count=\{i=1\}$^\wedge$\{group\+\_\+count\}group\+\_\+sizes\mbox{[}i\mbox{]}.\\
+\hline
+\mbox{\tt in}  & {\em ldb} & An array of integers of length group\+\_\+count-\/1, where ldb\mbox{[}i\mbox{]} is the leading dimension of the arrays B\mbox{[}j\mbox{]} of i-\/th group. ldb\mbox{[}i\mbox{]} $>$= max(1,m\mbox{[}i\mbox{]}).\\
+\hline
+\mbox{\tt in,out}  & {\em info} & Array of int for error handling. On entry info\mbox{[}0\mbox{]} should have one of the following values
+\begin{DoxyItemize}
+\item Bblas\+Errors\+Report\+All \+: All errors will be specified on output. Length of the array should be atleast \{i=1\}$^\wedge$\{group\+\_\+count-\/1\}group\+\_\+sizes\mbox{[}i\mbox{]}.
+\item Bblas\+Errors\+Report\+Group \+: Single error from each group will be reported. Length of the array should be atleast (group\+\_\+count).
+\item Bblas\+Errors\+Report\+Any \+: Occurence of an error will be indicated by a single integer value, and length of the array should be atleast 1.
+\item Bblas\+Errors\+Report\+None \+: No error will be reported on output, and length of the array should be atleast 1.
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Bblas\+Success} & successful exit\\
+\hline
+\end{DoxyRetVals}
+\begin{DoxySeeAlso}{See also}
+strmm\+\_\+batch 
+
+ctrmm\+\_\+batch 
+
+dtrmm\+\_\+batch 
+
+strmm\+\_\+batch 
+\end{DoxySeeAlso}
+\index{trmm\+\_\+batch\+: Batched triangular matrix multiply@{trmm\+\_\+batch\+: Batched triangular matrix multiply}!blas\+\_\+ztrmm\+\_\+batch@{blas\+\_\+ztrmm\+\_\+batch}}
+\index{blas\+\_\+ztrmm\+\_\+batch@{blas\+\_\+ztrmm\+\_\+batch}!trmm\+\_\+batch\+: Batched triangular matrix multiply@{trmm\+\_\+batch\+: Batched triangular matrix multiply}}
+\subsubsection[{\texorpdfstring{blas\+\_\+ztrmm\+\_\+batch(int group\+\_\+count, const int $\ast$group\+\_\+sizes, bblas\+\_\+enum\+\_\+t layout, const bblas\+\_\+enum\+\_\+t $\ast$side, const bblas\+\_\+enum\+\_\+t $\ast$uplo, const bblas\+\_\+enum\+\_\+t $\ast$transa, const bblas\+\_\+enum\+\_\+t $\ast$diag, const int $\ast$m, const int $\ast$n, const bblas\+\_\+complex64\+\_\+t $\ast$alpha, bblas\+\_\+complex64\+\_\+t const $\ast$const $\ast$\+A, const int $\ast$lda, bblas\+\_\+complex64\+\_\+t $\ast$$\ast$\+B, int const $\ast$ldb, int $\ast$info)}{blas_ztrmm_batch(int group_count, const int *group_sizes, bblas_enum_t layout, const bblas_enum_t *side, const bblas_enum_t *uplo, const bblas_enum_t *transa, const bblas_enum_t *diag, const int *m, const int *n, const bblas_complex64_t *alpha, bblas_complex64_t const *const *A, const int *lda, bblas_complex64_t **B, int const *ldb, int *info)}}]{\setlength{\rightskip}{0pt plus 5cm}void blas\+\_\+ztrmm\+\_\+batch (
+\begin{DoxyParamCaption}
+\item[{int}]{group\+\_\+count, }
+\item[{const int $\ast$}]{group\+\_\+sizes, }
+\item[{bblas\+\_\+enum\+\_\+t}]{layout, }
+\item[{const bblas\+\_\+enum\+\_\+t $\ast$}]{side, }
+\item[{const bblas\+\_\+enum\+\_\+t $\ast$}]{uplo, }
+\item[{const bblas\+\_\+enum\+\_\+t $\ast$}]{transa, }
+\item[{const bblas\+\_\+enum\+\_\+t $\ast$}]{diag, }
+\item[{const int $\ast$}]{m, }
+\item[{const int $\ast$}]{n, }
+\item[{const bblas\+\_\+complex64\+\_\+t $\ast$}]{alpha, }
+\item[{bblas\+\_\+complex64\+\_\+t const $\ast$const $\ast$}]{A, }
+\item[{const int $\ast$}]{lda, }
+\item[{bblas\+\_\+complex64\+\_\+t $\ast$$\ast$}]{B, }
+\item[{int const $\ast$}]{ldb, }
+\item[{int $\ast$}]{info}
+\end{DoxyParamCaption}
+)}\hypertarget{group__trmm__batch_ga86c0ac5ca43a5fe047386a17dae5c55f}{}\label{group__trmm__batch_ga86c0ac5ca43a5fe047386a17dae5c55f}
+Performs a triangular batch matrix-\/matrix multiply of the form
+
+\[B[i] = \alpha [op( A[i] ) \times B[i]] \], if side = Bblas\+Left or \[B[i] = \alpha [B[i] \times op( A[i]) ] \], if side = Bblas\+Right
+
+for a group of matrices, and op( X ) is one of\+: \begin{DoxyVerb}    - op(A[i]) = A[i]   or
+    - op(A[i]) = A[i]^T or
+    - op(A[i]) = A[i]^H
+\end{DoxyVerb}
+
+
+alpha\mbox{[}i\mbox{]}-\/s are scalars, B\mbox{[}i\mbox{]}-\/s are m-\/by-\/n matrices and A\mbox{[}i\mbox{]}-\/s are a unit or non-\/unit, upper or lower triangular matrix.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em group\+\_\+count} & The number groups of matrices.\\
+\hline
+\mbox{\tt in}  & {\em group\+\_\+sizes} & The number of matrices in each group.\\
+\hline
+\mbox{\tt in}  & {\em layout} & Specifies if the matrix is stored in row major or column major format\+:
+\begin{DoxyItemize}
+\item Bblas\+Row\+Major\+: Row major format
+\item Bblas\+Col\+Major\+: Column major format
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em side} & An array of length group\+\_\+count-\/1, for matrices of i-\/th group it specifies whether op( A\mbox{[}j\mbox{]} ) appears on the left or on the right of B\mbox{[}j\mbox{]}\+:
+\begin{DoxyItemize}
+\item Bblas\+Left\+: alpha\mbox{[}i\mbox{]}$\ast$op( A\mbox{[}j\mbox{]} )$\ast$B\mbox{[}j\mbox{]}
+\item Bblas\+Right\+: alpha\mbox{[}i\mbox{]}$\ast$B\mbox{[}j\mbox{]}$\ast$op( A\mbox{[}j\mbox{]} )
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em uplo} & An array of length group\+\_\+count-\/1, where uplo\mbox{[}i\mbox{]} specifies whether the upper or lower triangular part of the symmetric matrices A\mbox{[}j\mbox{]}-\/s of i-\/th group are to be referenced\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyItemize}
+\item Bblas\+Lower\+: Only the lower triangular part of the symmetric matrices A\mbox{[}j\mbox{]} is to be referenced.
+\item Bblas\+Upper\+: Only the upper triangular part of the symmetric matrices A\mbox{[}j\mbox{]} is to be referenced.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em transa} & An array of length group\+\_\+count-\/1, where
+\begin{DoxyItemize}
+\item Bblas\+No\+Trans\+: A\mbox{[}j\mbox{]}-\/s in i-\/th group are not transposed,
+\item Bblas\+Trans\+: A\mbox{[}j\mbox{]}-\/s in i-\/th group are transposed,
+\item Bblas\+Conj\+Trans\+: A\mbox{[}j\mbox{]}-\/s in i-\/th group are conjugate transposed.
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em diag} & An array of length group\+\_\+count-\/1, which specifies whether or not A\mbox{[}j\mbox{]}-\/s of i-\/th group are unit triangular\+:
+\begin{DoxyItemize}
+\item Bblas\+Non\+Unit\+: A\mbox{[}j\mbox{]}-\/s are non-\/unit triangular;
+\item Bblas\+Unit\+: A\mbox{[}j\mbox{]}-\/s are unit triangular.
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em m} & An array integers of length group\+\_\+count-\/1, which specified the number of rows of matrices B\mbox{[}j\mbox{]} in i-\/th group. m\mbox{[}i\mbox{]} $>$= 0.\\
+\hline
+\mbox{\tt in}  & {\em n} & An array integers of length group\+\_\+count-\/1, which specified the number of columns of matrices B\mbox{[}j\mbox{]} in i-\/th group. n\mbox{[}i\mbox{]} $>$= 0.\\
+\hline
+\mbox{\tt in}  & {\em alpha} & An array of length group\+\_\+count-\/1, where alpha\mbox{[}i\mbox{]} is a scalar.\\
+\hline
+\mbox{\tt in}  & {\em A} & A is an array of pointers to matrices A\mbox{[}0\mbox{]}, A\mbox{[}1\mbox{]} .. A\mbox{[}batch\+\_\+count-\/1\mbox{]}, where for i-\/th group each element A\mbox{[}j\mbox{]} is a pointer to a triangular matrix of dimension lda\mbox{[}i\mbox{]}-\/by-\/k, where k is m\mbox{[}i\mbox{]} when side=\textquotesingle{}L\textquotesingle{} or \textquotesingle{}l\textquotesingle{} and k is n\mbox{[}i\mbox{]} when when side=\textquotesingle{}R\textquotesingle{} or \textquotesingle{}r\textquotesingle{}. If uplo = Bblas\+Upper, the leading k-\/by-\/k upper triangular part of the array A\mbox{[}j\mbox{]} contains the upper triangular matrix, and the strictly lower triangular part of A\mbox{[}j\mbox{]} is not referenced. If uplo = Bblas\+Lower, the leading k-\/by-\/k lower triangular part of the array A\mbox{[}j\mbox{]} contains the lower triangular matrix, and the strictly upper triangular part of A\mbox{[}j\mbox{]} is not referenced. If diag = Bblas\+Unit, the diagonal elements of A\mbox{[}j\mbox{]} are also not referenced and are assumed to be 1. batch\+\_\+count=\{i=1\}$^\wedge$\{group\+\_\+count\}group\+\_\+sizes\mbox{[}i\mbox{]}.\\
+\hline
+\mbox{\tt in}  & {\em lda} & An array of integers of length group\+\_\+count-\/1, where lda\mbox{[}i\mbox{]} denotes the leading dimension of the arrays A\mbox{[}j\mbox{]} of i-\/th group. When side=\textquotesingle{}L\textquotesingle{} or \textquotesingle{}l\textquotesingle{}, lda\mbox{[}i\mbox{]} $>$= max(1,m\mbox{[}i\mbox{]}), when side=\textquotesingle{}R\textquotesingle{} or \textquotesingle{}r\textquotesingle{} then lda\mbox{[}i\mbox{]} $>$= max(1,n\mbox{[}i\mbox{]}).\\
+\hline
+\mbox{\tt in}  & {\em B} & B is an array of pointers to matrices B\mbox{[}0\mbox{]}, B\mbox{[}1\mbox{]},..,B\mbox{[}batch\+\_\+count-\/1\mbox{]}, where for i-\/th group each element B\mbox{[}j\mbox{]} is a pointer to a matrix. On entry, the matrices B\mbox{[}j\mbox{]} are of dimension ldb\mbox{[}i\mbox{]}-\/by-\/n\mbox{[}i\mbox{]}. On exit, the result of a triangular matrix-\/matrix multiply ( alpha\mbox{[}i\mbox{]}$\ast$op(A\mbox{[}j\mbox{]})$\ast$B\mbox{[}j\mbox{]} ) or ( alpha\mbox{[}i\mbox{]}$\ast$B\mbox{[}j\mbox{]}$\ast$op(A\mbox{[}j\mbox{]}) ). batch\+\_\+count=\{i=1\}$^\wedge$\{group\+\_\+count\}group\+\_\+sizes\mbox{[}i\mbox{]}.\\
+\hline
+\mbox{\tt in}  & {\em ldb} & An array of integers of length group\+\_\+count-\/1, where ldb\mbox{[}i\mbox{]} is the leading dimension of the arrays B\mbox{[}j\mbox{]} of i-\/th group. ldb\mbox{[}i\mbox{]} $>$= max(1,m\mbox{[}i\mbox{]}).\\
+\hline
+\mbox{\tt in,out}  & {\em info} & Array of int for error handling. On entry info\mbox{[}0\mbox{]} should have one of the following values
+\begin{DoxyItemize}
+\item Bblas\+Errors\+Report\+All \+: All errors will be specified on output. Length of the array should be atleast \{i=1\}$^\wedge$\{group\+\_\+count-\/1\}group\+\_\+sizes\mbox{[}i\mbox{]}.
+\item Bblas\+Errors\+Report\+Group \+: Single error from each group will be reported. Length of the array should be atleast (group\+\_\+count).
+\item Bblas\+Errors\+Report\+Any \+: Occurence of an error will be indicated by a single integer value, and length of the array should be atleast 1.
+\item Bblas\+Errors\+Report\+None \+: No error will be reported on output, and length of the array should be atleast 1.
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Bblas\+Success} & successful exit\\
+\hline
+\end{DoxyRetVals}
+\begin{DoxySeeAlso}{See also}
+ztrmm\+\_\+batch 
+
+ctrmm\+\_\+batch 
+
+dtrmm\+\_\+batch 
+
+strmm\+\_\+batch 
+\end{DoxySeeAlso}

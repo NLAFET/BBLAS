@@ -1,0 +1,402 @@
+\hypertarget{group__syrk__batch}{}\section{syrk\+\_\+batch\+: Batched symmetric rank k update}
+\label{group__syrk__batch}\index{syrk\+\_\+batch\+: Batched symmetric rank k update@{syrk\+\_\+batch\+: Batched symmetric rank k update}}
+
+
+$ C[i] = \alpha[i] A[i] A[i]^T + \beta[i] C[i] $ where $ C[i] $ are symmetric  
+
+
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__syrk__batch_gadd9f099fe76b3257fc81a9dc3a6b38c8}{blas\+\_\+csyrk\+\_\+batch} (int group\+\_\+count, const int $\ast$group\+\_\+sizes, bblas\+\_\+enum\+\_\+t layout, const bblas\+\_\+enum\+\_\+t $\ast$uplo, const bblas\+\_\+enum\+\_\+t $\ast$trans, const int $\ast$n, const int $\ast$k, const float $\ast$alpha, bblas\+\_\+complex32\+\_\+t const $\ast$const $\ast$A, const int $\ast$lda, const float $\ast$beta, bblas\+\_\+complex32\+\_\+t $\ast$$\ast$C, const int $\ast$ldc, int $\ast$info)
+\item 
+void \hyperlink{group__syrk__batch_gad68fb19e3fc8cc2d118be659cecae1a5}{blas\+\_\+dsyrk\+\_\+batch} (int group\+\_\+count, const int $\ast$group\+\_\+sizes, bblas\+\_\+enum\+\_\+t layout, const bblas\+\_\+enum\+\_\+t $\ast$uplo, const bblas\+\_\+enum\+\_\+t $\ast$trans, const int $\ast$n, const int $\ast$k, const double $\ast$alpha, double const $\ast$const $\ast$A, const int $\ast$lda, const double $\ast$beta, double $\ast$$\ast$C, const int $\ast$ldc, int $\ast$info)
+\item 
+void \hyperlink{group__syrk__batch_ga67e4827aa5b548bf5d43cc254c363819}{blas\+\_\+ssyrk\+\_\+batch} (int group\+\_\+count, const int $\ast$group\+\_\+sizes, bblas\+\_\+enum\+\_\+t layout, const bblas\+\_\+enum\+\_\+t $\ast$uplo, const bblas\+\_\+enum\+\_\+t $\ast$trans, const int $\ast$n, const int $\ast$k, const float $\ast$alpha, float const $\ast$const $\ast$A, const int $\ast$lda, const float $\ast$beta, float $\ast$$\ast$C, const int $\ast$ldc, int $\ast$info)
+\item 
+void \hyperlink{group__syrk__batch_ga2765c5d533bf4f4f394102892bfabceb}{blas\+\_\+zsyrk\+\_\+batch} (int group\+\_\+count, const int $\ast$group\+\_\+sizes, bblas\+\_\+enum\+\_\+t layout, const bblas\+\_\+enum\+\_\+t $\ast$uplo, const bblas\+\_\+enum\+\_\+t $\ast$trans, const int $\ast$n, const int $\ast$k, const double $\ast$alpha, bblas\+\_\+complex64\+\_\+t const $\ast$const $\ast$A, const int $\ast$lda, const double $\ast$beta, bblas\+\_\+complex64\+\_\+t $\ast$$\ast$C, const int $\ast$ldc, int $\ast$info)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+$ C[i] = \alpha[i] A[i] A[i]^T + \beta[i] C[i] $ where $ C[i] $ are symmetric 
+
+
+
+\subsection{Function Documentation}
+\index{syrk\+\_\+batch\+: Batched symmetric rank k update@{syrk\+\_\+batch\+: Batched symmetric rank k update}!blas\+\_\+csyrk\+\_\+batch@{blas\+\_\+csyrk\+\_\+batch}}
+\index{blas\+\_\+csyrk\+\_\+batch@{blas\+\_\+csyrk\+\_\+batch}!syrk\+\_\+batch\+: Batched symmetric rank k update@{syrk\+\_\+batch\+: Batched symmetric rank k update}}
+\subsubsection[{\texorpdfstring{blas\+\_\+csyrk\+\_\+batch(int group\+\_\+count, const int $\ast$group\+\_\+sizes, bblas\+\_\+enum\+\_\+t layout, const bblas\+\_\+enum\+\_\+t $\ast$uplo, const bblas\+\_\+enum\+\_\+t $\ast$trans, const int $\ast$n, const int $\ast$k, const float $\ast$alpha, bblas\+\_\+complex32\+\_\+t const $\ast$const $\ast$\+A, const int $\ast$lda, const float $\ast$beta, bblas\+\_\+complex32\+\_\+t $\ast$$\ast$\+C, const int $\ast$ldc, int $\ast$info)}{blas_csyrk_batch(int group_count, const int *group_sizes, bblas_enum_t layout, const bblas_enum_t *uplo, const bblas_enum_t *trans, const int *n, const int *k, const float *alpha, bblas_complex32_t const *const *A, const int *lda, const float *beta, bblas_complex32_t **C, const int *ldc, int *info)}}]{\setlength{\rightskip}{0pt plus 5cm}void blas\+\_\+csyrk\+\_\+batch (
+\begin{DoxyParamCaption}
+\item[{int}]{group\+\_\+count, }
+\item[{const int $\ast$}]{group\+\_\+sizes, }
+\item[{bblas\+\_\+enum\+\_\+t}]{layout, }
+\item[{const bblas\+\_\+enum\+\_\+t $\ast$}]{uplo, }
+\item[{const bblas\+\_\+enum\+\_\+t $\ast$}]{trans, }
+\item[{const int $\ast$}]{n, }
+\item[{const int $\ast$}]{k, }
+\item[{const float $\ast$}]{alpha, }
+\item[{bblas\+\_\+complex32\+\_\+t const $\ast$const $\ast$}]{A, }
+\item[{const int $\ast$}]{lda, }
+\item[{const float $\ast$}]{beta, }
+\item[{bblas\+\_\+complex32\+\_\+t $\ast$$\ast$}]{C, }
+\item[{const int $\ast$}]{ldc, }
+\item[{int $\ast$}]{info}
+\end{DoxyParamCaption}
+)}\hypertarget{group__syrk__batch_gadd9f099fe76b3257fc81a9dc3a6b38c8}{}\label{group__syrk__batch_gadd9f099fe76b3257fc81a9dc3a6b38c8}
+Performs one of the batch symmetric rank k operations
+
+\[ C[i] = \alpha A[i] \times A[i]^T + \beta C[i], \] or \[ C[i] = \alpha A[i]^T \times A[i] + \beta C[i], \]
+
+for a group of matrices, where alpha\mbox{[}i\mbox{]} and beta\mbox{[}i\mbox{]} are scalars, C\mbox{[}i\mbox{]}-\/s are n\mbox{[}i\mbox{]}-\/by-\/n\mbox{[}i\mbox{]} symmetric matrices, and A\mbox{[}i\mbox{]}-\/s are n\mbox{[}i\mbox{]}-\/by-\/k\mbox{[}i\mbox{]} matrices in the first case and a k\mbox{[}i\mbox{]}-\/by-\/n\mbox{[}i\mbox{]} matrices in the second case.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em group\+\_\+count} & The number groups of matrices with fixed size.\\
+\hline
+\mbox{\tt in}  & {\em group\+\_\+sizes} & An array of integers of length group\+\_\+count, where group\+\_\+sizes\mbox{[}i\mbox{]} denotes the number of matrices in i-\/th group.\\
+\hline
+\mbox{\tt in}  & {\em layout} & Specifies if the matrix is stored in row major or column major format\+:
+\begin{DoxyItemize}
+\item Bblas\+Row\+Major\+: Row major format
+\item Bblas\+Col\+Major\+: Column major format
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em uplo} & An array of length group\+\_\+count-\/1, where uplo\mbox{[}i\mbox{]} specifies whether the upper or lower triangular part of the Hermitian matrices C\mbox{[}j\mbox{]}-\/s of i-\/th group are to be stored\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyItemize}
+\item Bblas\+Lower\+: Only the lower triangular part of the Symmetric matrices C\mbox{[}j\mbox{]} are to be stored.
+\item Bblas\+Upper\+: Only the upper triangular part of the Symmetric matrices C\mbox{[}j\mbox{]} are to be stored.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em trans} & An array of length group\+\_\+count-\/1, where for j-\/th matrix in i-\/th group
+\begin{DoxyItemize}
+\item Bblas\+No\+Trans\+: \[ C[j] = \alpha[i] A[j] \times A[j]^T + \beta[i] C[j]; \]
+\item Bblas\+Trans\+: \[ C[j] = \alpha[i] A[j]^T \times A[j] + \beta[i] C[j]. \]
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em n} & An array of integers of length group count-\/1, where n\mbox{[}i\mbox{]} is the order of the matrices C\mbox{[}j\mbox{]} in i-\/th group. n\mbox{[}i\mbox{]} $>$= 0.\\
+\hline
+\mbox{\tt in}  & {\em k} & An array of integers of length group\+\_\+count-\/1. For matrices in i-\/th group If trans = Bblas\+No\+Trans, number of columns of A\mbox{[}j\mbox{]}-\/s and B\mbox{[}j\mbox{]}-\/s matrices; if trans = Bblas\+Trans, number of rows of A\mbox{[}j\mbox{]}-\/s and B\mbox{[}j\mbox{]}-\/s matrices.\\
+\hline
+\mbox{\tt in}  & {\em alpha} & An array of scalars of length group\+\_\+count-\/1.\\
+\hline
+\mbox{\tt in}  & {\em A} & A is an array of pointers to matrices A\mbox{[}0\mbox{]}, A\mbox{[}1\mbox{]} .. A\mbox{[}batch\+\_\+count-\/1\mbox{]}. In i-\/th group each element A\mbox{[}j\mbox{]} is a pointer to a matrix of A\mbox{[}j\mbox{]} of size lda\mbox{[}i\mbox{]}-\/by-\/ka. If trans\mbox{[}i\mbox{]} = Bblas\+No\+Trans, ka = k\mbox{[}i\mbox{]}; if trans\mbox{[}i\mbox{]} = Bblas\+Trans, ka = n\mbox{[}i\mbox{]}. batch\+\_\+count=\{i=1\}$^\wedge$\{group\+\_\+count\}group\+\_\+sizes\mbox{[}i\mbox{]}.\\
+\hline
+\mbox{\tt in}  & {\em lda} & An array of integers of length group\+\_\+count-\/1, are the leading dimension of the arrays A\mbox{[}j\mbox{]} in i-\/th group. If trans\mbox{[}i\mbox{]} = Bblas\+No\+Trans, lda\mbox{[}i\mbox{]} $>$= max(1, n\mbox{[}i\mbox{]}); if trans\mbox{[}i\mbox{]} = Bblas\+Trans, lda\mbox{[}i\mbox{]} $>$= max(1, k\mbox{[}i\mbox{]}).\\
+\hline
+\mbox{\tt in}  & {\em beta} & An array of scalars of length group\+\_\+count-\/1.\\
+\hline
+\mbox{\tt in,out}  & {\em C} & C is an array of pointers to matrices C\mbox{[}0\mbox{]}, C\mbox{[}1\mbox{]} .. C\mbox{[}batc\+\_\+count-\/1\mbox{]}. In i-\/th group each element C\mbox{[}j\mbox{]} is a pointer to a matrix C\mbox{[}j\mbox{]} of size ldc\mbox{[}i\mbox{]}-\/by-\/n\mbox{[}i\mbox{]}. On exit, the uplo\mbox{[}i\mbox{]} part of the matrix is overwritten by the uplo\mbox{[}i\mbox{]} part of the updated matrix. batch\+\_\+count=\{i=1\}$^\wedge$\{group\+\_\+count\}group\+\_\+sizes\mbox{[}i\mbox{]}.\\
+\hline
+\mbox{\tt in}  & {\em ldc} & An array of integers of length group\+\_\+count-\/1. Where ldc\mbox{[}i\mbox{]} is the leading dimension of the arrays C\mbox{[}j\mbox{]} in i-\/th group. ldc\mbox{[}i\mbox{]} $>$= max(1, n\mbox{[}i\mbox{]}).\\
+\hline
+\mbox{\tt in,out}  & {\em info} & Array of int for error handling. On entry info\mbox{[}0\mbox{]} should have one of the following values
+\begin{DoxyItemize}
+\item Bblas\+Errors\+Report\+All \+: All errors will be specified on output. Length of the array should be atleast \{i=1\}$^\wedge$\{group\+\_\+count-\/1\}group\+\_\+size\mbox{[}i\mbox{]}.
+\item Bblas\+Errors\+Report\+Group \+: Single error from each group will be reported. Length of the array should be atleast to (group\+\_\+count).
+\item Bblas\+Errors\+Report\+Any \+: Occurence of an error will be indicated by a single integer value, and length of the array should be atleast 1.
+\item Bblas\+Errors\+Report\+None \+: No error will be reported on output, and length of the array should be atleast 1.
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Bblas\+Success} & successful exit\\
+\hline
+\end{DoxyRetVals}
+\begin{DoxySeeAlso}{See also}
+csyrk\+\_\+batch 
+
+csyrk\+\_\+batch 
+
+dsyrk\+\_\+batch 
+
+ssyrk\+\_\+batch 
+\end{DoxySeeAlso}
+\index{syrk\+\_\+batch\+: Batched symmetric rank k update@{syrk\+\_\+batch\+: Batched symmetric rank k update}!blas\+\_\+dsyrk\+\_\+batch@{blas\+\_\+dsyrk\+\_\+batch}}
+\index{blas\+\_\+dsyrk\+\_\+batch@{blas\+\_\+dsyrk\+\_\+batch}!syrk\+\_\+batch\+: Batched symmetric rank k update@{syrk\+\_\+batch\+: Batched symmetric rank k update}}
+\subsubsection[{\texorpdfstring{blas\+\_\+dsyrk\+\_\+batch(int group\+\_\+count, const int $\ast$group\+\_\+sizes, bblas\+\_\+enum\+\_\+t layout, const bblas\+\_\+enum\+\_\+t $\ast$uplo, const bblas\+\_\+enum\+\_\+t $\ast$trans, const int $\ast$n, const int $\ast$k, const double $\ast$alpha, double const $\ast$const $\ast$\+A, const int $\ast$lda, const double $\ast$beta, double $\ast$$\ast$\+C, const int $\ast$ldc, int $\ast$info)}{blas_dsyrk_batch(int group_count, const int *group_sizes, bblas_enum_t layout, const bblas_enum_t *uplo, const bblas_enum_t *trans, const int *n, const int *k, const double *alpha, double const *const *A, const int *lda, const double *beta, double **C, const int *ldc, int *info)}}]{\setlength{\rightskip}{0pt plus 5cm}void blas\+\_\+dsyrk\+\_\+batch (
+\begin{DoxyParamCaption}
+\item[{int}]{group\+\_\+count, }
+\item[{const int $\ast$}]{group\+\_\+sizes, }
+\item[{bblas\+\_\+enum\+\_\+t}]{layout, }
+\item[{const bblas\+\_\+enum\+\_\+t $\ast$}]{uplo, }
+\item[{const bblas\+\_\+enum\+\_\+t $\ast$}]{trans, }
+\item[{const int $\ast$}]{n, }
+\item[{const int $\ast$}]{k, }
+\item[{const double $\ast$}]{alpha, }
+\item[{double const $\ast$const $\ast$}]{A, }
+\item[{const int $\ast$}]{lda, }
+\item[{const double $\ast$}]{beta, }
+\item[{double $\ast$$\ast$}]{C, }
+\item[{const int $\ast$}]{ldc, }
+\item[{int $\ast$}]{info}
+\end{DoxyParamCaption}
+)}\hypertarget{group__syrk__batch_gad68fb19e3fc8cc2d118be659cecae1a5}{}\label{group__syrk__batch_gad68fb19e3fc8cc2d118be659cecae1a5}
+Performs one of the batch symmetric rank k operations
+
+\[ C[i] = \alpha A[i] \times A[i]^T + \beta C[i], \] or \[ C[i] = \alpha A[i]^T \times A[i] + \beta C[i], \]
+
+for a group of matrices, where alpha\mbox{[}i\mbox{]} and beta\mbox{[}i\mbox{]} are scalars, C\mbox{[}i\mbox{]}-\/s are n\mbox{[}i\mbox{]}-\/by-\/n\mbox{[}i\mbox{]} symmetric matrices, and A\mbox{[}i\mbox{]}-\/s are n\mbox{[}i\mbox{]}-\/by-\/k\mbox{[}i\mbox{]} matrices in the first case and a k\mbox{[}i\mbox{]}-\/by-\/n\mbox{[}i\mbox{]} matrices in the second case.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em group\+\_\+count} & The number groups of matrices with fixed size.\\
+\hline
+\mbox{\tt in}  & {\em group\+\_\+sizes} & An array of integers of length group\+\_\+count, where group\+\_\+sizes\mbox{[}i\mbox{]} denotes the number of matrices in i-\/th group.\\
+\hline
+\mbox{\tt in}  & {\em layout} & Specifies if the matrix is stored in row major or column major format\+:
+\begin{DoxyItemize}
+\item Bblas\+Row\+Major\+: Row major format
+\item Bblas\+Col\+Major\+: Column major format
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em uplo} & An array of length group\+\_\+count-\/1, where uplo\mbox{[}i\mbox{]} specifies whether the upper or lower triangular part of the symmetric matrices C\mbox{[}j\mbox{]}-\/s of i-\/th group are to be stored\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyItemize}
+\item Bblas\+Lower\+: Only the lower triangular part of the Symmetric matrices C\mbox{[}j\mbox{]} are to be stored.
+\item Bblas\+Upper\+: Only the upper triangular part of the Symmetric matrices C\mbox{[}j\mbox{]} are to be stored.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em trans} & An array of length group\+\_\+count-\/1, where for j-\/th matrix in i-\/th group
+\begin{DoxyItemize}
+\item Bblas\+No\+Trans\+: \[ C[j] = \alpha[i] A[j] \times A[j]^T + \beta[i] C[j]; \]
+\item Bblas\+Trans\+: \[ C[j] = \alpha[i] A[j]^T \times A[j] + \beta[i] C[j]. \]
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em n} & An array of integers of length group count-\/1, where n\mbox{[}i\mbox{]} is the order of the matrices C\mbox{[}j\mbox{]} in i-\/th group. n\mbox{[}i\mbox{]} $>$= 0.\\
+\hline
+\mbox{\tt in}  & {\em k} & An array of integers of length group\+\_\+count-\/1. For matrices in i-\/th group If trans = Bblas\+No\+Trans, number of columns of A\mbox{[}j\mbox{]}-\/s and B\mbox{[}j\mbox{]}-\/s matrices; if trans = Bblas\+Trans, number of rows of A\mbox{[}j\mbox{]}-\/s and B\mbox{[}j\mbox{]}-\/s matrices.\\
+\hline
+\mbox{\tt in}  & {\em alpha} & An array of scalars of length group\+\_\+count-\/1.\\
+\hline
+\mbox{\tt in}  & {\em A} & A is an array of pointers to matrices A\mbox{[}0\mbox{]}, A\mbox{[}1\mbox{]} .. A\mbox{[}batch\+\_\+count-\/1\mbox{]}. In i-\/th group each element A\mbox{[}j\mbox{]} is a pointer to a matrix of A\mbox{[}j\mbox{]} of size lda\mbox{[}i\mbox{]}-\/by-\/ka. If trans\mbox{[}i\mbox{]} = Bblas\+No\+Trans, ka = k\mbox{[}i\mbox{]}; if trans\mbox{[}i\mbox{]} = Bblas\+Trans, ka = n\mbox{[}i\mbox{]}. batch\+\_\+count=\{i=1\}$^\wedge$\{group\+\_\+count\}group\+\_\+sizes\mbox{[}i\mbox{]}.\\
+\hline
+\mbox{\tt in}  & {\em lda} & An array of integers of length group\+\_\+count-\/1, are the leading dimension of the arrays A\mbox{[}j\mbox{]} in i-\/th group. If trans\mbox{[}i\mbox{]} = Bblas\+No\+Trans, lda\mbox{[}i\mbox{]} $>$= max(1, n\mbox{[}i\mbox{]}); if trans\mbox{[}i\mbox{]} = Bblas\+Trans, lda\mbox{[}i\mbox{]} $>$= max(1, k\mbox{[}i\mbox{]}).\\
+\hline
+\mbox{\tt in}  & {\em beta} & An array of scalars of length group\+\_\+count-\/1.\\
+\hline
+\mbox{\tt in,out}  & {\em C} & C is an array of pointers to matrices C\mbox{[}0\mbox{]}, C\mbox{[}1\mbox{]} .. C\mbox{[}batc\+\_\+count-\/1\mbox{]}. In i-\/th group each element C\mbox{[}j\mbox{]} is a pointer to a matrix C\mbox{[}j\mbox{]} of size ldc\mbox{[}i\mbox{]}-\/by-\/n\mbox{[}i\mbox{]}. On exit, the uplo\mbox{[}i\mbox{]} part of the matrix is overwritten by the uplo\mbox{[}i\mbox{]} part of the updated matrix. batch\+\_\+count=\{i=1\}$^\wedge$\{group\+\_\+count\}group\+\_\+sizes\mbox{[}i\mbox{]}.\\
+\hline
+\mbox{\tt in}  & {\em ldc} & An array of integers of length group\+\_\+count-\/1. Where ldc\mbox{[}i\mbox{]} is the leading dimension of the arrays C\mbox{[}j\mbox{]} in i-\/th group. ldc\mbox{[}i\mbox{]} $>$= max(1, n\mbox{[}i\mbox{]}).\\
+\hline
+\mbox{\tt in,out}  & {\em info} & Array of int for error handling. On entry info\mbox{[}0\mbox{]} should have one of the following values
+\begin{DoxyItemize}
+\item Bblas\+Errors\+Report\+All \+: All errors will be specified on output. Length of the array should be atleast \{i=1\}$^\wedge$\{group\+\_\+count-\/1\}group\+\_\+size\mbox{[}i\mbox{]}.
+\item Bblas\+Errors\+Report\+Group \+: Single error from each group will be reported. Length of the array should be atleast to (group\+\_\+count).
+\item Bblas\+Errors\+Report\+Any \+: Occurence of an error will be indicated by a single integer value, and length of the array should be atleast 1.
+\item Bblas\+Errors\+Report\+None \+: No error will be reported on output, and length of the array should be atleast 1.
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Bblas\+Success} & successful exit\\
+\hline
+\end{DoxyRetVals}
+\begin{DoxySeeAlso}{See also}
+dsyrk\+\_\+batch 
+
+csyrk\+\_\+batch 
+
+dsyrk\+\_\+batch 
+
+ssyrk\+\_\+batch 
+\end{DoxySeeAlso}
+\index{syrk\+\_\+batch\+: Batched symmetric rank k update@{syrk\+\_\+batch\+: Batched symmetric rank k update}!blas\+\_\+ssyrk\+\_\+batch@{blas\+\_\+ssyrk\+\_\+batch}}
+\index{blas\+\_\+ssyrk\+\_\+batch@{blas\+\_\+ssyrk\+\_\+batch}!syrk\+\_\+batch\+: Batched symmetric rank k update@{syrk\+\_\+batch\+: Batched symmetric rank k update}}
+\subsubsection[{\texorpdfstring{blas\+\_\+ssyrk\+\_\+batch(int group\+\_\+count, const int $\ast$group\+\_\+sizes, bblas\+\_\+enum\+\_\+t layout, const bblas\+\_\+enum\+\_\+t $\ast$uplo, const bblas\+\_\+enum\+\_\+t $\ast$trans, const int $\ast$n, const int $\ast$k, const float $\ast$alpha, float const $\ast$const $\ast$\+A, const int $\ast$lda, const float $\ast$beta, float $\ast$$\ast$\+C, const int $\ast$ldc, int $\ast$info)}{blas_ssyrk_batch(int group_count, const int *group_sizes, bblas_enum_t layout, const bblas_enum_t *uplo, const bblas_enum_t *trans, const int *n, const int *k, const float *alpha, float const *const *A, const int *lda, const float *beta, float **C, const int *ldc, int *info)}}]{\setlength{\rightskip}{0pt plus 5cm}void blas\+\_\+ssyrk\+\_\+batch (
+\begin{DoxyParamCaption}
+\item[{int}]{group\+\_\+count, }
+\item[{const int $\ast$}]{group\+\_\+sizes, }
+\item[{bblas\+\_\+enum\+\_\+t}]{layout, }
+\item[{const bblas\+\_\+enum\+\_\+t $\ast$}]{uplo, }
+\item[{const bblas\+\_\+enum\+\_\+t $\ast$}]{trans, }
+\item[{const int $\ast$}]{n, }
+\item[{const int $\ast$}]{k, }
+\item[{const float $\ast$}]{alpha, }
+\item[{float const $\ast$const $\ast$}]{A, }
+\item[{const int $\ast$}]{lda, }
+\item[{const float $\ast$}]{beta, }
+\item[{float $\ast$$\ast$}]{C, }
+\item[{const int $\ast$}]{ldc, }
+\item[{int $\ast$}]{info}
+\end{DoxyParamCaption}
+)}\hypertarget{group__syrk__batch_ga67e4827aa5b548bf5d43cc254c363819}{}\label{group__syrk__batch_ga67e4827aa5b548bf5d43cc254c363819}
+Performs one of the batch symmetric rank k operations
+
+\[ C[i] = \alpha A[i] \times A[i]^T + \beta C[i], \] or \[ C[i] = \alpha A[i]^T \times A[i] + \beta C[i], \]
+
+for a group of matrices, where alpha\mbox{[}i\mbox{]} and beta\mbox{[}i\mbox{]} are scalars, C\mbox{[}i\mbox{]}-\/s are n\mbox{[}i\mbox{]}-\/by-\/n\mbox{[}i\mbox{]} symmetric matrices, and A\mbox{[}i\mbox{]}-\/s are n\mbox{[}i\mbox{]}-\/by-\/k\mbox{[}i\mbox{]} matrices in the first case and a k\mbox{[}i\mbox{]}-\/by-\/n\mbox{[}i\mbox{]} matrices in the second case.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em group\+\_\+count} & The number groups of matrices with fixed size.\\
+\hline
+\mbox{\tt in}  & {\em group\+\_\+sizes} & An array of integers of length group\+\_\+count, where group\+\_\+sizes\mbox{[}i\mbox{]} denotes the number of matrices in i-\/th group.\\
+\hline
+\mbox{\tt in}  & {\em layout} & Specifies if the matrix is stored in row major or column major format\+:
+\begin{DoxyItemize}
+\item Bblas\+Row\+Major\+: Row major format
+\item Bblas\+Col\+Major\+: Column major format
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em uplo} & An array of length group\+\_\+count-\/1, where uplo\mbox{[}i\mbox{]} specifies whether the upper or lower triangular part of the symmetric matrices C\mbox{[}j\mbox{]}-\/s of i-\/th group are to be stored\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyItemize}
+\item Bblas\+Lower\+: Only the lower triangular part of the Symmetric matrices C\mbox{[}j\mbox{]} are to be stored.
+\item Bblas\+Upper\+: Only the upper triangular part of the Symmetric matrices C\mbox{[}j\mbox{]} are to be stored.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em trans} & An array of length group\+\_\+count-\/1, where for j-\/th matrix in i-\/th group
+\begin{DoxyItemize}
+\item Bblas\+No\+Trans\+: \[ C[j] = \alpha[i] A[j] \times A[j]^T + \beta[i] C[j]; \]
+\item Bblas\+Trans\+: \[ C[j] = \alpha[i] A[j]^T \times A[j] + \beta[i] C[j]. \]
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em n} & An array of integers of length group count-\/1, where n\mbox{[}i\mbox{]} is the order of the matrices C\mbox{[}j\mbox{]} in i-\/th group. n\mbox{[}i\mbox{]} $>$= 0.\\
+\hline
+\mbox{\tt in}  & {\em k} & An array of integers of length group\+\_\+count-\/1. For matrices in i-\/th group If trans = Bblas\+No\+Trans, number of columns of A\mbox{[}j\mbox{]}-\/s and B\mbox{[}j\mbox{]}-\/s matrices; if trans = Bblas\+Trans, number of rows of A\mbox{[}j\mbox{]}-\/s and B\mbox{[}j\mbox{]}-\/s matrices.\\
+\hline
+\mbox{\tt in}  & {\em alpha} & An array of scalars of length group\+\_\+count-\/1.\\
+\hline
+\mbox{\tt in}  & {\em A} & A is an array of pointers to matrices A\mbox{[}0\mbox{]}, A\mbox{[}1\mbox{]} .. A\mbox{[}batch\+\_\+count-\/1\mbox{]}. In i-\/th group each element A\mbox{[}j\mbox{]} is a pointer to a matrix of A\mbox{[}j\mbox{]} of size lda\mbox{[}i\mbox{]}-\/by-\/ka. If trans\mbox{[}i\mbox{]} = Bblas\+No\+Trans, ka = k\mbox{[}i\mbox{]}; if trans\mbox{[}i\mbox{]} = Bblas\+Trans, ka = n\mbox{[}i\mbox{]}. batch\+\_\+count=\{i=1\}$^\wedge$\{group\+\_\+count\}group\+\_\+sizes\mbox{[}i\mbox{]}.\\
+\hline
+\mbox{\tt in}  & {\em lda} & An array of integers of length group\+\_\+count-\/1, are the leading dimension of the arrays A\mbox{[}j\mbox{]} in i-\/th group. If trans\mbox{[}i\mbox{]} = Bblas\+No\+Trans, lda\mbox{[}i\mbox{]} $>$= max(1, n\mbox{[}i\mbox{]}); if trans\mbox{[}i\mbox{]} = Bblas\+Trans, lda\mbox{[}i\mbox{]} $>$= max(1, k\mbox{[}i\mbox{]}).\\
+\hline
+\mbox{\tt in}  & {\em beta} & An array of scalars of length group\+\_\+count-\/1.\\
+\hline
+\mbox{\tt in,out}  & {\em C} & C is an array of pointers to matrices C\mbox{[}0\mbox{]}, C\mbox{[}1\mbox{]} .. C\mbox{[}batc\+\_\+count-\/1\mbox{]}. In i-\/th group each element C\mbox{[}j\mbox{]} is a pointer to a matrix C\mbox{[}j\mbox{]} of size ldc\mbox{[}i\mbox{]}-\/by-\/n\mbox{[}i\mbox{]}. On exit, the uplo\mbox{[}i\mbox{]} part of the matrix is overwritten by the uplo\mbox{[}i\mbox{]} part of the updated matrix. batch\+\_\+count=\{i=1\}$^\wedge$\{group\+\_\+count\}group\+\_\+sizes\mbox{[}i\mbox{]}.\\
+\hline
+\mbox{\tt in}  & {\em ldc} & An array of integers of length group\+\_\+count-\/1. Where ldc\mbox{[}i\mbox{]} is the leading dimension of the arrays C\mbox{[}j\mbox{]} in i-\/th group. ldc\mbox{[}i\mbox{]} $>$= max(1, n\mbox{[}i\mbox{]}).\\
+\hline
+\mbox{\tt in,out}  & {\em info} & Array of int for error handling. On entry info\mbox{[}0\mbox{]} should have one of the following values
+\begin{DoxyItemize}
+\item Bblas\+Errors\+Report\+All \+: All errors will be specified on output. Length of the array should be atleast \{i=1\}$^\wedge$\{group\+\_\+count-\/1\}group\+\_\+size\mbox{[}i\mbox{]}.
+\item Bblas\+Errors\+Report\+Group \+: Single error from each group will be reported. Length of the array should be atleast to (group\+\_\+count).
+\item Bblas\+Errors\+Report\+Any \+: Occurence of an error will be indicated by a single integer value, and length of the array should be atleast 1.
+\item Bblas\+Errors\+Report\+None \+: No error will be reported on output, and length of the array should be atleast 1.
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Bblas\+Success} & successful exit\\
+\hline
+\end{DoxyRetVals}
+\begin{DoxySeeAlso}{See also}
+ssyrk\+\_\+batch 
+
+csyrk\+\_\+batch 
+
+dsyrk\+\_\+batch 
+
+ssyrk\+\_\+batch 
+\end{DoxySeeAlso}
+\index{syrk\+\_\+batch\+: Batched symmetric rank k update@{syrk\+\_\+batch\+: Batched symmetric rank k update}!blas\+\_\+zsyrk\+\_\+batch@{blas\+\_\+zsyrk\+\_\+batch}}
+\index{blas\+\_\+zsyrk\+\_\+batch@{blas\+\_\+zsyrk\+\_\+batch}!syrk\+\_\+batch\+: Batched symmetric rank k update@{syrk\+\_\+batch\+: Batched symmetric rank k update}}
+\subsubsection[{\texorpdfstring{blas\+\_\+zsyrk\+\_\+batch(int group\+\_\+count, const int $\ast$group\+\_\+sizes, bblas\+\_\+enum\+\_\+t layout, const bblas\+\_\+enum\+\_\+t $\ast$uplo, const bblas\+\_\+enum\+\_\+t $\ast$trans, const int $\ast$n, const int $\ast$k, const double $\ast$alpha, bblas\+\_\+complex64\+\_\+t const $\ast$const $\ast$\+A, const int $\ast$lda, const double $\ast$beta, bblas\+\_\+complex64\+\_\+t $\ast$$\ast$\+C, const int $\ast$ldc, int $\ast$info)}{blas_zsyrk_batch(int group_count, const int *group_sizes, bblas_enum_t layout, const bblas_enum_t *uplo, const bblas_enum_t *trans, const int *n, const int *k, const double *alpha, bblas_complex64_t const *const *A, const int *lda, const double *beta, bblas_complex64_t **C, const int *ldc, int *info)}}]{\setlength{\rightskip}{0pt plus 5cm}void blas\+\_\+zsyrk\+\_\+batch (
+\begin{DoxyParamCaption}
+\item[{int}]{group\+\_\+count, }
+\item[{const int $\ast$}]{group\+\_\+sizes, }
+\item[{bblas\+\_\+enum\+\_\+t}]{layout, }
+\item[{const bblas\+\_\+enum\+\_\+t $\ast$}]{uplo, }
+\item[{const bblas\+\_\+enum\+\_\+t $\ast$}]{trans, }
+\item[{const int $\ast$}]{n, }
+\item[{const int $\ast$}]{k, }
+\item[{const double $\ast$}]{alpha, }
+\item[{bblas\+\_\+complex64\+\_\+t const $\ast$const $\ast$}]{A, }
+\item[{const int $\ast$}]{lda, }
+\item[{const double $\ast$}]{beta, }
+\item[{bblas\+\_\+complex64\+\_\+t $\ast$$\ast$}]{C, }
+\item[{const int $\ast$}]{ldc, }
+\item[{int $\ast$}]{info}
+\end{DoxyParamCaption}
+)}\hypertarget{group__syrk__batch_ga2765c5d533bf4f4f394102892bfabceb}{}\label{group__syrk__batch_ga2765c5d533bf4f4f394102892bfabceb}
+Performs one of the batch symmetric rank k operations
+
+\[ C[i] = \alpha A[i] \times A[i]^T + \beta C[i], \] or \[ C[i] = \alpha A[i]^T \times A[i] + \beta C[i], \]
+
+for a group of matrices, where alpha\mbox{[}i\mbox{]} and beta\mbox{[}i\mbox{]} are scalars, C\mbox{[}i\mbox{]}-\/s are n\mbox{[}i\mbox{]}-\/by-\/n\mbox{[}i\mbox{]} symmetric matrices, and A\mbox{[}i\mbox{]}-\/s are n\mbox{[}i\mbox{]}-\/by-\/k\mbox{[}i\mbox{]} matrices in the first case and a k\mbox{[}i\mbox{]}-\/by-\/n\mbox{[}i\mbox{]} matrices in the second case.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em group\+\_\+count} & The number groups of matrices with fixed size.\\
+\hline
+\mbox{\tt in}  & {\em group\+\_\+sizes} & An array of integers of length group\+\_\+count, where group\+\_\+sizes\mbox{[}i\mbox{]} denotes the number of matrices in i-\/th group.\\
+\hline
+\mbox{\tt in}  & {\em layout} & Specifies if the matrix is stored in row major or column major format\+:
+\begin{DoxyItemize}
+\item Bblas\+Row\+Major\+: Row major format
+\item Bblas\+Col\+Major\+: Column major format
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em uplo} & An array of length group\+\_\+count-\/1, where uplo\mbox{[}i\mbox{]} specifies whether the upper or lower triangular part of the Hermitian matrices C\mbox{[}j\mbox{]}-\/s of i-\/th group are to be stored\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyItemize}
+\item Bblas\+Lower\+: Only the lower triangular part of the Symmetric matrices C\mbox{[}j\mbox{]} are to be stored.
+\item Bblas\+Upper\+: Only the upper triangular part of the Symmetric matrices C\mbox{[}j\mbox{]} are to be stored.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em trans} & An array of length group\+\_\+count-\/1, where for j-\/th matrix in i-\/th group
+\begin{DoxyItemize}
+\item Bblas\+No\+Trans\+: \[ C[j] = \alpha[i] A[j] \times A[j]^T + \beta[i] C[j]; \]
+\item Bblas\+Trans\+: \[ C[j] = \alpha[i] A[j]^T \times A[j] + \beta[i] C[j]. \]
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em n} & An array of integers of length group count-\/1, where n\mbox{[}i\mbox{]} is the order of the matrices C\mbox{[}j\mbox{]} in i-\/th group. n\mbox{[}i\mbox{]} $>$= 0.\\
+\hline
+\mbox{\tt in}  & {\em k} & An array of integers of length group\+\_\+count-\/1. For matrices in i-\/th group If trans = Bblas\+No\+Trans, number of columns of A\mbox{[}j\mbox{]}-\/s and B\mbox{[}j\mbox{]}-\/s matrices; if trans = Bblas\+Trans, number of rows of A\mbox{[}j\mbox{]}-\/s and B\mbox{[}j\mbox{]}-\/s matrices.\\
+\hline
+\mbox{\tt in}  & {\em alpha} & An array of scalars of length group\+\_\+count-\/1.\\
+\hline
+\mbox{\tt in}  & {\em A} & A is an array of pointers to matrices A\mbox{[}0\mbox{]}, A\mbox{[}1\mbox{]} .. A\mbox{[}batch\+\_\+count-\/1\mbox{]}. In i-\/th group each element A\mbox{[}j\mbox{]} is a pointer to a matrix of A\mbox{[}j\mbox{]} of size lda\mbox{[}i\mbox{]}-\/by-\/ka. If trans\mbox{[}i\mbox{]} = Bblas\+No\+Trans, ka = k\mbox{[}i\mbox{]}; if trans\mbox{[}i\mbox{]} = Bblas\+Trans, ka = n\mbox{[}i\mbox{]}. batch\+\_\+count=\{i=1\}$^\wedge$\{group\+\_\+count\}group\+\_\+sizes\mbox{[}i\mbox{]}.\\
+\hline
+\mbox{\tt in}  & {\em lda} & An array of integers of length group\+\_\+count-\/1, are the leading dimension of the arrays A\mbox{[}j\mbox{]} in i-\/th group. If trans\mbox{[}i\mbox{]} = Bblas\+No\+Trans, lda\mbox{[}i\mbox{]} $>$= max(1, n\mbox{[}i\mbox{]}); if trans\mbox{[}i\mbox{]} = Bblas\+Trans, lda\mbox{[}i\mbox{]} $>$= max(1, k\mbox{[}i\mbox{]}).\\
+\hline
+\mbox{\tt in}  & {\em beta} & An array of scalars of length group\+\_\+count-\/1.\\
+\hline
+\mbox{\tt in,out}  & {\em C} & C is an array of pointers to matrices C\mbox{[}0\mbox{]}, C\mbox{[}1\mbox{]} .. C\mbox{[}batc\+\_\+count-\/1\mbox{]}. In i-\/th group each element C\mbox{[}j\mbox{]} is a pointer to a matrix C\mbox{[}j\mbox{]} of size ldc\mbox{[}i\mbox{]}-\/by-\/n\mbox{[}i\mbox{]}. On exit, the uplo\mbox{[}i\mbox{]} part of the matrix is overwritten by the uplo\mbox{[}i\mbox{]} part of the updated matrix. batch\+\_\+count=\{i=1\}$^\wedge$\{group\+\_\+count\}group\+\_\+sizes\mbox{[}i\mbox{]}.\\
+\hline
+\mbox{\tt in}  & {\em ldc} & An array of integers of length group\+\_\+count-\/1. Where ldc\mbox{[}i\mbox{]} is the leading dimension of the arrays C\mbox{[}j\mbox{]} in i-\/th group. ldc\mbox{[}i\mbox{]} $>$= max(1, n\mbox{[}i\mbox{]}).\\
+\hline
+\mbox{\tt in,out}  & {\em info} & Array of int for error handling. On entry info\mbox{[}0\mbox{]} should have one of the following values
+\begin{DoxyItemize}
+\item Bblas\+Errors\+Report\+All \+: All errors will be specified on output. Length of the array should be atleast \{i=1\}$^\wedge$\{group\+\_\+count-\/1\}group\+\_\+size\mbox{[}i\mbox{]}.
+\item Bblas\+Errors\+Report\+Group \+: Single error from each group will be reported. Length of the array should be atleast to (group\+\_\+count).
+\item Bblas\+Errors\+Report\+Any \+: Occurence of an error will be indicated by a single integer value, and length of the array should be atleast 1.
+\item Bblas\+Errors\+Report\+None \+: No error will be reported on output, and length of the array should be atleast 1.
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Bblas\+Success} & successful exit\\
+\hline
+\end{DoxyRetVals}
+\begin{DoxySeeAlso}{See also}
+zsyrk\+\_\+batch 
+
+csyrk\+\_\+batch 
+
+dsyrk\+\_\+batch 
+
+ssyrk\+\_\+batch 
+\end{DoxySeeAlso}

@@ -1,0 +1,106 @@
+{\bfseries Batched Basic Linear Algebra Subroutines}
+
+{\bfseries University of Manchester (UK)}
+
+{\bfseries University of Tennessee (US)}
+
+
+
+
+
+\href{https://github.com/NLAFET/BBLAS/archive/master.zip}{\tt Download B\+B\+L\+AS Software}
+
+
+
+
+
+\section*{About }
+
+B\+B\+L\+AS is the reference implementation of the Batched B\+L\+AS standard specification. A current trend in high-\/performance computing is to decompose a large linear algebra problem into batches containing thousands of smaller problems, which can be solved independently, before collating the results. To standardize the interface to these routines, the community developed an extension to the B\+L\+AS standard (the batched B\+L\+AS), enabling users to perform thousands of small B\+L\+AS operations in parallel whilst making efficient use of their hardware. Please visit \href{http://icl.utk.edu/bblas}{\tt B\+B\+L\+AS workshops} for more information on the standardization efforts.
+
+\section*{The main folders \& files }
+
+
+\begin{DoxyItemize}
+\item {\bfseries compute}\+: contains the standard B\+B\+L\+AS group A\+PI functions
+\item {\bfseries core}\+: contains the auxiliary batched B\+L\+AS functions which perform on groups of same size problems
+\item {\bfseries control}\+: contains auxiliary functions for type conversions
+\item {\bfseries test}\+: contains testing routines associated with the B\+B\+L\+AS functions and provides an insight on how the B\+B\+L\+AS functions should be called/used.
+\item {\bfseries include}\+: contains header files
+\item {\itshape make.\+inc}\+: a configuration file to specify a C/\+C++ compiler, compilation flags and a B\+L\+AS library. The default configuration should work when M\+KL is installed.
+\item {\itshape Makefile}\+: the Makefile, normally, it should not be modified.
+\end{DoxyItemize}
+
+\section*{Requirements }
+
+\paragraph*{B\+L\+AS \& L\+A\+P\+A\+CK}
+
+
+\begin{DoxyItemize}
+\item {\bfseries M\+KL} is now free for academics (students and researchers) available at \href{https://software.intel.com/en-us/articles/free-mkl}{\tt https\+://software.\+intel.\+com/en-\/us/articles/free-\/mkl}
+\end{DoxyItemize}
+
+OR
+
+
+\begin{DoxyItemize}
+\item {\bfseries Netlib B\+L\+AS} no optimized B\+L\+AS routines, available at \href{http://www.netlib.org/blas/blas-3.8.0.tgz}{\tt B\+L\+A\+S-\/3.\+8.\+0.\+tgz}
+\item {\bfseries Netlib L\+A\+P\+A\+CK} no optimized L\+A\+P\+A\+CK routines, available at \href{http://www.netlib.org/lapack/lapack-3.8.0.tar.gz}{\tt L\+A\+P\+A\+C\+K-\/3.\+8.\+0.\+tgz}
+\end{DoxyItemize}
+
+\paragraph*{Doxygen for documentation}
+
+
+\begin{DoxyItemize}
+\item {\bfseries Doxygen} can be install on Unix systems by {\itshape sudo apt-\/get install doxygen} or downloaded on \href{http://www.doxygen.org/download.html}{\tt the doxygen page}.
+\end{DoxyItemize}
+
+\section*{Compilation }
+
+After the configuration of {\bfseries make.\+inc}, the compilation is very simple\+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries make \mbox{[}all\mbox{]}} -- make lib test
+\item {\bfseries make lib} -- make lib/libbblas.\{a,so\} lib/libcore.\{a,so\}
+\item {\bfseries make test} -- make test/test
+\item {\bfseries make docs} -- make docs/html
+\item {\bfseries make generate} -- generate precisions
+\item {\bfseries make clean} -- remove objects, libraries, and executables
+\item {\bfseries make cleangen} -- remove generated precision files
+\item {\bfseries make distclean} -- remove above, Makefile.$\ast$.gen, and anything else that can be generated
+\end{DoxyItemize}
+
+\section*{Citing }
+
+Feel free to use the following publications to reference B\+B\+L\+AS\+:
+
+
+\begin{DoxyItemize}
+\item Jack Dongarra, Sven Hammarling, Nicholas J. Higham, Samuel D. Relton, Mawussi Zounon\+: {\bfseries Optimized Batched Linear Algebra for Modern Architectures.} {\itshape Euro-\/\+Par 2017\+: 511-\/522}.
+\item Jack Dongarra, Sven Hammarling, Nicholas J. Higham, Samuel D. Relton, Pedro Valero-\/\+Lara, Mawussi Zounon\+: {\bfseries The Design and Performance of Batched B\+L\+AS on Modern High-\/\+Performance Computing Systems}, {\itshape I\+C\+CS 2017\+: 495-\/504}
+\item Jack Dongarra, Iain Duff, Mark Gates, Azzam Haidar, Sven Hammarling, Nicholas J. Higham, Jonathan Hogg, Pedro Valero Lara, Mawussi Zounon, Samuel D. Relton, and Stanimire Tomov, {\bfseries A Proposed A\+PI for Batched Basic Linear Algebra Subprograms}, \href{https://www.dropbox.com/s/olocmipyxfvcaui/batched_api_03_30_2016.pdf?dl=0}{\tt Draft Report, May 2016.}
+\end{DoxyItemize}
+
+\section*{Funding }
+
+Primary funding for B\+B\+L\+AS was provided the European Union grant\+:
+
+
+\begin{DoxyItemize}
+\item \href{http://www.nlafet.eu}{\tt N\+L\+A\+F\+E\+T\+: Parallel Numerical Linear Algebra for Future Extreme Scale Systems}, Grant Agreement no. 671633
+\end{DoxyItemize}
+
+\section*{People }
+
+The following people listed in alphabetical order contributed to the B\+B\+L\+AS reference implementation\+:
+
+
+\begin{DoxyItemize}
+\item Jack Dongarra
+\item Mark Gates
+\item Srikara Pranesh
+\item Samuel Relton
+\item Pedro Valero Lara
+\item Mawussi Zounon 
+\end{DoxyItemize}
