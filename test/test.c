@@ -72,10 +72,10 @@ struct routines_t routines[] =
     { "ctrmm_batch", test_ctrmm_batch }, 
     { "strmm_batch", test_strmm_batch }, 
 
-    /* { "ztrsm_batch", test_ztrsm_batch }, */
-    /* { "dtrsm_batch", test_dtrsm_batch }, */
-    /* { "ctrsm_batch", test_ctrsm_batch }, */
-    /* { "strsm_batch", test_strsm_batch }, */
+    { "ztrsm_batch", test_ztrsm_batch }, 
+    { "dtrsm_batch", test_dtrsm_batch }, 
+    { "ctrsm_batch", test_ctrsm_batch }, 
+    { "strsm_batch", test_strsm_batch }, 
 
 
     { NULL, NULL }  // last entry
