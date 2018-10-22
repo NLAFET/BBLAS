@@ -212,7 +212,7 @@ void test_zsymm_batch(param_value_t param[], bool run)
 
 	//Set info
 	int info_size;
-	switch (bblas_info_const(param[PARAM_TRANSA].c)) {
+	switch (bblas_info_const(param[PARAM_INFO].c)) {
 		case BblasErrorsReportAll :
 			info_size = batch_count +1;
 			break;
@@ -229,7 +229,7 @@ void test_zsymm_batch(param_value_t param[], bool run)
 	}
 
 	int *info = (int*) malloc((size_t)info_size*sizeof(int))  ;
-	info[0] = bblas_trans_const(param[PARAM_TRANSA].c);
+	info[0] = bblas_trans_const(param[PARAM_INFO].c);
 
 	//================================================================
 	// Run and time BBLAS.

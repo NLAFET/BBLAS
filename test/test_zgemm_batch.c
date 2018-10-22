@@ -210,7 +210,7 @@ void test_zgemm_batch(param_value_t param[], bool run)
 
 	//Set info
 	int info_size;
-	switch (bblas_info_const(param[PARAM_TRANSA].c)) {
+	switch (bblas_info_const(param[PARAM_INFO].c)) {
 		case BblasErrorsReportAll :
 			info_size = batch_count +1;
 			break;
