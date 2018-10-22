@@ -72,8 +72,8 @@ void test_zhemm_batch(param_value_t param[], bool run)
 		uplo[i] = bblas_uplo_const(param[PARAM_UPLO].c);
 	}
 
-	int m[group_count]; 
-	int n[group_count];
+	int *m = (int*)malloc((size_t)group_count*sizeof(int));
+	int *n = (int*)malloc((size_t)group_count*sizeof(int));
 	int size_incre = param[PARAM_INCM].i;
 	m[0] = param[PARAM_DIM].dim.m;
 	n[0] = param[PARAM_DIM].dim.n;
@@ -212,7 +212,7 @@ void test_zhemm_batch(param_value_t param[], bool run)
 
 	//Set info
 	int info_size;
-	switch (bblas_info_const(param[PARAM_TRANSA].c)) {
+	switch (bblas_info_const(param[PARAM_INFO].c)) { 
 		case BblasErrorsReportAll :
 			info_size = batch_count +1;
 			break;
@@ -229,7 +229,7 @@ void test_zhemm_batch(param_value_t param[], bool run)
 	}
 
 	int *info = (int*) malloc((size_t)info_size*sizeof(int))  ;
-	info[0] = bblas_trans_const(param[PARAM_TRANSA].c);
+	info[0] = bblas_info_const(param[PARAM_INFO].c);
 
 	//================================================================
 	// Run and time BBLAS.
@@ -273,9 +273,9 @@ void test_zhemm_batch(param_value_t param[], bool run)
 				cblas_zhemm(CblasColMajor,
 						(CBLAS_SIDE) side[group_iter], (CBLAS_UPLO) uplo[group_iter],
 						m[group_iter], n[group_iter],
-						CBLAS_SADDR(alpha[group_iter]), A[group_iter], lda[group_iter],
-										B[group_iter], ldb[group_iter],
-						CBLAS_SADDR(beta[group_iter]),  Cref[group_iter], ldc[group_iter]);
+						CBLAS_SADDR(alpha[group_iter]), A[matrix_iter], lda[group_iter],
+										B[matrix_iter], ldb[group_iter],
+						CBLAS_SADDR(beta[group_iter]),  Cref[matrix_iter], ldc[group_iter]);
 
 				// compute difference C[matrix_iter] - C[matrix_iter]
 				cblas_zaxpy((size_t)ldc[group_iter]*Cn[group_iter],

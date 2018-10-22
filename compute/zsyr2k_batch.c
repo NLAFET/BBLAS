@@ -151,7 +151,7 @@ void blas_zsyr2k_batch(int group_count, const int *group_sizes,
 		       const int *n, const int *k, 
 		       const bblas_complex64_t *alpha, bblas_complex64_t const *const *A, const int *lda, 
 		       				       bblas_complex64_t const* const *B, const int *ldb, 
-		       const double  		*beta, bblas_complex64_t	    ** C, const int *ldc, 
+		       const bblas_complex64_t  *beta, bblas_complex64_t	    ** C, const int *ldc, 
 		       int *info)
 
 {
