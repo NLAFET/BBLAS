@@ -39,6 +39,24 @@ bblas_enum_t bblas_diag_const(char lapack_char)
 }
 
 /***************************************************************************//**
+ * @retval BblasErrorsReportAll       if lapack_char = 'a'
+ * @retval BblasErrorsReportGroup     if lapack_char = 'g'
+ * @retval BblasErrorsReportAny       if lapack_char = 'o'
+ * @retval BblasErrorsReportNone      if lapack_char = 'n'
+ ******************************************************************************/
+bblas_enum_t bblas_info_const(char lapack_char)
+{
+    switch (lapack_char) {
+    case 'A': case 'a': return BblasErrorsReportAll;
+    case 'G': case 'g': return BblasErrorsReportGroup;
+    case 'O': case 'o': return BblasErrorsReportAny;
+    case 'N': case 'n': return BblasErrorsReportNone;
+    default:            return BblasInvalid;
+    }
+}
+
+
+/***************************************************************************//**
  * @retval BblasForward  if lapack_char = 'F'
  * @retval BblasBackward if lapack_char = 'B'
  ******************************************************************************/

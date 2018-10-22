@@ -47,7 +47,7 @@ typedef enum {
     PARAM_SIDE,    // left of right side application
     PARAM_UPLO,    // general rectangular or upper or lower triangular
     PARAM_DIAG,    // non-unit or unit diagonal
-
+    PARAM_INFO,  // transposition of B
     // numeric params
     PARAM_NG,      // number of group
     PARAM_GS,      // first group size    

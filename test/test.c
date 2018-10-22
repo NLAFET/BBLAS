@@ -156,6 +156,9 @@ static param_desc_t ParamDesc[] = {
 
     {"--diag=[n|u]",       "diag",         6,     true,
      "non-unit diagonal or unit diagonal [default: n]"},
+    
+    {"--info=[a|g|n|o]",       "info",         6,     true,
+     "all or group or none or one(any) [default: g]"},
 
     {"--ng=",              "ng",           6,     true,
      "The number groups of matrices [default: 10]"},
@@ -406,6 +409,7 @@ int test_routine(const char *name, param_value_t pval[], bool test)
             case PARAM_UPLO:
             case PARAM_DIAG:
             case PARAM_COLROW:
+            case PARAM_INFO:
                 printf("  %*c", ParamDesc[i].width, pval[i].c);
                 break;
 
@@ -558,6 +562,9 @@ void param_read(int argc, char **argv, param_t param[])
 
         else if (param_starts_with(argv[i], "--diag="))
             err = param_scan_char(strchr(argv[i], '=')+1, &param[PARAM_DIAG]);
+        
+        else if (param_starts_with(argv[i], "--info="))
+            err = param_scan_char(strchr(argv[i], '=')+1, &param[PARAM_INFO]);
 
         else if (param_starts_with(argv[i], "--colrow="))
             err = param_scan_char(strchr(argv[i], '=')+1, &param[PARAM_COLROW]);
@@ -645,7 +652,8 @@ void param_read(int argc, char **argv, param_t param[])
         param_add_char('n', &param[PARAM_DIAG]);
     if (param[PARAM_COLROW].num == 0)
         param_add_char('c', &param[PARAM_COLROW]);
-
+    if (param[PARAM_INFO].num == 0)
+        param_add_char('a', &param[PARAM_INFO]);
     //--------------------------------------------------
     // Set integer parameters.
     //--------------------------------------------------

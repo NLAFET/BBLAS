@@ -43,6 +43,7 @@ void test_zgemm_batch(param_value_t param[], bool run)
     param[PARAM_INCG   ].used = true;
     param[PARAM_TRANSA ].used = true;
     param[PARAM_TRANSB ].used = true;
+    param[PARAM_INFO ].used = true;
     param[PARAM_DIM    ].used = PARAM_USE_M | PARAM_USE_N | PARAM_USE_K;
     param[PARAM_INCM   ].used = true;
     param[PARAM_ALPHA  ].used = true;
@@ -208,9 +209,25 @@ void test_zgemm_batch(param_value_t param[], bool run)
     }
 
     //Set info
-    int info[group_count];
-    info[0] = BblasErrorsReportGroup;
-
+    int info_size;
+    switch (bblas_info_const(param[PARAM_TRANSA].c)) {
+    case BblasErrorsReportAll :
+        info_size = batch_count +1;
+        break;
+    case BblasErrorsReportGroup :
+        info_size = group_count +1;
+        break;
+    case BblasErrorsReportAny :
+    case BblasErrorsReportNone :
+        info_size = 1;
+        break;
+    default :
+        bblas_error ("illegal value of info");
+        return;
+    }
+    
+    int *info = (int*) malloc((size_t)info_size*sizeof(int))  ;
+    info[0] = bblas_trans_const(param[PARAM_TRANSA].c);
     //================================================================
     // Run and time BBLAS.
     //================================================================

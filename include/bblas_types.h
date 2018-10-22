@@ -109,6 +109,7 @@ bblas_enum_t bblas_side_const(char lapack_char);
 bblas_enum_t bblas_storev_const(char lapack_char);
 bblas_enum_t bblas_trans_const(char lapack_char);
 bblas_enum_t bblas_uplo_const(char lapack_char);
+bblas_enum_t bblas_info_const(char lapack_char);
 
 /******************************************************************************/
 static inline int imin(int a, int b)
