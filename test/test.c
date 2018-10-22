@@ -45,10 +45,10 @@ struct routines_t routines[] =
     { "cher2k_batch", test_cher2k_batch }, 
     { "", NULL }, 
 
-    /* { "zherk_batch", test_zherk_batch }, */
-    /* { "", NULL }, */
-    /* { "cherk_batch", test_cherk_batch }, */
-    /* { "", NULL }, */
+    { "zherk_batch", test_zherk_batch }, 
+    { "", NULL }, 
+    { "cherk_batch", test_cherk_batch }, 
+    { "", NULL },
 
 
     { "zsymm_batch", test_zsymm_batch }, 
@@ -56,10 +56,10 @@ struct routines_t routines[] =
     { "csymm_batch", test_csymm_batch }, 
     { "ssymm_batch", test_ssymm_batch }, 
 
-    /* { "zsyr2k_batch", test_zsyr2k_batch },  */
-    /* { "dsyr2k_batch", test_dsyr2k_batch },  */
-    /* { "csyr2k_batch", test_csyr2k_batch },  */
-    /* { "ssyr2k_batch", test_ssyr2k_batch },  */
+    { "zsyr2k_batch", test_zsyr2k_batch }, 
+    { "dsyr2k_batch", test_dsyr2k_batch }, 
+    { "csyr2k_batch", test_csyr2k_batch }, 
+    { "ssyr2k_batch", test_ssyr2k_batch }, 
 
     /* { "zsyrk_batch", test_zsyrk_batch }, */
     /* { "dsyrk_batch", test_dsyrk_batch }, */

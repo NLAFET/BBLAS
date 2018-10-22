@@ -194,7 +194,7 @@ void test_zher2k_batch(param_value_t param[], bool run)
 
 	//Set info
 	int info_size;
-	switch (bblas_info_const(param[PARAM_TRANSA].c)) {
+	switch (bblas_info_const(param[PARAM_INFO].c)) {
 		case BblasErrorsReportAll :
 			info_size = batch_count +1;
 			break;
@@ -211,7 +211,7 @@ void test_zher2k_batch(param_value_t param[], bool run)
 	}
 
 	int *info = (int*) malloc((size_t)info_size*sizeof(int))  ;
-	info[0] = bblas_trans_const(param[PARAM_TRANSA].c);
+	info[0] = bblas_info_const(param[PARAM_INFO].c);
 	//================================================================
 	// Run and time BBLAS.
 	//================================================================
@@ -253,14 +253,14 @@ void test_zher2k_batch(param_value_t param[], bool run)
 						n[group_iter], k[group_iter],
 						CBLAS_SADDR(alpha[group_iter]), A[matrix_iter], lda[group_iter],
 										B[matrix_iter], ldb[group_iter],
-							     beta[group_iter],  C[matrix_iter], ldc[group_iter]);
+							     beta[group_iter],  Cref[matrix_iter], ldc[group_iter]);
 
 				// compute difference C[matrix_iter] - C[matrix_iter]
 				cblas_zaxpy((size_t)ldc[group_iter]*Cn[group_iter],
 						CBLAS_SADDR(zmone), Cref[matrix_iter], 1, C[matrix_iter], 1);
 
-				error += LAPACKE_zlange_work(
-						LAPACK_COL_MAJOR, 'F', Cm[group_iter], Cn[group_iter],
+				error += LAPACKE_zlanhe_work(
+						LAPACK_COL_MAJOR, 'F', uplo[group_iter], Cn[group_iter],
 						C[matrix_iter],  ldc[group_iter], work);
 			}
 		}

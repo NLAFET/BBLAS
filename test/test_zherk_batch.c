@@ -6,7 +6,7 @@
  *  University of Manchester, UK,
  *  University of Tennessee, US.
  *
- * @precisions normal z -> s d c
+ * @precisions normal z -> c
  *
  **/
 #include "test.h"
@@ -25,7 +25,7 @@
 
 /***************************************************************************//**
  *
- * @brief Tests BATCHED ZGEMM.
+ * @brief Tests BATCHED ZHERK.
  *
  * @param[in,out] param - array of parameters
  * @param[in]     run - whether to run test
@@ -33,7 +33,7 @@
  * Sets used flags in param indicating parameters that are used.
  * If run is true, also runs test and stores output parameters.
  ******************************************************************************/
-void test_zgemm_batch(param_value_t param[], bool run)
+void test_zherk_batch(param_value_t param[], bool run)
 {
 	//================================================================
 	// Mark which parameters are used.
@@ -42,14 +42,15 @@ void test_zgemm_batch(param_value_t param[], bool run)
 	param[PARAM_GS     ].used = true;
 	param[PARAM_INCM   ].used = true;
 	param[PARAM_INCG   ].used = true;
-	param[PARAM_TRANSA ].used = true;
-	param[PARAM_TRANSB ].used = true;
+	param[PARAM_UPLO   ].used = true;
+	param[PARAM_TRANS  ].used = true;
 	param[PARAM_INFO   ].used = true;
-	param[PARAM_DIM    ].used = PARAM_USE_M | PARAM_USE_N | PARAM_USE_K;
+	param[PARAM_DIM    ].used = PARAM_USE_N | PARAM_USE_K;
 	param[PARAM_ALPHA  ].used = true;
 	param[PARAM_BETA   ].used = true;
 	if (! run)
 		return;
+
 
 
 	//================================================================
@@ -64,80 +65,57 @@ void test_zgemm_batch(param_value_t param[], bool run)
 		group_sizes[i] = first_group_size + i*inc_group;
 	}
 
-	bblas_enum_t transa[group_count];
-	bblas_enum_t transb[group_count];
+	bblas_enum_t trans[group_count];
+	bblas_enum_t uplo[group_count];
 	for (int i=0; i < group_count; i++) { // Todo: assign different trans value
-		transa[i]  = bblas_trans_const(param[PARAM_TRANSA].c);
-		transb[i]  = bblas_trans_const(param[PARAM_TRANSB].c);
+		trans[i] = bblas_trans_const(param[PARAM_TRANS].c);
+		uplo[i] =  bblas_uplo_const(param[PARAM_UPLO].c);
 	}
 
 	int inc_matrix_size = param[PARAM_INCM].i;
-	int *m = (int*)malloc((size_t)group_count*sizeof(int));
 	int *n = (int*)malloc((size_t)group_count*sizeof(int));
 	int *k = (int*)malloc((size_t)group_count*sizeof(int));
 
 	for (int i=0; i < group_count; i++) { // Todo: provide different inc par dimension
-		m[i] = param[PARAM_DIM].dim.m + i*inc_matrix_size;
 		n[i] = param[PARAM_DIM].dim.n + i*inc_matrix_size;
 		k[i] = param[PARAM_DIM].dim.k + i*inc_matrix_size;
 	}
 
 	int *lda = (int*)malloc((size_t)group_count*sizeof(int));
-	int *ldb = (int*)malloc((size_t)group_count*sizeof(int));
 	int *ldc = (int*)malloc((size_t)group_count*sizeof(int));
 
 	int *An = (int*)malloc((size_t)group_count*sizeof(int));
-	int *Bn = (int*)malloc((size_t)group_count*sizeof(int));
 	int *Cn = (int*)malloc((size_t)group_count*sizeof(int));
 
 	int *Am = (int*)malloc((size_t)group_count*sizeof(int));
-	int *Bm = (int*)malloc((size_t)group_count*sizeof(int));
 	int *Cm = (int*)malloc((size_t)group_count*sizeof(int));
 
 	for (int i= 0; i < group_count; i++) {
 
-		if (transa[i] == BblasNoTrans) {
-			Am[i] = m[i];
+		if (trans[i] == BblasNoTrans) {
+			Am[i] = n[i];
 			An[i] = k[i];
 		}
 		else {
 			Am[i] = k[i];
-			An[i] = m[i];
+			An[i] = n[i];
 		}
-		if (transb[i] == BblasNoTrans) {
-			Bm[i] = k[i];
-			Bn[i] = n[i];
-		}
-		else {
-			Bm[i] = n[i];
-			Bn[i] = k[i];
-		}
-		Cm[i] = m[i];
+		Cm[i] = n[i];
 		Cn[i] = n[i];
 
 		lda[i] = imax(1, Am[i]);
-		ldb[i] = imax(1, Bm[i]);
 		ldc[i] = imax(1, Cm[i]);
 	}
 	int test = param[PARAM_TEST].c == 'y';
 	double eps = LAPACKE_dlamch('E');
 
 
-#ifdef COMPLEX
-	bblas_complex64_t alpha[group_count];
-	bblas_complex64_t beta[group_count];
-	for (int i = 0; i < group_count; i++) {
-		alpha[i] =  param[PARAM_ALPHA].z;
-		beta[i]  =  param[PARAM_BETA].z;
-	}
-#else
 	double alpha[group_count];
 	double beta[group_count];
 	for (int i = 0; i < group_count; i++) {
-		alpha[i] = creal(param[PARAM_ALPHA].z);
-		beta[i]  = creal(param[PARAM_BETA].z);
+		alpha[i] =  creal(param[PARAM_ALPHA].z);
+		beta[i]  =  creal(param[PARAM_BETA].z);
 	}
-#endif
 
 	//================================================================
 	// Allocate and initialize arrays.
@@ -151,10 +129,6 @@ void test_zgemm_batch(param_value_t param[], bool run)
 	bblas_complex64_t **A = (bblas_complex64_t**)malloc(
 			(size_t)batch_count*sizeof(bblas_complex64_t*));
 	assert(A != NULL);
-
-	bblas_complex64_t **B = (bblas_complex64_t**)malloc(
-			(size_t)batch_count*sizeof(bblas_complex64_t*));
-	assert(B != NULL);
 
 	bblas_complex64_t **C = (bblas_complex64_t**)malloc(
 			(size_t)batch_count*sizeof(bblas_complex64_t*));
@@ -181,18 +155,11 @@ void test_zgemm_batch(param_value_t param[], bool run)
 					(size_t)lda[group_iter]*An[group_iter]*sizeof(bblas_complex64_t));
 			assert(A[matrix_iter] != NULL);
 
-			B[matrix_iter] = (bblas_complex64_t*)malloc(
-					(size_t)ldb[group_iter]*Bn[group_iter]*sizeof(bblas_complex64_t));
-			assert(B[matrix_iter] != NULL);
-
 			C[matrix_iter] = (bblas_complex64_t*)malloc(
 					(size_t)ldc[group_iter]*Cn[group_iter]*sizeof(bblas_complex64_t));
 			assert(C[matrix_iter] != NULL);
 
 			retval = LAPACKE_zlarnv(1, seed, (size_t)lda[group_iter]*An[group_iter], A[matrix_iter]);
-			assert(retval == 0);
-
-			retval = LAPACKE_zlarnv(1, seed, (size_t)ldb[group_iter]*Bn[group_iter], B[matrix_iter]);
 			assert(retval == 0);
 
 			retval = LAPACKE_zlarnv(1, seed, (size_t)ldc[group_iter]*Cn[group_iter], C[matrix_iter]);
@@ -233,12 +200,11 @@ void test_zgemm_batch(param_value_t param[], bool run)
 	//================================================================
 	bblas_time_t start = gettime();
 
-	blas_zgemm_batch(group_count, (const int *)group_sizes,
-			BblasColMajor, (const bblas_enum_t *)transa, (const bblas_enum_t *)transb,
-			(const int *)m, (const int *)n, (const int *)k,
-			(const bblas_complex64_t *)alpha, (bblas_complex64_t const *const *)A, (const int *)lda,
-							  (bblas_complex64_t const *const *)B, (const int *)ldb,
-			(const bblas_complex64_t *)beta,                                    C, (const int *)ldc,
+	blas_zherk_batch(group_count, (const int *)group_sizes,
+			BblasColMajor, (const bblas_enum_t *)uplo, (const bblas_enum_t *)trans,
+			(const int *)n, (const int *)k, 
+			(const double 		*)alpha, (bblas_complex64_t const *const *)A, (const int *)lda, 
+			(const double  		*)beta, 				   C, (const int *)ldc, 
 			info);
 
 	bblas_time_t stop = gettime();
@@ -248,11 +214,9 @@ void test_zgemm_batch(param_value_t param[], bool run)
 
 	double flops = 0;
 	for (int group_iter = 0; group_iter < group_count; group_iter++) {
-		flops += flops_zgemm(m[group_iter], n[group_iter],
-				k[group_iter])*group_sizes[group_iter];
+		flops += flops_zherk(n[group_iter], k[group_iter])*group_sizes[group_iter];
 	}
 	param[PARAM_MFLOPS].d = flops / time / 1e6;
-
 
 	//=====================================================================
 	// Test Batched API results by comparing to regular mutiple blas calls .
@@ -267,20 +231,18 @@ void test_zgemm_batch(param_value_t param[], bool run)
 			group_end += group_sizes[group_iter];
 			for (int matrix_iter= group_start; matrix_iter < group_end; matrix_iter++) {
 
-				cblas_zgemm(
-						CblasColMajor,
-						(CBLAS_TRANSPOSE)transa[group_iter], (CBLAS_TRANSPOSE)transb[group_iter],
-						m[group_iter], n[group_iter], k[group_iter],
-						CBLAS_SADDR(alpha[group_iter]), A[matrix_iter], lda[group_iter],
-										B[matrix_iter], ldb[group_iter],
-						CBLAS_SADDR(beta[group_iter]), Cref[matrix_iter], ldc[group_iter]);
+				cblas_zherk(CblasColMajor, 
+					    (CBLAS_UPLO) uplo[group_iter], (CBLAS_TRANSPOSE)trans[group_iter],
+					    n[group_iter], k[group_iter],
+					    alpha[group_iter], A[matrix_iter], lda[group_iter],
+					    beta[group_iter],  Cref[matrix_iter], ldc[group_iter]);
 
 				// compute difference C[matrix_iter] - C[matrix_iter]
 				cblas_zaxpy((size_t)ldc[group_iter]*Cn[group_iter],
 						CBLAS_SADDR(zmone), Cref[matrix_iter], 1, C[matrix_iter], 1);
 
-				error += LAPACKE_zlange_work(
-						LAPACK_COL_MAJOR, 'F', Cm[group_iter], Cn[group_iter],
+				error += LAPACKE_zlanhe_work(
+						LAPACK_COL_MAJOR, 'F', uplo[group_iter], Cn[group_iter],
 						C[matrix_iter],  ldc[group_iter], work);
 			}
 		}
@@ -294,32 +256,26 @@ void test_zgemm_batch(param_value_t param[], bool run)
 	for (int matrix_iter = 0; matrix_iter < batch_count; matrix_iter++) {
 
 		free(A[matrix_iter]);
-		free(B[matrix_iter]);
 		free(C[matrix_iter]);
 
 		if (test)
 			free(Cref[matrix_iter]);
 	}
 	free(A);
-	free(B);
 	free(C);
 
 	if (test)
 		free(Cref);
 
 	free(n);
-	free(m);
 	free(k);
 
 	free(lda);
-	free(ldb);
 	free(ldc);
 
 	free(An);
-	free(Bn);
 	free(Cn);
 
 	free(Am);
-	free(Bm);
 	free(Cm);
 }
