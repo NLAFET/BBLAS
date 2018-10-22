@@ -165,7 +165,7 @@ void blas_zsyr2k_batch(int group_count, const int *group_sizes,
 
 	int offset = 0;
 	int info_offset = 0;
-	int info_init = 0;
+	int flag = 0;
 	int info_option = info[0];
 	// Check group_size and call fixed batch computation 
 	for (int group_iter = 0; group_iter < group_count; group_iter++) {
@@ -203,8 +203,10 @@ void blas_zsyr2k_batch(int group_count, const int *group_sizes,
 				   &info[info_offset]);    
 
 		// check for errors in batchf function
-		if (info[info_offset] != info_init)
+		if (info[info_offset] != 0 && flag == 0) {
 			info[0] = info[info_offset];	
+			flag = 1;
+		}
 
 		offset += group_sizes[group_iter];    
 	}
