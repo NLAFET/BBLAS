@@ -25,7 +25,7 @@
 
 /***************************************************************************//**
  *
- * @brief Tests BATCHED ZHEMM.
+ * @brief Tests BATCHED ZHER2K.
  *
  * @param[in,out] param - array of parameters
  * @param[in]     run - whether to run test
@@ -33,7 +33,7 @@
  * Sets used flags in param indicating parameters that are used.
  * If run is true, also runs test and stores output parameters.
  ******************************************************************************/
-void test_zhemm_batch(param_value_t param[], bool run)
+void test_zher2k_batch(param_value_t param[], bool run)
 {
 	//================================================================
 	// Mark which parameters are used.
@@ -42,13 +42,12 @@ void test_zhemm_batch(param_value_t param[], bool run)
 	param[PARAM_GS     ].used = true;
 	param[PARAM_INCM   ].used = true;
 	param[PARAM_INCG   ].used = true;
-	param[PARAM_SIDE   ].used = true;
 	param[PARAM_UPLO   ].used = true;
+	param[PARAM_TRANS  ].used = true;
 	param[PARAM_INFO   ].used = true;
-	param[PARAM_DIM    ].used = PARAM_USE_M | PARAM_USE_N;
+	param[PARAM_DIM    ].used = PARAM_USE_N | PARAM_USE_K;
 	param[PARAM_ALPHA  ].used = true;
 	param[PARAM_BETA   ].used = true;
-
 	if (! run)
 		return;
 
@@ -56,30 +55,28 @@ void test_zhemm_batch(param_value_t param[], bool run)
 	// Set parameters.
 	//================================================================
 
-	int group_count = param[PARAM_NG].i;
-
-	int group_sizes[group_count];
+	int group_count       = param[PARAM_NG].i;
+	int inc_group         = param[PARAM_INCG].i;
 	int first_group_size  = param[PARAM_GS].i;
-	int inc_group = param[PARAM_INCG].i;
+	int group_sizes[group_count];
 	for (int i=0; i < group_count; i++) {
 		group_sizes[i] = first_group_size + i*inc_group;
 	}
 
-	bblas_enum_t side[group_count]; 
+	bblas_enum_t trans[group_count];
 	bblas_enum_t uplo[group_count];
-	for (int i = 0; i < group_count; ++i) {
-		side[i] = bblas_side_const(param[PARAM_SIDE].c);
-		uplo[i] = bblas_uplo_const(param[PARAM_UPLO].c);
+	for (int i=0; i < group_count; i++) { // Todo: assign different trans value
+		trans[i] = bblas_trans_const(param[PARAM_TRANS].c);
+		uplo[i] =  bblas_uplo_const(param[PARAM_UPLO].c);
 	}
 
-	int m[group_count]; 
-	int n[group_count];
-	int size_incre = param[PARAM_INCM].i;
-	m[0] = param[PARAM_DIM].dim.m;
-	n[0] = param[PARAM_DIM].dim.n;
-	for (int i = 1; i < group_count; ++i) {
-		m[i] = m[i-1] + size_incre;
-		n[i] = n[i-1] + size_incre;
+	int inc_matrix_size = param[PARAM_INCM].i;
+	int *n = (int*)malloc((size_t)group_count*sizeof(int));
+	int *k = (int*)malloc((size_t)group_count*sizeof(int));
+
+	for (int i=0; i < group_count; i++) { // Todo: provide different inc par dimension
+		n[i] = param[PARAM_DIM].dim.n + i*inc_matrix_size;
+		k[i] = param[PARAM_DIM].dim.k + i*inc_matrix_size;
 	}
 
 	int *lda = (int*)malloc((size_t)group_count*sizeof(int));
@@ -94,44 +91,37 @@ void test_zhemm_batch(param_value_t param[], bool run)
 	int *Bm = (int*)malloc((size_t)group_count*sizeof(int));
 	int *Cm = (int*)malloc((size_t)group_count*sizeof(int));
 
-	for (int i = 0; i < group_count; ++i) {
-		if (side[i] == BblasLeft) {
-			Am[i] = m[i];
-			An[i] = m[i];
+	for (int i= 0; i < group_count; i++) {
+
+		if (trans[i] == BblasNoTrans) {
+			Am[i]= n[i];
+			An[i]= k[i];
+			Bm[i] = n[i];
+			Bn[i] = k[i];
 		}
 		else {
-			Am[i] = n[i];
+			Am[i] = k[i];
 			An[i] = n[i];
+			Bm[i] = k[i];
+			Bn[i] = n[i];
 		}
-		Bm[i] = m[i];
-		Bn[i] = n[i];
-
-		Cm[i] = m[i];
+		Cm[i] = n[i];
 		Cn[i] = n[i];
 
-		lda[i] = imax(1, Am[i]); 
+		lda[i] = imax(1, Am[i]);
 		ldb[i] = imax(1, Bm[i]);
 		ldc[i] = imax(1, Cm[i]);
 	}
-
 	int test = param[PARAM_TEST].c == 'y';
 	double eps = LAPACKE_dlamch('E');
 
-#ifdef COMPLEX
+
 	bblas_complex64_t alpha[group_count];
-	bblas_complex64_t beta[group_count];
-	for (int i = 0; i < group_count; i++) {
-		alpha[i] =  param[PARAM_ALPHA].z;
-		beta[i]  =  param[PARAM_BETA].z;
-	}
-#else
-	double alpha[group_count];
 	double beta[group_count];
 	for (int i = 0; i < group_count; i++) {
-		alpha[i] = creal(param[PARAM_ALPHA].z);
-		beta[i]  = creal(param[PARAM_BETA].z);
+		alpha[i] =  param[PARAM_ALPHA].z;
+		beta[i]  =  creal(param[PARAM_BETA].z);
 	}
-#endif
 
 	//================================================================
 	// Allocate and initialize arrays.
@@ -142,28 +132,28 @@ void test_zhemm_batch(param_value_t param[], bool run)
 		batch_count += group_sizes[i];
 	}
 
-	bblas_complex64_t **A =
-		(bblas_complex64_t**)malloc((size_t)batch_count*sizeof(bblas_complex64_t*));
+	bblas_complex64_t **A = (bblas_complex64_t**)malloc(
+			(size_t)batch_count*sizeof(bblas_complex64_t*));
 	assert(A != NULL);
 
-	bblas_complex64_t **B =
-		(bblas_complex64_t**)malloc((size_t)batch_count*sizeof(bblas_complex64_t*));
+	bblas_complex64_t **B = (bblas_complex64_t**)malloc(
+			(size_t)batch_count*sizeof(bblas_complex64_t*));
 	assert(B != NULL);
 
-	bblas_complex64_t **C =
-		(bblas_complex64_t**)malloc((size_t)batch_count*sizeof(bblas_complex64_t*));
+	bblas_complex64_t **C = (bblas_complex64_t**)malloc(
+			(size_t)batch_count*sizeof(bblas_complex64_t*));
 	assert(C != NULL);
 
-	bblas_complex64_t **Cref = NULL;
+	bblas_complex64_t **Cref =NULL;
 	if (test) {
 		Cref = (bblas_complex64_t**)malloc(
 				(size_t)batch_count*sizeof(bblas_complex64_t*));
 		assert(Cref != NULL);
 	}
 
-
 	int seed[] = {0, 0, 0, 1};
 	lapack_int retval;
+
 	int  group_start=0;
 	int  group_end =0;
 	for (int group_iter= 0; group_iter < group_count; group_iter++) {
@@ -172,40 +162,32 @@ void test_zhemm_batch(param_value_t param[], bool run)
 		for (int matrix_iter= group_start; matrix_iter < group_end; matrix_iter++) {
 
 			A[matrix_iter] = (bblas_complex64_t*)malloc(
-					(size_t)lda[group_iter]*An[group_iter]*sizeof(
-						bblas_complex64_t));
+					(size_t)lda[group_iter]*An[group_iter]*sizeof(bblas_complex64_t));
 			assert(A[matrix_iter] != NULL);
 
 			B[matrix_iter] = (bblas_complex64_t*)malloc(
-					(size_t)ldb[group_iter]*Bn[group_iter]*sizeof(
-						bblas_complex64_t));
+					(size_t)ldb[group_iter]*Bn[group_iter]*sizeof(bblas_complex64_t));
 			assert(B[matrix_iter] != NULL);
 
 			C[matrix_iter] = (bblas_complex64_t*)malloc(
-					(size_t)ldc[group_iter]*Cn[group_iter]*sizeof(
-						bblas_complex64_t));
+					(size_t)ldc[group_iter]*Cn[group_iter]*sizeof(bblas_complex64_t));
 			assert(C[matrix_iter] != NULL);
 
-			retval = LAPACKE_zlarnv(1, seed, (size_t)lda[group_iter]*An[group_iter], 
-					A[matrix_iter]);
+			retval = LAPACKE_zlarnv(1, seed, (size_t)lda[group_iter]*An[group_iter], A[matrix_iter]);
 			assert(retval == 0);
 
-			retval = LAPACKE_zlarnv(1, seed, (size_t)ldb[group_iter]*Bn[group_iter], 
-					B[matrix_iter]);
+			retval = LAPACKE_zlarnv(1, seed, (size_t)ldb[group_iter]*Bn[group_iter], B[matrix_iter]);
 			assert(retval == 0);
 
-			retval = LAPACKE_zlarnv(1, seed, (size_t)ldc[group_iter]*Cn[group_iter], 
-					C[matrix_iter]);
+			retval = LAPACKE_zlarnv(1, seed, (size_t)ldc[group_iter]*Cn[group_iter], C[matrix_iter]);
 			assert(retval == 0);
 
 			if (test) {
 				Cref[matrix_iter] = (bblas_complex64_t*)malloc(
-						(size_t)ldc[group_iter]*Cn[group_iter]*sizeof(
-							bblas_complex64_t));
+						(size_t)ldc[group_iter]*Cn[group_iter]*sizeof(bblas_complex64_t));
 				assert(Cref[matrix_iter] != NULL);
 
-				memcpy(Cref[matrix_iter], C[matrix_iter], (size_t)ldc[group_iter]*
-						Cn[group_iter]*sizeof(bblas_complex64_t));
+				memcpy(Cref[matrix_iter], C[matrix_iter], (size_t)ldc[group_iter]*Cn[group_iter]*sizeof(bblas_complex64_t));
 			}
 		}
 	}
@@ -230,19 +212,17 @@ void test_zhemm_batch(param_value_t param[], bool run)
 
 	int *info = (int*) malloc((size_t)info_size*sizeof(int))  ;
 	info[0] = bblas_trans_const(param[PARAM_TRANSA].c);
-
 	//================================================================
 	// Run and time BBLAS.
 	//================================================================
 	bblas_time_t start = gettime();
 
-
-	blas_zhemm_batch(group_count, (const int *)group_sizes,
-			BblasColMajor, (const bblas_enum_t *)side, (const bblas_enum_t *)uplo,
-			(const int *)m, (const int *)n, 
+	blas_zher2k_batch(group_count, (const int *)group_sizes,
+			BblasColMajor, (const bblas_enum_t *)uplo, (const bblas_enum_t *)trans,
+			(const int *)n, (const int *)k, 
 			(const bblas_complex64_t *)alpha, (bblas_complex64_t const *const *)A, (const int *)lda, 
 							  (bblas_complex64_t const* const *)B, (const int *)ldb, 
-			(const bblas_complex64_t *)beta,  				    C, (const int *)ldc, 
+			(const double  		*)beta, 				    C, (const int *)ldc, 
 			info);
 
 	bblas_time_t stop = gettime();
@@ -252,8 +232,7 @@ void test_zhemm_batch(param_value_t param[], bool run)
 
 	double flops = 0;
 	for (int group_iter = 0; group_iter < group_count; group_iter++) {
-		flops += flops_zhemm(side[group_iter], m[group_iter], n[group_iter])
-			*group_sizes[group_iter];
+		flops += flops_zher2k(n[group_iter], k[group_iter])*group_sizes[group_iter];
 	}
 	param[PARAM_MFLOPS].d = flops / time / 1e6;
 
@@ -270,12 +249,11 @@ void test_zhemm_batch(param_value_t param[], bool run)
 			group_end += group_sizes[group_iter];
 			for (int matrix_iter= group_start; matrix_iter < group_end; matrix_iter++) {
 
-				cblas_zhemm(CblasColMajor,
-						(CBLAS_SIDE) side[group_iter], (CBLAS_UPLO) uplo[group_iter],
-						m[group_iter], n[group_iter],
-						CBLAS_SADDR(alpha[group_iter]), A[group_iter], lda[group_iter],
-										B[group_iter], ldb[group_iter],
-						CBLAS_SADDR(beta[group_iter]),  Cref[group_iter], ldc[group_iter]);
+				cblas_zher2k(CblasColMajor, (CBLAS_UPLO) uplo[group_iter], (CBLAS_TRANSPOSE)trans[group_iter],
+						n[group_iter], k[group_iter],
+						CBLAS_SADDR(alpha[group_iter]), A[matrix_iter], lda[group_iter],
+										B[matrix_iter], ldb[group_iter],
+							     beta[group_iter],  C[matrix_iter], ldc[group_iter]);
 
 				// compute difference C[matrix_iter] - C[matrix_iter]
 				cblas_zaxpy((size_t)ldc[group_iter]*Cn[group_iter],
@@ -310,7 +288,7 @@ void test_zhemm_batch(param_value_t param[], bool run)
 		free(Cref);
 
 	free(n);
-	free(m);
+	free(k);
 
 	free(lda);
 	free(ldb);
