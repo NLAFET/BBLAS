@@ -20,6 +20,7 @@ RANLIB    = ranlib
 FPIC      = -fPIC
 
 CFLAGS    =  $(FPIC) -O3 -std=c99   -Wall -pedantic -Wshadow -Wno-unused-function
+
 LDFLAGS   =  $(FPIC)
 
 # one of: aix bsd c89 freebsd generic linux macosx mingw posix solaris

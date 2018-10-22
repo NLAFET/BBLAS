@@ -72,8 +72,8 @@ void test_zhemm_batch(param_value_t param[], bool run)
 		uplo[i] = bblas_uplo_const(param[PARAM_UPLO].c);
 	}
 
-	int m[group_count]; 
-	int n[group_count];
+	int *m = (int*)malloc((size_t)group_count*sizeof(int));
+	int *n = (int*)malloc((size_t)group_count*sizeof(int));
 	int size_incre = param[PARAM_INCM].i;
 	m[0] = param[PARAM_DIM].dim.m;
 	n[0] = param[PARAM_DIM].dim.n;
@@ -271,12 +271,12 @@ void test_zhemm_batch(param_value_t param[], bool run)
 			for (int matrix_iter= group_start; matrix_iter < group_end; matrix_iter++) {
 
 				cblas_zhemm(CblasColMajor,
-						(CBLAS_SIDE) side[group_iter], (CBLAS_UPLO) uplo[group_iter],
-						m[group_iter], n[group_iter],
-						CBLAS_SADDR(alpha[group_iter]), A[group_iter], lda[group_iter],
-										B[group_iter], ldb[group_iter],
-						CBLAS_SADDR(beta[group_iter]),  Cref[group_iter], ldc[group_iter]);
-
+                            (CBLAS_SIDE) side[group_iter], (CBLAS_UPLO) uplo[group_iter],
+                            m[group_iter], n[group_iter],
+                            CBLAS_SADDR(alpha[group_iter]), A[matrix_iter], lda[group_iter],
+                            B[matrix_iter], ldb[group_iter],
+                            CBLAS_SADDR(beta[group_iter]),  Cref[matrix_iter], ldc[group_iter]);
+                
 				// compute difference C[matrix_iter] - C[matrix_iter]
 				cblas_zaxpy((size_t)ldc[group_iter]*Cn[group_iter],
 						CBLAS_SADDR(zmone), Cref[matrix_iter], 1, C[matrix_iter], 1);
@@ -293,8 +293,8 @@ void test_zhemm_batch(param_value_t param[], bool run)
 	// Free arrays.
 	//================================================================
 
-	for (int matrix_iter = 0; matrix_iter < batch_count; matrix_iter++) {
-
+    for (int matrix_iter = 0; matrix_iter < batch_count; matrix_iter++) { 
+        
 		free(A[matrix_iter]);
 		free(B[matrix_iter]);
 		free(C[matrix_iter]);
