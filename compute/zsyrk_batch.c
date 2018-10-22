@@ -181,9 +181,9 @@ void blas_zsyrk_batch(int group_count, const int *group_sizes,
 				  &info[info_offset]);    
 
 		// check for errors in batchf function
-		if (info[info_offset] != info_init && flag == 0) {
+		if (info[info_offset] != 0 && flag == 0) {
 			info[0] = info[info_offset];	
-			flag = 1;
+
 		}
 
 		offset += group_sizes[group_iter];    
