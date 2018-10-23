@@ -91,10 +91,10 @@ the following arguments:
 * **--incm** : The increment of matrix size across the group. If the matrix size in the first group is M x N x K,
 the matrix size in the i^th group will be (M + incm*i) x (N + incm*i) x (K + incm*i)  [default: --incm = 1].
 * **--info[a|g|n|o]** : The parameter to set an error handling option [default: --info=a].
-..* **a**: which indicates that all errors will be specified on output.
-..* **g**: which indicates that only a single error will be reported for each group, independently.
-..* **n**: which indicates that no errors will be reported on output.
-..* **o**: which indicates that the occurrence of errors will be specified on output as a single integer value.
+ * **a**: which indicates that all errors will be specified on output.
+ * **g**: which indicates that only a single error will be reported for each group, independently.
+ * **n**: which indicates that no errors will be reported on output.
+ * **o**: which indicates that the occurrence of errors will be specified on output as a single integer value.
 
 In addition to these options, arguments like **trans, transa, transb, side, diag, uplo, etc.**, can be set, and
 for the sake of simplicity, they have the same value in all the groups.
