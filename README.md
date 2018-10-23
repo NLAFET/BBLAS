@@ -72,6 +72,10 @@ After the configuration of **make.inc**, the compilation is very simple:
 *  **make cleangen**  --  remove generated precision files
 *  **make distclean** --  remove above, Makefile.*.gen, and anything else that can be generated 
 
+For MacOS the libraries have to be linked manually. Use the following in the .profile file.
+
+export DYLD_FALLBACK_LIBRARY_PATH=/path/to/BBLAS/lib:$DYLD_FALLBACK_LIBRARY_PATH
+
 
 Citing
 ======
