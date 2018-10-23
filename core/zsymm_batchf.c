@@ -93,15 +93,16 @@
  * 		following values
  *			- BblasErrorsReportAll    :  All errors will be specified on output.
  *						     Length of the array should be atleast
- *						     (group_count*group_size).
+ *						     \sum_{i=0}^{group_count-1}group_sizes[i]+1.
  *			- BblasErrorsReportGroup  :  Single error from each group will be 
  *						     reported. Length of the array should 
- *						     be atleast to (group_count).
+ *						     be atleast group_count+1.
  *			- BblasErrorsReportAny    :  Occurence of an error will be indicated
  *						     by a single integer value, and length 
  *						     of the array should be atleast 1.
  *			- BblasErrorsReportNone   :  No error will be reported on output, and
  *						     length of the array should be atleast 1.
+ ******************************************************************************
  *
  * @retval  BblasSuccess successful exit
  *
