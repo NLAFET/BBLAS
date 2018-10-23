@@ -75,7 +75,7 @@
  * 		matrix A[j] of size lda[i]-by-ka, where ka is m[i] when 
  * 		side[i] = BblasLeft, and is n[i] otherwise. Only the uplo 
  * 		triangular part is referenced.
- *              batch_count=\sum_{i=1}^{group_count}group_sizes[i].
+ *		batch_count = \sum_{i=0}^{group_count-1}group_sizes[i].
  *
  *
  * @param[in] lda
@@ -88,7 +88,7 @@
  * 	    where each element B[j] of i-th group is a pointer to a 
  * 	    matrix B[j] of size ldb[i]-by-n[i] matrix, where the leading 
  * 	    m[i]-by-n[i] part of the array B[j] must contain the matrix B[j].
- *          batch_count=\sum_{i=1}^{group_count}group_sizes[i].
+ *	    batch_count = \sum_{i=0}^{group_count-1}group_sizes[i].
  *
  * @param[in] ldb
  * 	    An array of length group_count, where ldb[i] is
@@ -103,7 +103,7 @@
  * 		In i-th group each element C[j] is a pointer to a matrix C[j].
  *		On exit, each array C[j] of i-th group is overwritten 
  *              by the m[i]-by-n[i] updated matrix.
- *              batch_count=\sum_{i=1}^{group_count}group_sizes[i].
+ *	        batch_count = \sum_{i=0}^{group_count-1}group_sizes[i].
  *
  * @param[in] ldc
  * 	    An array of integers of size group_count, which
@@ -115,10 +115,11 @@
  * 		following values
  *			- BblasErrorsReportAll    :  All errors will be specified on output.
  *						     Length of the array should be atleast
- *						     (group_count*batch_count).
+ *						     (\sum_{i=0}^{group_count-1}group_sizes[i]
+ *						     )+1
  *			- BblasErrorsReportGroup  :  Single error from each group will be 
  *						     reported. Length of the array should 
- *						     be atleast to (group_count).
+ *						     be atleast to (group_count+1).
  *			- BblasErrorsReportAny    :  Occurence of an error will be indicated
  *						     by a single integer value, and length 
  *						     of the array should be atleast 1.

@@ -80,7 +80,7 @@
  * 	    A[j] of size lda[i]-by-ka.
  *    	    If trans[i] = BblasNoTrans,   ka = k[i];
  *          if trans[i] = BblasConjTrans, ka = n[i].
- * 	    batch_count=\sum_{i=1}^{group_count}group_sizes[i].
+ *	    batch_count = \sum_{i=0}^{group_count-1}group_sizes[i].
  *
  *
  * @param[in] lda
@@ -99,7 +99,7 @@
  *          	ldc[i]-by-n[i].
  *          	On exit, the uplo[i] part of the matrix is overwritten
  *          	by the uplo[i] part of the updated matrix.
- * 		batch_count=\sum_{i=1}^{group_count}group_sizes[i].
+ *	        batch_count = \sum_{i=0}^{group_count-1}group_sizes[i].
  *
  *
  * @param[in] ldc
@@ -112,10 +112,11 @@
  * 		following values
  *			- BblasErrorsReportAll    :  All errors will be specified on output.
  *						     Length of the array should be atleast
- *						     \sum_{i=1}^{group_count-1}group_sizes[i].
+ *						     \sum_{i=1}^{group_count-1}group_sizes[i]
+ *						     +1.
  *			- BblasErrorsReportGroup  :  Single error from each group will be 
  *						     reported. Length of the array should 
- *						     be atleast to (group_count).
+ *						     be atleast to (group_count+1).
  *			- BblasErrorsReportAny    :  Occurence of an error will be indicated
  *						     by a single integer value, and length 
  *						     of the array should be atleast 1.

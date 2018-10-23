@@ -44,13 +44,13 @@
  * 	    - BblasColMajor: Column major format
  *
  * @param[in] side
- * 	    An array of length group_count-1, for matrices of i-th group it
+ * 	    An array of length group_count, for matrices of i-th group it
  *          specifies whether op( A[j] ) appears on the left or on the right of B[j]:
  *          - BblasLeft:  alpha[i]*op( A[j] )*B[j]
  *          - BblasRight: alpha[i]*B[j]*op( A[j] )
  *
  * @param[in] uplo
- * 	    An array of length group_count-1, where uplo[i]
+ * 	    An array of length group_count, where uplo[i]
  *          specifies whether the upper or lower triangular part of
  *          the symmetric matrices A[j]-s of i-th group are to be referenced 
  *          
@@ -60,29 +60,29 @@
  *                            symmetric matrices A[j] is to be referenced.
  *
  * @param[in] transa
- * 	    An array of length group_count-1, where
+ * 	    An array of length group_count, where
  *          - BblasNoTrans:   A[j]-s in i-th group are not transposed,
  *          - BblasTrans:     A[j]-s in i-th group are transposed,
  *          - BblasConjTrans: A[j]-s in i-th group are conjugate transposed.
  *
  * @param[in] diag
- *          An array of length group_count-1, which specifies 
+ *          An array of length group_count, which specifies 
  *          whether or not A[j]-s of i-th group are unit triangular:
  *          - BblasNonUnit: A[j]-s are non-unit triangular;
  *          - BblasUnit:    A[j]-s are unit triangular.
  *
  * @param[in] m
- *          An array integers of length group_count-1,
+ *          An array integers of length group_count,
  *          which specified the number of rows of matrices B[j]
  *          in i-th group. m[i] >= 0.
  *
  * @param[in] n
- *          An array integers of length group_count-1,
+ *          An array integers of length group_count,
  *          which specified the number of columns of matrices B[j]
  *          in i-th group. n[i] >= 0.
  *
  * @param[in] alpha
- *          An array of length group_count-1, where alpha[i] is
+ *          An array of length group_count, where alpha[i] is
  *          a scalar.
  *
  * @param[in] A
@@ -97,11 +97,11 @@
  *          	lower triangular matrix, and the strictly upper triangular part of
  *          	A[j] is not referenced. If diag = BblasUnit, the diagonal elements of
  *          	A[j] are also not referenced and are assumed to be 1.
- * 		batch_count=\sum_{i=1}^{group_count}group_sizes[i].
+ *		batch_count = \sum_{i=0}^{group_count-1}group_sizes[i].
  *
  *
  * @param[in] lda
- * 	    An array of integers of length group_count-1, where lda[i]
+ * 	    An array of integers of length group_count, where lda[i]
  *          denotes the leading dimension of the arrays A[j] of i-th group. 
  *          When side='L' or 'l', lda[i] >= max(1,m[i]), 
  *          when side='R' or 'r' then lda[i] >= max(1,n[i]).
@@ -112,11 +112,11 @@
  *          	On entry, the matrices B[j] are of dimension ldb[i]-by-n[i].
  *          	On exit, the result of a triangular matrix-matrix multiply
  *          	( alpha[i]*op(A[j])*B[j] ) or ( alpha[i]*B[j]*op(A[j]) ).
- * 		batch_count=\sum_{i=1}^{group_count}group_sizes[i].
+ *		batch_count = \sum_{i=0}^{group_count-1}group_sizes[i].
  *
  *
  * @param[in] ldb
- * 	    An array of integers of length group_count-1, where ldb[i]
+ * 	    An array of integers of length group_count, where ldb[i]
  *          is the leading dimension of the arrays B[j] of i-th group. 
  *          ldb[i] >= max(1,m[i]).
  *
@@ -125,10 +125,10 @@
  * 		following values
  *			- BblasErrorsReportAll    :  All errors will be specified on output.
  *						     Length of the array should be atleast
- *						     \sum_{i=1}^{group_count-1}group_sizes[i].
+ *						     \sum_{i=0}^{group_count-1}group_sizes[i]+1.
  *			- BblasErrorsReportGroup  :  Single error from each group will be 
  *						     reported. Length of the array should 
- *						     be atleast (group_count).
+ *						     be atleast group_count+1.
  *			- BblasErrorsReportAny    :  Occurence of an error will be indicated
  *						     by a single integer value, and length 
  *						     of the array should be atleast 1.
@@ -197,7 +197,7 @@ void blas_ztrmm_batch(int group_count, const int *group_sizes,
 				  transa[group_iter], diag[group_iter],
 				  m[group_iter], n[group_iter],
 				  alpha[group_iter], A+offset, lda[group_iter],
-				  B+offset, ldb[group_iter],
+				  		     B+offset, ldb[group_iter],
 				  &info[info_offset]);    
 
 		// check for errors in batchf function

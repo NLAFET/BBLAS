@@ -41,7 +41,7 @@
  * 	    - BblasColMajor: Column major format
  *
  * @param[in] uplo
- * 	    An array of length group_count-1, where uplo[i]
+ * 	    An array of length group_count, where uplo[i]
  *          specifies whether the upper or lower triangular part of
  *          the Hermitian matrices C[j]-s of i-th group are to be stored
  *  
@@ -51,7 +51,7 @@
  *                            Symmetric matrices C[j] are to be stored.
  *
  * @param[in] trans
- * 	    An array of length group_count-1, where 
+ * 	    An array of length group_count, where 
  * 	    for j-th matrix in i-th group
  *          - BblasNoTrans: \f[ C[j] = \alpha[i] A[j] \times A[j]^T + \beta[i] C[j]; \f]
  *          - BblasTrans:   \f[ C[j] = \alpha[i] A[j]^T \times A[j] + \beta[i] C[j]. \f]
@@ -61,13 +61,13 @@
  *          the order of the matrices C[j] in i-th group. n[i] >= 0.
  *
  * @param[in] k
- * 	    An array of integers of length group_count-1. For matrices
+ * 	    An array of integers of length group_count. For matrices
  * 	    in i-th group
  *          If trans = BblasNoTrans, number of columns of A[j]-s and B[j]-s matrices;
  *          if trans = BblasTrans, number of rows of A[j]-s and B[j]-s matrices.
  *
  * @param[in] alpha
- *          An array of scalars of length group_count-1.
+ *          An array of scalars of length group_count.
  *
  * @param[in] A
  * 	    A is an array of pointers to matrices A[0], A[1] .. A[batch_count-1]. 
@@ -79,14 +79,14 @@
  *
  *
  * @param[in] lda
- *          An array of integers of length group_count-1, 
+ *          An array of integers of length group_count, 
  *          are the leading dimension of the arrays A[j]
  *          in i-th group.
  *          If trans[i] = BblasNoTrans,   lda[i] >= max(1, n[i]);
  *          if trans[i] = BblasTrans, lda[i] >= max(1, k[i]).
  *
  * @param[in] beta
- *          An array of scalars of length group_count-1.
+ *          An array of scalars of length group_count.
  *
  * @param[in,out] C
  * 		C is an array of pointers to matrices C[0], C[1] .. C[batc_count-1].
@@ -97,7 +97,7 @@
  * 		batch_count=\sum_{i=1}^{group_count}group_sizes[i].
  *
  * @param[in] ldc
- *          An array of integers of length group_count-1. Where ldc[i]
+ *          An array of integers of length group_count. Where ldc[i]
  *          is the leading dimension of the arrays C[j] in i-th group. 
  *          ldc[i] >= max(1, n[i]).
  *
@@ -106,10 +106,10 @@
  * 		following values
  *			- BblasErrorsReportAll    :  All errors will be specified on output.
  *						     Length of the array should be atleast
- *						     \sum_{i=1}^{group_count-1}group_size[i].
+ *						     \sum_{i=0}^{group_count-1}group_sizes[i]+1.
  *			- BblasErrorsReportGroup  :  Single error from each group will be 
  *						     reported. Length of the array should 
- *						     be atleast to (group_count).
+ *						     be atleast group_count+1.
  *			- BblasErrorsReportAny    :  Occurence of an error will be indicated
  *						     by a single integer value, and length 
  *						     of the array should be atleast 1.

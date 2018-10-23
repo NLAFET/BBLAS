@@ -98,7 +98,7 @@
  *          strictly upper triangular part of A[j] is not referenced.
  *          If diag[i] = BblasUnit, the diagonal elements of A[j] are also not
  *          referenced and are assumed to be 1.
- * 	    batch_count=\sum_{i=1}^{group_count}group_sizes[i].
+ *	    batch_count = \sum_{i=0}^{group_count-1}group_sizes[i].
  *
  * @param[in] lda
  * 	    An arrray of integers of length group_count-1, where
@@ -109,7 +109,7 @@
  * 	    B is an array of pointers to matrices B[0], B[1] .. B[batch_count-1], 
  *          On entry, for i-th group each B[j]-s are ldb[i]-by-n[i] right hand side matrix.
  *          On exit, if return value = 0, the ldb[i]-by-n[i] solution matrix X.
- *	    batch_count=\sum_{i=1}^{group_count}group_sizes[i].
+ *	    batch_count = \sum_{i=0}^{group_count-1}group_sizes[i].
  *
  * @param[in] ldb
  * 	    An array of integers of length group_count-1, where
@@ -121,10 +121,10 @@
  * 		following values
  *			- BblasErrorsReportAll    :  All errors will be specified on output.
  *						     Length of the array should be atleast
- *						     \sum_{i=1}^{group_count-1}group_sizes[i]. 
+ *						     \sum_{i=0}^{group_count-1}group_sizes[i]+1.
  *			- BblasErrorsReportGroup  :  Single error from each group will be 
  *						     reported. Length of the array should 
- *						     be atleast (group_count).
+ *						     be atleast group_count+1.
  *			- BblasErrorsReportAny    :  Occurence of an error will be indicated
  *						     by a single integer value, and length 
  *						     of the array should be atleast 1.

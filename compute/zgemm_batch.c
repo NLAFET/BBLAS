@@ -82,7 +82,7 @@
  * 		BblasNoTrans the leading m[i]-by-k[i] part of A[j] 
  * 		must contain the matrix elements, otherwise the leading  
  * 		k[i]-by-m[i] part of A[j] must contain the matrix elements.
- * 		batch_count=\sum_{i=1}^{group_count}group_sizes[i].
+ *		batch_count = \sum_{i=0}^{group_count-1}group_sizes[i].
  *
  * @param[in] lda
  * 	    An array of integers of length group_count, which
@@ -98,7 +98,7 @@
  * 		BblasNoTrans the leading k[i]-by-n[i] part of B[j] 
  * 		must contain the matrix elements, otherwise the leading  
  * 		n[i]-by-k[i] part of B[j] must contain the matrix elements.
- * 		batch_count=\sum_{i=1}^{group_count}group_sizes[i].
+ *		batch_count = \sum_{i=0}^{group_count-1}group_sizes[i].
  *
  * @param[in] ldb
  * 	    An array of integers of size group_count, which 
@@ -188,9 +188,9 @@ void blas_zgemm_batch(int group_count, const int *group_sizes,
 		// Skip the group where nothing needs to be done
 		if (m[group_iter] == 0 || n[group_iter] == 0 ||
 				((alpha[group_iter] == (bblas_complex64_t)0.0 || 
-				  k[group_iter] == 0) && 
+				 k[group_iter] == 0) && 
 				 beta[group_iter] == (bblas_complex64_t)1.0 ) ||
-				group_sizes[group_iter] == 0) {
+				 group_sizes[group_iter] == 0) {
 			bblas_success(info_option, &info[info_offset], group_sizes[group_iter]);
 			continue;
 		}
@@ -200,7 +200,7 @@ void blas_zgemm_batch(int group_count, const int *group_sizes,
                           layout, transa[group_iter], transb[group_iter],
                           m[group_iter], n[group_iter], k[group_iter],
                           alpha[group_iter], A+offset, lda[group_iter],
-                          B+offset, ldb[group_iter],
+                          		     B+offset, ldb[group_iter],
                           beta[group_iter],  C+offset, ldc[group_iter],
                           &info[info_offset]);   
 
