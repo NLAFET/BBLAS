@@ -76,6 +76,18 @@ For MacOS the libraries have to be linked manually. Use the following in the .pr
 
 export DYLD_FALLBACK_LIBRARY_PATH=/path/to/BBLAS/lib:$DYLD_FALLBACK_LIBRARY_PATH
 
+Testing
+=======
+At the end of the compilation, testing routines (in four precisions [c,d,s,z]) will be available in the folder BBLAS/test.
+The main testing driver is the binary **./test**. It should be used with the kernel to test as the firt parameter followed 
+by the kernel arguments. For example **./test dgemm_batch** will run the double precision of version of **dgemm_batch** with 
+default arguments. For help **./test -h** will display the list of kernel availble for testing, while **./test dgemm_batch -h** will display all the possible more help and details on how to test **dgemm_batch**, this holds for all the kernels. 
+We use random matrices for the test. To simplify the way to provide matrices in a batch and the size of each group, we provide 
+the following arguments:
+* **--dim** : M x N x K dimensions of th matrices in the first group [default: --dim=1000 x 1000 x 1000]
+* **incm** : the increment of matrix size across 
+
+
 
 Citing
 ======
