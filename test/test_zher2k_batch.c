@@ -220,9 +220,9 @@ void test_zher2k_batch(param_value_t param[], bool run)
 	blas_zher2k_batch(group_count, (const int *)group_sizes,
 			BblasColMajor, (const bblas_enum_t *)uplo, (const bblas_enum_t *)trans,
 			(const int *)n, (const int *)k, 
-			(const bblas_complex64_t *)alpha, (bblas_complex64_t const *const *)A, (const int *)lda, 
-							  (bblas_complex64_t const* const *)B, (const int *)ldb, 
-			(const double  		  *)beta, 				    C, (const int *)ldc, 
+			(const bblas_complex64_t *)alpha, (bblas_complex64_t const *const *)A, (const int *)lda,
+							                  (bblas_complex64_t const* const *)B, (const int *)ldb,
+			(const double  		  *)beta, 				                        C, (const int *)ldc,
 			info);
 
 	bblas_time_t stop = gettime();
@@ -252,8 +252,8 @@ void test_zher2k_batch(param_value_t param[], bool run)
 				cblas_zher2k(CblasColMajor, (CBLAS_UPLO) uplo[group_iter], (CBLAS_TRANSPOSE)trans[group_iter],
 						n[group_iter], k[group_iter],
 						CBLAS_SADDR(alpha[group_iter]), A[matrix_iter], lda[group_iter],
-										B[matrix_iter], ldb[group_iter],
-							     beta[group_iter],  Cref[matrix_iter], ldc[group_iter]);
+										                B[matrix_iter], ldb[group_iter],
+							     beta[group_iter],   Cref[matrix_iter], ldc[group_iter]);
 
 				// compute difference C[matrix_iter] - C[matrix_iter]
 				cblas_zaxpy((size_t)ldc[group_iter]*Cn[group_iter],

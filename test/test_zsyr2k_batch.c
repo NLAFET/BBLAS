@@ -228,9 +228,9 @@ void test_zsyr2k_batch(param_value_t param[], bool run)
 	blas_zsyr2k_batch(group_count, (const int *)group_sizes,
 			BblasColMajor, (const bblas_enum_t *)uplo, (const bblas_enum_t *)trans,
 			(const int *)n, (const int *)k, 
-			(const bblas_complex64_t *)alpha, (bblas_complex64_t const *const *)A, (const int *)lda, 
-							  (bblas_complex64_t const* const *)B, (const int *)ldb, 
-			(const bblas_complex64_t *)beta, 				    C, (const int *)ldc, 
+			(const bblas_complex64_t *)alpha, (bblas_complex64_t const *const *)A, (const int *)lda,
+							                  (bblas_complex64_t const* const *)B, (const int *)ldb,
+			(const bblas_complex64_t *)beta, 				                    C, (const int *)ldc,
 			info);
 
 	bblas_time_t stop = gettime();
