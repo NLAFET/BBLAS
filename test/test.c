@@ -136,49 +136,49 @@ static param_desc_t ParamDesc[] = {
     // function input parameters
     //------------------------------------------------------
     // argument            header          width  is_list  help
-    {"--colrow=[c|r]",     "colrow",       6,     true,
+    {"--colrow=[c|r]",     "colrow",       5,     true,
      "columnwise or rowwise [default: c]"},
 
-    {"--trans=[n|t|c]",    "trans",        6,     true,
+    {"--trans=[n|t|c]",    "trans",        5,     true,
      "transposition [default: n]"},
 
-    {"--transa=[n|t|c]",   "transA",       6,     true,
+    {"--transa=[n|t|c]",   "transA",       5,     true,
      "transposition of A [default: n]"},
 
-    {"--transb=[n|t|c]",   "transB",       6,     true,
+    {"--transb=[n|t|c]",   "transB",       5,     true,
      "transposition of B [default: n]"},
 
-    {"--side=[l|r]",       "side",         6,     true,
+    {"--side=[l|r]",       "side",         5,     true,
      "left or right side application [default: l]"},
 
-    {"--uplo=[g|u|l]",     "uplo",         6,     true,
+    {"--uplo=[g|u|l]",     "uplo",         5,     true,
      "general rectangular or upper or lower triangular matrix [default: l]"},
 
-    {"--diag=[n|u]",       "diag",         6,     true,
+    {"--diag=[n|u]",       "diag",         5,     true,
      "non-unit diagonal or unit diagonal [default: n]"},
     
-    {"--info=[a|g|n|o]",       "info",         6,     true,
+    {"--info=[a|g|n|o]",       "info",         5,     true,
      "all or group or none or one(any) [default: g]"},
 
-    {"--ng=",              "ng",           6,     true,
+    {"--ng=",              "ng",           5,     true,
      "The number groups of matrices [default: 10]"},
     
-    {"--gs=",              "gs",          6,     true,
+    {"--gs=",              "gs",          5,     true,
      "The number matrices in the first group [default: 100]"},
  
-    {"--incg=",              "incg",      6,     true,
+    {"--incg=",              "incg",      5,     true,
      "group size increment [default: 10]"},
 
-    {"--incm=",            "incm",         6,     true,
+    {"--incm=",            "incm",         5,     true,
      "matrix size increment [default: 1]"},
 
-    {"--dim=",             "Dimensions",   6,     true,
+    {"--dim=",             "Dimensions",   5,     true,
      "M x N x K dimensions of group matrices [default: 1000 x 1000 x 1000]\n"
      INDENT "M, N, K can each be a single value or a range.\n"
      INDENT "N and K are optional; if not given, N=M and K=N.\n"
      INDENT "Ex: --dim=100:300:100x64 is 100x64x64, 200x64x64, 300x64x64."},
 
-    {"--nrhs=",            "nrhs",         6,     true,
+    {"--nrhs=",            "nrhs",         5,     true,
      "NHRS dimension (number of columns) [default: 1000]"},
     
     {"--alpha=",           "alpha",       14,    true,
@@ -1209,5 +1209,5 @@ double gettime(){
     double time;
     struct timeval tv;
     gettimeofday(&tv, NULL);
-    return time = tv.tv_sec +tv.tv_usec/1000000;
+    return time = tv.tv_sec +tv.tv_usec/(1000000.0);
 }
