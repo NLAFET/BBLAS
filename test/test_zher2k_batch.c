@@ -222,7 +222,7 @@ void test_zher2k_batch(param_value_t param[], bool run)
 			(const int *)n, (const int *)k, 
 			(const bblas_complex64_t *)alpha, (bblas_complex64_t const *const *)A, (const int *)lda, 
 							  (bblas_complex64_t const* const *)B, (const int *)ldb, 
-			(const double  		*)beta, 				    C, (const int *)ldc, 
+			(const double  		  *)beta, 				    C, (const int *)ldc, 
 			info);
 
 	bblas_time_t stop = gettime();

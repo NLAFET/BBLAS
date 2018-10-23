@@ -244,7 +244,8 @@ void test_ztrsm_batch(param_value_t param[], bool run)
 				cblas_ztrsm(CblasColMajor, (CBLAS_SIDE)side[group_iter], (CBLAS_UPLO)uplo[group_iter],
 						(CBLAS_TRANSPOSE)transa[group_iter], (CBLAS_DIAG)diag[group_iter],
 						m[group_iter], n[group_iter], CBLAS_SADDR(alpha[group_iter]), 
-						A[matrix_iter], lda[group_iter], Bref[matrix_iter], ldb[group_iter]);
+						A[matrix_iter], lda[group_iter], 
+						Bref[matrix_iter], ldb[group_iter]);
 
 				cblas_zaxpy((size_t)ldb[group_iter]*n[group_iter], CBLAS_SADDR(zmone), Bref[matrix_iter], 1, 
 						B[matrix_iter], 1);
