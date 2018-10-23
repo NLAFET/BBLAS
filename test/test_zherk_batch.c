@@ -203,8 +203,8 @@ void test_zherk_batch(param_value_t param[], bool run)
 	blas_zherk_batch(group_count, (const int *)group_sizes,
 			BblasColMajor, (const bblas_enum_t *)uplo, (const bblas_enum_t *)trans,
 			(const int *)n, (const int *)k, 
-			(const double 		*)alpha, (bblas_complex64_t const *const *)A, (const int *)lda, 
-			(const double  		*)beta, 				   C, (const int *)ldc, 
+			(const double *)alpha, (bblas_complex64_t const *const *)A, (const int *)lda,
+			(const double *)beta, 				                     C, (const int *)ldc,
 			info);
 
 	bblas_time_t stop = gettime();

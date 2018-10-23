@@ -240,9 +240,9 @@ void test_zhemm_batch(param_value_t param[], bool run)
 	blas_zhemm_batch(group_count, (const int *)group_sizes,
 			BblasColMajor, (const bblas_enum_t *)side, (const bblas_enum_t *)uplo,
 			(const int *)m, (const int *)n, 
-			(const bblas_complex64_t *)alpha, (bblas_complex64_t const *const *)A, (const int *)lda, 
-							  (bblas_complex64_t const* const *)B, (const int *)ldb, 
-			(const bblas_complex64_t *)beta,  				    C, (const int *)ldc, 
+			(const bblas_complex64_t *)alpha, (bblas_complex64_t const *const *)A, (const int *)lda,
+							                  (bblas_complex64_t const* const *)B, (const int *)ldb,
+			(const bblas_complex64_t *)beta,  				                    C, (const int *)ldc,
 			info);
 
 	bblas_time_t stop = gettime();
@@ -274,7 +274,7 @@ void test_zhemm_batch(param_value_t param[], bool run)
                             		    (CBLAS_SIDE) side[group_iter], (CBLAS_UPLO) uplo[group_iter],
 					    m[group_iter], n[group_iter],
 					    CBLAS_SADDR(alpha[group_iter]), A[matrix_iter], lda[group_iter],
-					    				    B[matrix_iter], ldb[group_iter],
+					    				                B[matrix_iter], ldb[group_iter],
 					    CBLAS_SADDR(beta[group_iter]), Cref[matrix_iter], ldc[group_iter]);
 
 				// compute difference C[matrix_iter] - C[matrix_iter]
