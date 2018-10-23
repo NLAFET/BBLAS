@@ -1,0 +1,214 @@
+\hypertarget{group__hemm__batch}{}\section{hemm\+\_\+batch\+: Batched hermitian matrix multiply}
+\label{group__hemm__batch}\index{hemm\+\_\+batch\+: Batched hermitian matrix multiply@{hemm\+\_\+batch\+: Batched hermitian matrix multiply}}
+
+
+$ C[i] = \alpha[i] A[i] B[i] + \beta[i] C[i] $ or $ C[i] = \alpha[i] B[i] A[i] + \beta C[i] $ where $ A[i] $ are hermitian  
+
+
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__hemm__batch_gac708e40d6650c0de054693950359c1e6}{blas\+\_\+chemm\+\_\+batch} (int group\+\_\+count, const int $\ast$group\+\_\+sizes, bblas\+\_\+enum\+\_\+t layout, const bblas\+\_\+enum\+\_\+t $\ast$side, const bblas\+\_\+enum\+\_\+t $\ast$uplo, const int $\ast$m, const int $\ast$n, const bblas\+\_\+complex32\+\_\+t $\ast$alpha, bblas\+\_\+complex32\+\_\+t const $\ast$const $\ast$A, const int $\ast$lda, bblas\+\_\+complex32\+\_\+t const $\ast$const $\ast$B, const int $\ast$ldb, const bblas\+\_\+complex32\+\_\+t $\ast$beta, bblas\+\_\+complex32\+\_\+t $\ast$$\ast$C, const int $\ast$ldc, int $\ast$info)
+\item 
+void \hyperlink{group__hemm__batch_gac72a9c3caf452b2ecded5f55399035f9}{blas\+\_\+zhemm\+\_\+batch} (int group\+\_\+count, const int $\ast$group\+\_\+sizes, bblas\+\_\+enum\+\_\+t layout, const bblas\+\_\+enum\+\_\+t $\ast$side, const bblas\+\_\+enum\+\_\+t $\ast$uplo, const int $\ast$m, const int $\ast$n, const bblas\+\_\+complex64\+\_\+t $\ast$alpha, bblas\+\_\+complex64\+\_\+t const $\ast$const $\ast$A, const int $\ast$lda, bblas\+\_\+complex64\+\_\+t const $\ast$const $\ast$B, const int $\ast$ldb, const bblas\+\_\+complex64\+\_\+t $\ast$beta, bblas\+\_\+complex64\+\_\+t $\ast$$\ast$C, const int $\ast$ldc, int $\ast$info)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+$ C[i] = \alpha[i] A[i] B[i] + \beta[i] C[i] $ or $ C[i] = \alpha[i] B[i] A[i] + \beta C[i] $ where $ A[i] $ are hermitian 
+
+
+
+\subsection{Function Documentation}
+\index{hemm\+\_\+batch\+: Batched hermitian matrix multiply@{hemm\+\_\+batch\+: Batched hermitian matrix multiply}!blas\+\_\+chemm\+\_\+batch@{blas\+\_\+chemm\+\_\+batch}}
+\index{blas\+\_\+chemm\+\_\+batch@{blas\+\_\+chemm\+\_\+batch}!hemm\+\_\+batch\+: Batched hermitian matrix multiply@{hemm\+\_\+batch\+: Batched hermitian matrix multiply}}
+\subsubsection[{\texorpdfstring{blas\+\_\+chemm\+\_\+batch(int group\+\_\+count, const int $\ast$group\+\_\+sizes, bblas\+\_\+enum\+\_\+t layout, const bblas\+\_\+enum\+\_\+t $\ast$side, const bblas\+\_\+enum\+\_\+t $\ast$uplo, const int $\ast$m, const int $\ast$n, const bblas\+\_\+complex32\+\_\+t $\ast$alpha, bblas\+\_\+complex32\+\_\+t const $\ast$const $\ast$\+A, const int $\ast$lda, bblas\+\_\+complex32\+\_\+t const $\ast$const $\ast$\+B, const int $\ast$ldb, const bblas\+\_\+complex32\+\_\+t $\ast$beta, bblas\+\_\+complex32\+\_\+t $\ast$$\ast$\+C, const int $\ast$ldc, int $\ast$info)}{blas_chemm_batch(int group_count, const int *group_sizes, bblas_enum_t layout, const bblas_enum_t *side, const bblas_enum_t *uplo, const int *m, const int *n, const bblas_complex32_t *alpha, bblas_complex32_t const *const *A, const int *lda, bblas_complex32_t const *const *B, const int *ldb, const bblas_complex32_t *beta, bblas_complex32_t **C, const int *ldc, int *info)}}]{\setlength{\rightskip}{0pt plus 5cm}void blas\+\_\+chemm\+\_\+batch (
+\begin{DoxyParamCaption}
+\item[{int}]{group\+\_\+count, }
+\item[{const int $\ast$}]{group\+\_\+sizes, }
+\item[{bblas\+\_\+enum\+\_\+t}]{layout, }
+\item[{const bblas\+\_\+enum\+\_\+t $\ast$}]{side, }
+\item[{const bblas\+\_\+enum\+\_\+t $\ast$}]{uplo, }
+\item[{const int $\ast$}]{m, }
+\item[{const int $\ast$}]{n, }
+\item[{const bblas\+\_\+complex32\+\_\+t $\ast$}]{alpha, }
+\item[{bblas\+\_\+complex32\+\_\+t const $\ast$const $\ast$}]{A, }
+\item[{const int $\ast$}]{lda, }
+\item[{bblas\+\_\+complex32\+\_\+t const $\ast$const $\ast$}]{B, }
+\item[{const int $\ast$}]{ldb, }
+\item[{const bblas\+\_\+complex32\+\_\+t $\ast$}]{beta, }
+\item[{bblas\+\_\+complex32\+\_\+t $\ast$$\ast$}]{C, }
+\item[{const int $\ast$}]{ldc, }
+\item[{int $\ast$}]{info}
+\end{DoxyParamCaption}
+)}\hypertarget{group__hemm__batch_gac708e40d6650c0de054693950359c1e6}{}\label{group__hemm__batch_gac708e40d6650c0de054693950359c1e6}
+Performs one of the batch matrix-\/matrix operations on each group of matrices
+
+\[ C[i] = \alpha[i] \times A[i] \times B[i] + \beta[i] \times C[i] \] or \[ C[i] = \alpha[i] \times B[i] \times A[i] + \beta[i] \times C[i] \]
+
+where alpha\mbox{[}i\mbox{]} and beta\mbox{[}i\mbox{]} are scalars, A\mbox{[}i\mbox{]}-\/s are Hermitian matrices B\mbox{[}i\mbox{]}-\/s and C\mbox{[}i\mbox{]}-\/s are m-\/by-\/n matrices.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em group\+\_\+count} & The number groups of matrices.\\
+\hline
+\mbox{\tt in}  & {\em group\+\_\+sizes} & An array of integers of length group\+\_\+count, where group\+\_\+sizes\mbox{[}i\mbox{]} denotes the number of matrices in i-\/th group.\\
+\hline
+\mbox{\tt in}  & {\em layout} & Specifies if the matrix is stored in row major or column major format\+:
+\begin{DoxyItemize}
+\item Bblas\+Row\+Major\+: Row major format
+\item Bblas\+Col\+Major\+: Column major format
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em side} & An array of length group\+\_\+count. side\mbox{[}i\mbox{]} Specifies whether the Hermitian matrices A\mbox{[}j\mbox{]}-\/s of i-\/th group appear on the left or right in the operation as follows\+:
+\begin{DoxyItemize}
+\item Bblas\+Left\+: \[ C[j] = \alpha[i] \times A[j] \times B[j] + \beta[i] \times C[j] \]
+\item Bblas\+Right\+: \[ C[j] = \alpha[i] \times B[j] \times A[j] + \beta[i] \times C[j] \]
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em uplo} & An array of length group\+\_\+count, where uplo\mbox{[}i\mbox{]} specifies whether the upper or lower triangular part of the Hermitian matrices A\mbox{[}j\mbox{]}-\/s of i-\/th group are to be referenced\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyItemize}
+\item Bblas\+Lower\+: Only the lower triangular part of the Hermitian matrices A\mbox{[}j\mbox{]} is to be referenced.
+\item Bblas\+Upper\+: Only the upper triangular part of the Hermitian matrices A\mbox{[}j\mbox{]} is to be referenced.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em m} & An of array of integers of length group\+\_\+count, where m\mbox{[}i\mbox{]} denotes the number of rows in the matrices C\mbox{[}j\mbox{]} of i-\/th group. m\mbox{[}i\mbox{]} $>$= 0.\\
+\hline
+\mbox{\tt in}  & {\em n} & An of array of integers of length group\+\_\+count, where n\mbox{[}i\mbox{]} denotes the number of columns in the matrices C\mbox{[}j\mbox{]} of i-\/th group. n\mbox{[}i\mbox{]} $>$= 0.\\
+\hline
+\mbox{\tt in}  & {\em alpha} & An array of scalars of length group-\/count.\\
+\hline
+\mbox{\tt in}  & {\em A} & A is an array of pointers to matrices A\mbox{[}0\mbox{]}, A\mbox{[}1\mbox{]} .. A\mbox{[}batch\+\_\+count-\/1\mbox{]}, where each element A\mbox{[}j\mbox{]} of i-\/th group is a pointer to a matrix A\mbox{[}j\mbox{]} of size lda\mbox{[}i\mbox{]}-\/by-\/ka, where ka is m\mbox{[}i\mbox{]} when side\mbox{[}i\mbox{]} = Bblas\+Left, and is n\mbox{[}i\mbox{]} otherwise. Only the uplo triangular part is referenced. batch\+\_\+count=\{i=1\}$^\wedge$\{group\+\_\+count\}group\+\_\+sizes\mbox{[}i\mbox{]}.\\
+\hline
+\mbox{\tt in}  & {\em lda} & An array of length group\+\_\+count, where lda\mbox{[}i\mbox{]} is the leading dimension of the arrays A\mbox{[}j\mbox{]} of i-\/th group. lda\mbox{[}i\mbox{]} $>$= max(1,ka).\\
+\hline
+\mbox{\tt in}  & {\em B} & B is an array of pointers to matrices B\mbox{[}0\mbox{]}, B\mbox{[}1\mbox{]} .. B\mbox{[}batch\+\_\+count-\/1\mbox{]}, where each element B\mbox{[}j\mbox{]} of i-\/th group is a pointer to a matrix B\mbox{[}j\mbox{]} of size ldb\mbox{[}i\mbox{]}-\/by-\/n\mbox{[}i\mbox{]} matrix, where the leading m\mbox{[}i\mbox{]}-\/by-\/n\mbox{[}i\mbox{]} part of the array B\mbox{[}j\mbox{]} must contain the matrix B\mbox{[}j\mbox{]}. batch\+\_\+count=\{i=1\}$^\wedge$\{group\+\_\+count\}group\+\_\+sizes\mbox{[}i\mbox{]}.\\
+\hline
+\mbox{\tt in}  & {\em ldb} & An array of length group\+\_\+count, where ldb\mbox{[}i\mbox{]} is the leading dimension of the arrays B\mbox{[}j\mbox{]} of i-\/th group. ldb\mbox{[}i\mbox{]} $>$= max(1,m\mbox{[}i\mbox{]}).\\
+\hline
+\mbox{\tt in}  & {\em beta} & An array of scalars of length group\+\_\+count.\\
+\hline
+\mbox{\tt in,out}  & {\em C} & C is an array of pointers to matrices C\mbox{[}0\mbox{]}, C\mbox{[}1\mbox{]},...,C\mbox{[}batch\+\_\+count-\/1\mbox{]}. In i-\/th group each element C\mbox{[}j\mbox{]} is a pointer to a matrix C\mbox{[}j\mbox{]}. On exit, each array C\mbox{[}j\mbox{]} of i-\/th group is overwritten by the m\mbox{[}i\mbox{]}-\/by-\/n\mbox{[}i\mbox{]} updated matrix. batch\+\_\+count=\{i=1\}$^\wedge$\{group\+\_\+count\}group\+\_\+sizes\mbox{[}i\mbox{]}.\\
+\hline
+\mbox{\tt in}  & {\em ldc} & An array of integers of size group\+\_\+count, which denotes the leading dimension of the arrays C\mbox{[}j\mbox{]} in i-\/th group. ldc\mbox{[}i\mbox{]} $>$= max(1,m\mbox{[}i\mbox{]}).\\
+\hline
+\mbox{\tt in,out}  & {\em info} & Array of int for error handling. On entry info\mbox{[}0\mbox{]} should have one of the following values
+\begin{DoxyItemize}
+\item Bblas\+Errors\+Report\+All \+: All errors will be specified on output. Length of the array should be atleast (group\+\_\+count$\ast$batch\+\_\+count).
+\item Bblas\+Errors\+Report\+Group \+: Single error from each group will be reported. Length of the array should be atleast to (group\+\_\+count).
+\item Bblas\+Errors\+Report\+Any \+: Occurence of an error will be indicated by a single integer value, and length of the array should be atleast 1.
+\item Bblas\+Errors\+Report\+None \+: No error will be reported on output, and length of the array should be atleast 1.
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Bblas\+Success} & successful exit\\
+\hline
+\end{DoxyRetVals}
+\begin{DoxySeeAlso}{See also}
+chemm\+\_\+batch 
+
+chemm\+\_\+batch 
+\end{DoxySeeAlso}
+\index{hemm\+\_\+batch\+: Batched hermitian matrix multiply@{hemm\+\_\+batch\+: Batched hermitian matrix multiply}!blas\+\_\+zhemm\+\_\+batch@{blas\+\_\+zhemm\+\_\+batch}}
+\index{blas\+\_\+zhemm\+\_\+batch@{blas\+\_\+zhemm\+\_\+batch}!hemm\+\_\+batch\+: Batched hermitian matrix multiply@{hemm\+\_\+batch\+: Batched hermitian matrix multiply}}
+\subsubsection[{\texorpdfstring{blas\+\_\+zhemm\+\_\+batch(int group\+\_\+count, const int $\ast$group\+\_\+sizes, bblas\+\_\+enum\+\_\+t layout, const bblas\+\_\+enum\+\_\+t $\ast$side, const bblas\+\_\+enum\+\_\+t $\ast$uplo, const int $\ast$m, const int $\ast$n, const bblas\+\_\+complex64\+\_\+t $\ast$alpha, bblas\+\_\+complex64\+\_\+t const $\ast$const $\ast$\+A, const int $\ast$lda, bblas\+\_\+complex64\+\_\+t const $\ast$const $\ast$\+B, const int $\ast$ldb, const bblas\+\_\+complex64\+\_\+t $\ast$beta, bblas\+\_\+complex64\+\_\+t $\ast$$\ast$\+C, const int $\ast$ldc, int $\ast$info)}{blas_zhemm_batch(int group_count, const int *group_sizes, bblas_enum_t layout, const bblas_enum_t *side, const bblas_enum_t *uplo, const int *m, const int *n, const bblas_complex64_t *alpha, bblas_complex64_t const *const *A, const int *lda, bblas_complex64_t const *const *B, const int *ldb, const bblas_complex64_t *beta, bblas_complex64_t **C, const int *ldc, int *info)}}]{\setlength{\rightskip}{0pt plus 5cm}void blas\+\_\+zhemm\+\_\+batch (
+\begin{DoxyParamCaption}
+\item[{int}]{group\+\_\+count, }
+\item[{const int $\ast$}]{group\+\_\+sizes, }
+\item[{bblas\+\_\+enum\+\_\+t}]{layout, }
+\item[{const bblas\+\_\+enum\+\_\+t $\ast$}]{side, }
+\item[{const bblas\+\_\+enum\+\_\+t $\ast$}]{uplo, }
+\item[{const int $\ast$}]{m, }
+\item[{const int $\ast$}]{n, }
+\item[{const bblas\+\_\+complex64\+\_\+t $\ast$}]{alpha, }
+\item[{bblas\+\_\+complex64\+\_\+t const $\ast$const $\ast$}]{A, }
+\item[{const int $\ast$}]{lda, }
+\item[{bblas\+\_\+complex64\+\_\+t const $\ast$const $\ast$}]{B, }
+\item[{const int $\ast$}]{ldb, }
+\item[{const bblas\+\_\+complex64\+\_\+t $\ast$}]{beta, }
+\item[{bblas\+\_\+complex64\+\_\+t $\ast$$\ast$}]{C, }
+\item[{const int $\ast$}]{ldc, }
+\item[{int $\ast$}]{info}
+\end{DoxyParamCaption}
+)}\hypertarget{group__hemm__batch_gac72a9c3caf452b2ecded5f55399035f9}{}\label{group__hemm__batch_gac72a9c3caf452b2ecded5f55399035f9}
+Performs one of the batch matrix-\/matrix operations on each group of matrices
+
+\[ C[i] = \alpha[i] \times A[i] \times B[i] + \beta[i] \times C[i] \] or \[ C[i] = \alpha[i] \times B[i] \times A[i] + \beta[i] \times C[i] \]
+
+where alpha\mbox{[}i\mbox{]} and beta\mbox{[}i\mbox{]} are scalars, A\mbox{[}i\mbox{]}-\/s are Hermitian matrices B\mbox{[}i\mbox{]}-\/s and C\mbox{[}i\mbox{]}-\/s are m-\/by-\/n matrices.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em group\+\_\+count} & The number groups of matrices.\\
+\hline
+\mbox{\tt in}  & {\em group\+\_\+sizes} & An array of integers of length group\+\_\+count, where group\+\_\+sizes\mbox{[}i\mbox{]} denotes the number of matrices in i-\/th group.\\
+\hline
+\mbox{\tt in}  & {\em layout} & Specifies if the matrix is stored in row major or column major format\+:
+\begin{DoxyItemize}
+\item Bblas\+Row\+Major\+: Row major format
+\item Bblas\+Col\+Major\+: Column major format
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em side} & An array of length group\+\_\+count. side\mbox{[}i\mbox{]} Specifies whether the Hermitian matrices A\mbox{[}j\mbox{]}-\/s of i-\/th group appear on the left or right in the operation as follows\+:
+\begin{DoxyItemize}
+\item Bblas\+Left\+: \[ C[j] = \alpha[i] \times A[j] \times B[j] + \beta[i] \times C[j] \]
+\item Bblas\+Right\+: \[ C[j] = \alpha[i] \times B[j] \times A[j] + \beta[i] \times C[j] \]
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em uplo} & An array of length group\+\_\+count, where uplo\mbox{[}i\mbox{]} specifies whether the upper or lower triangular part of the Hermitian matrices A\mbox{[}j\mbox{]}-\/s of i-\/th group are to be referenced\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyItemize}
+\item Bblas\+Lower\+: Only the lower triangular part of the Hermitian matrices A\mbox{[}j\mbox{]} is to be referenced.
+\item Bblas\+Upper\+: Only the upper triangular part of the Hermitian matrices A\mbox{[}j\mbox{]} is to be referenced.
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em m} & An of array of integers of length group\+\_\+count, where m\mbox{[}i\mbox{]} denotes the number of rows in the matrices C\mbox{[}j\mbox{]} of i-\/th group. m\mbox{[}i\mbox{]} $>$= 0.\\
+\hline
+\mbox{\tt in}  & {\em n} & An of array of integers of length group\+\_\+count, where n\mbox{[}i\mbox{]} denotes the number of columns in the matrices C\mbox{[}j\mbox{]} of i-\/th group. n\mbox{[}i\mbox{]} $>$= 0.\\
+\hline
+\mbox{\tt in}  & {\em alpha} & An array of scalars of length group-\/count.\\
+\hline
+\mbox{\tt in}  & {\em A} & A is an array of pointers to matrices A\mbox{[}0\mbox{]}, A\mbox{[}1\mbox{]} .. A\mbox{[}batch\+\_\+count-\/1\mbox{]}, where each element A\mbox{[}j\mbox{]} of i-\/th group is a pointer to a matrix A\mbox{[}j\mbox{]} of size lda\mbox{[}i\mbox{]}-\/by-\/ka, where ka is m\mbox{[}i\mbox{]} when side\mbox{[}i\mbox{]} = Bblas\+Left, and is n\mbox{[}i\mbox{]} otherwise. Only the uplo triangular part is referenced. batch\+\_\+count=\{i=1\}$^\wedge$\{group\+\_\+count\}group\+\_\+sizes\mbox{[}i\mbox{]}.\\
+\hline
+\mbox{\tt in}  & {\em lda} & An array of length group\+\_\+count, where lda\mbox{[}i\mbox{]} is the leading dimension of the arrays A\mbox{[}j\mbox{]} of i-\/th group. lda\mbox{[}i\mbox{]} $>$= max(1,ka).\\
+\hline
+\mbox{\tt in}  & {\em B} & B is an array of pointers to matrices B\mbox{[}0\mbox{]}, B\mbox{[}1\mbox{]} .. B\mbox{[}batch\+\_\+count-\/1\mbox{]}, where each element B\mbox{[}j\mbox{]} of i-\/th group is a pointer to a matrix B\mbox{[}j\mbox{]} of size ldb\mbox{[}i\mbox{]}-\/by-\/n\mbox{[}i\mbox{]} matrix, where the leading m\mbox{[}i\mbox{]}-\/by-\/n\mbox{[}i\mbox{]} part of the array B\mbox{[}j\mbox{]} must contain the matrix B\mbox{[}j\mbox{]}. batch\+\_\+count=\{i=1\}$^\wedge$\{group\+\_\+count\}group\+\_\+sizes\mbox{[}i\mbox{]}.\\
+\hline
+\mbox{\tt in}  & {\em ldb} & An array of length group\+\_\+count, where ldb\mbox{[}i\mbox{]} is the leading dimension of the arrays B\mbox{[}j\mbox{]} of i-\/th group. ldb\mbox{[}i\mbox{]} $>$= max(1,m\mbox{[}i\mbox{]}).\\
+\hline
+\mbox{\tt in}  & {\em beta} & An array of scalars of length group\+\_\+count.\\
+\hline
+\mbox{\tt in,out}  & {\em C} & C is an array of pointers to matrices C\mbox{[}0\mbox{]}, C\mbox{[}1\mbox{]},...,C\mbox{[}batch\+\_\+count-\/1\mbox{]}. In i-\/th group each element C\mbox{[}j\mbox{]} is a pointer to a matrix C\mbox{[}j\mbox{]}. On exit, each array C\mbox{[}j\mbox{]} of i-\/th group is overwritten by the m\mbox{[}i\mbox{]}-\/by-\/n\mbox{[}i\mbox{]} updated matrix. batch\+\_\+count=\{i=1\}$^\wedge$\{group\+\_\+count\}group\+\_\+sizes\mbox{[}i\mbox{]}.\\
+\hline
+\mbox{\tt in}  & {\em ldc} & An array of integers of size group\+\_\+count, which denotes the leading dimension of the arrays C\mbox{[}j\mbox{]} in i-\/th group. ldc\mbox{[}i\mbox{]} $>$= max(1,m\mbox{[}i\mbox{]}).\\
+\hline
+\mbox{\tt in,out}  & {\em info} & Array of int for error handling. On entry info\mbox{[}0\mbox{]} should have one of the following values
+\begin{DoxyItemize}
+\item Bblas\+Errors\+Report\+All \+: All errors will be specified on output. Length of the array should be atleast (group\+\_\+count$\ast$batch\+\_\+count).
+\item Bblas\+Errors\+Report\+Group \+: Single error from each group will be reported. Length of the array should be atleast to (group\+\_\+count).
+\item Bblas\+Errors\+Report\+Any \+: Occurence of an error will be indicated by a single integer value, and length of the array should be atleast 1.
+\item Bblas\+Errors\+Report\+None \+: No error will be reported on output, and length of the array should be atleast 1.
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Bblas\+Success} & successful exit\\
+\hline
+\end{DoxyRetVals}
+\begin{DoxySeeAlso}{See also}
+zhemm\+\_\+batch 
+
+chemm\+\_\+batch 
+\end{DoxySeeAlso}

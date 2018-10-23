@@ -1,0 +1,394 @@
+\hypertarget{group__symm__batchf}{}\section{symm\+\_\+batchf\+: Batch of same size symmetric matrix multiply}
+\label{group__symm__batchf}\index{symm\+\_\+batchf\+:  Batch of same size symmetric matrix multiply@{symm\+\_\+batchf\+:  Batch of same size symmetric matrix multiply}}
+
+
+$ C[i] = \alpha[i] A[i] B[i] + \beta[i] C[i] $ or $ C[i] = \alpha[i] B[i] A[i] + \beta[i] C[i] $ where $ A[i] $ are symmetric  
+
+
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__symm__batchf_ga3b7888d0a43cf26d146581c2615897e5}{blas\+\_\+csymm\+\_\+batchf} (int group\+\_\+size, bblas\+\_\+enum\+\_\+t layout, bblas\+\_\+enum\+\_\+t side, bblas\+\_\+enum\+\_\+t uplo, int m, int n, bblas\+\_\+complex32\+\_\+t alpha, bblas\+\_\+complex32\+\_\+t const $\ast$const $\ast$A, int lda, bblas\+\_\+complex32\+\_\+t const $\ast$const $\ast$B, int ldb, bblas\+\_\+complex32\+\_\+t beta, bblas\+\_\+complex32\+\_\+t $\ast$$\ast$C, int ldc, int $\ast$info)
+\item 
+void \hyperlink{group__symm__batchf_gac8e8bd6f38e2584eef2162a6f5b6464e}{blas\+\_\+dsymm\+\_\+batchf} (int group\+\_\+size, bblas\+\_\+enum\+\_\+t layout, bblas\+\_\+enum\+\_\+t side, bblas\+\_\+enum\+\_\+t uplo, int m, int n, double alpha, double const $\ast$const $\ast$A, int lda, double const $\ast$const $\ast$B, int ldb, double beta, double $\ast$$\ast$C, int ldc, int $\ast$info)
+\item 
+void \hyperlink{group__symm__batchf_gad73d6157baa333e8b81127d9fb0e73c7}{blas\+\_\+ssymm\+\_\+batchf} (int group\+\_\+size, bblas\+\_\+enum\+\_\+t layout, bblas\+\_\+enum\+\_\+t side, bblas\+\_\+enum\+\_\+t uplo, int m, int n, float alpha, float const $\ast$const $\ast$A, int lda, float const $\ast$const $\ast$B, int ldb, float beta, float $\ast$$\ast$C, int ldc, int $\ast$info)
+\item 
+void \hyperlink{group__symm__batchf_ga207ca7335041928197b6c1739e40cd46}{blas\+\_\+zsymm\+\_\+batchf} (int group\+\_\+size, bblas\+\_\+enum\+\_\+t layout, bblas\+\_\+enum\+\_\+t side, bblas\+\_\+enum\+\_\+t uplo, int m, int n, bblas\+\_\+complex64\+\_\+t alpha, bblas\+\_\+complex64\+\_\+t const $\ast$const $\ast$A, int lda, bblas\+\_\+complex64\+\_\+t const $\ast$const $\ast$B, int ldb, bblas\+\_\+complex64\+\_\+t beta, bblas\+\_\+complex64\+\_\+t $\ast$$\ast$C, int ldc, int $\ast$info)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+$ C[i] = \alpha[i] A[i] B[i] + \beta[i] C[i] $ or $ C[i] = \alpha[i] B[i] A[i] + \beta[i] C[i] $ where $ A[i] $ are symmetric 
+
+
+
+\subsection{Function Documentation}
+\index{symm\+\_\+batchf\+:  Batch of same size symmetric matrix multiply@{symm\+\_\+batchf\+:  Batch of same size symmetric matrix multiply}!blas\+\_\+csymm\+\_\+batchf@{blas\+\_\+csymm\+\_\+batchf}}
+\index{blas\+\_\+csymm\+\_\+batchf@{blas\+\_\+csymm\+\_\+batchf}!symm\+\_\+batchf\+:  Batch of same size symmetric matrix multiply@{symm\+\_\+batchf\+:  Batch of same size symmetric matrix multiply}}
+\subsubsection[{\texorpdfstring{blas\+\_\+csymm\+\_\+batchf(int group\+\_\+size, bblas\+\_\+enum\+\_\+t layout, bblas\+\_\+enum\+\_\+t side, bblas\+\_\+enum\+\_\+t uplo, int m, int n, bblas\+\_\+complex32\+\_\+t alpha, bblas\+\_\+complex32\+\_\+t const $\ast$const $\ast$\+A, int lda, bblas\+\_\+complex32\+\_\+t const $\ast$const $\ast$\+B, int ldb, bblas\+\_\+complex32\+\_\+t beta, bblas\+\_\+complex32\+\_\+t $\ast$$\ast$\+C, int ldc, int $\ast$info)}{blas_csymm_batchf(int group_size, bblas_enum_t layout, bblas_enum_t side, bblas_enum_t uplo, int m, int n, bblas_complex32_t alpha, bblas_complex32_t const *const *A, int lda, bblas_complex32_t const *const *B, int ldb, bblas_complex32_t beta, bblas_complex32_t **C, int ldc, int *info)}}]{\setlength{\rightskip}{0pt plus 5cm}void blas\+\_\+csymm\+\_\+batchf (
+\begin{DoxyParamCaption}
+\item[{int}]{group\+\_\+size, }
+\item[{bblas\+\_\+enum\+\_\+t}]{layout, }
+\item[{bblas\+\_\+enum\+\_\+t}]{side, }
+\item[{bblas\+\_\+enum\+\_\+t}]{uplo, }
+\item[{int}]{m, }
+\item[{int}]{n, }
+\item[{bblas\+\_\+complex32\+\_\+t}]{alpha, }
+\item[{bblas\+\_\+complex32\+\_\+t const $\ast$const $\ast$}]{A, }
+\item[{int}]{lda, }
+\item[{bblas\+\_\+complex32\+\_\+t const $\ast$const $\ast$}]{B, }
+\item[{int}]{ldb, }
+\item[{bblas\+\_\+complex32\+\_\+t}]{beta, }
+\item[{bblas\+\_\+complex32\+\_\+t $\ast$$\ast$}]{C, }
+\item[{int}]{ldc, }
+\item[{int $\ast$}]{info}
+\end{DoxyParamCaption}
+)}\hypertarget{group__symm__batchf_ga3b7888d0a43cf26d146581c2615897e5}{}\label{group__symm__batchf_ga3b7888d0a43cf26d146581c2615897e5}
+Performs one of the matrix-\/matrix operations
+
+\[ C[i] = \alpha \times A[i] \times B[i] + \beta \times C[i] \] or \[ C[i] = \alpha \times B[i] \times A[i] + \beta \times C[i] \]
+
+where alpha and beta are scalars, A\mbox{[}i\mbox{]}-\/s are symmetric matrices and B\mbox{[}i\mbox{]}-\/s are C\mbox{[}i\mbox{]} are m-\/by-\/n matrices.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em group\+\_\+size} & The number of matrices to operate on\\
+\hline
+\mbox{\tt in}  & {\em layout} & Specifies if the matrix is stored in row major or column major format\+:
+\begin{DoxyItemize}
+\item Bblas\+Row\+Major\+: Row major format
+\item Bblas\+Col\+Major\+: Column major format
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em side} & Specifies whether the symmetric matrices A\mbox{[}i\mbox{]} appears on the left or right in the operation as follows\+:
+\begin{DoxyItemize}
+\item Bblas\+Left\+: \[ C[i] = \alpha \times A[i] \times B[i] + \beta \times C[i] \]
+\item Bblas\+Right\+: \[ C[i] = \alpha \times B[i] \times A[i] + \beta \times C[i] \]
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em uplo} & Specifies whether the upper or lower triangular part of the symmetric matrices A\mbox{[}i\mbox{]} are to be referenced as follows\+:
+\begin{DoxyItemize}
+\item Bblas\+Lower\+: Only the lower triangular part of the symmetric matrices A\mbox{[}i\mbox{]} is to be referenced.
+\item Bblas\+Upper\+: Only the upper triangular part of the symmetric matrices A\mbox{[}i\mbox{]} is to be referenced.
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em m} & The number of rows of the matrices C\mbox{[}i\mbox{]}. m $>$= 0.\\
+\hline
+\mbox{\tt in}  & {\em n} & The number of columns of the matrices C\mbox{[}i\mbox{]}. n $>$= 0.\\
+\hline
+\mbox{\tt in}  & {\em alpha} & The scalar alpha.\\
+\hline
+\mbox{\tt in}  & {\em A} & A is an array of pointers to matrices A\mbox{[}0\mbox{]}, A\mbox{[}1\mbox{]} .. A\mbox{[}group\+\_\+size-\/1\mbox{]}, where each element A\mbox{[}i\mbox{]} is a pointer to a matrix A\mbox{[}i\mbox{]} of size lda-\/by-\/ka, where ka is m when side = Bblas\+Left, and is n otherwise. Only the uplo triangular part is referenced.\\
+\hline
+\mbox{\tt in}  & {\em lda} & The leading dimension of the arrays A\mbox{[}i\mbox{]}. lda $>$= max(1,ka).\\
+\hline
+\mbox{\tt in}  & {\em B} & B is an array of pointers to matrices B\mbox{[}0\mbox{]}, B\mbox{[}1\mbox{]} .. B\mbox{[}group\+\_\+size-\/1\mbox{]}, where each element B\mbox{[}i\mbox{]} is a pointer to a matrix B\mbox{[}i\mbox{]} of size ldb-\/by-\/n matrix, where the leading m-\/by-\/n part of the array B\mbox{[}i\mbox{]} must contain the matrix B\mbox{[}i\mbox{]}.\\
+\hline
+\mbox{\tt in}  & {\em ldb} & The leading dimension of the arrays B\mbox{[}i\mbox{]}. ldb $>$= max(1,m).\\
+\hline
+\mbox{\tt in}  & {\em beta} & The scalar beta.\\
+\hline
+\mbox{\tt in,out}  & {\em C} & C is an array of pointers to matrices C\mbox{[}0\mbox{]}, C\mbox{[}1\mbox{]} .. C\mbox{[}group\+\_\+size-\/1\mbox{]}, where each element C\mbox{[}i\mbox{]} is a pointer to a matrix C\mbox{[}i\mbox{]}. On exit, the array is overwritten by the m-\/by-\/n updated matrix.\\
+\hline
+\mbox{\tt in}  & {\em ldc} & The leading dimension of the arrays C\mbox{[}i\mbox{]}. ldc $>$= max(1,m).\\
+\hline
+\mbox{\tt in,out}  & {\em info} & Array of int for error handling. On entry info\mbox{[}0\mbox{]} should have one of the following values
+\begin{DoxyItemize}
+\item Bblas\+Errors\+Report\+All \+: All errors will be specified on output. Length of the array should be atleast (group\+\_\+count$\ast$group\+\_\+size).
+\item Bblas\+Errors\+Report\+Group \+: Single error from each group will be reported. Length of the array should be atleast to (group\+\_\+count).
+\item Bblas\+Errors\+Report\+Any \+: Occurence of an error will be indicated by a single integer value, and length of the array should be atleast 1.
+\item Bblas\+Errors\+Report\+None \+: No error will be reported on output, and length of the array should be atleast 1.
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Bblas\+Success} & successful exit\\
+\hline
+\end{DoxyRetVals}
+\begin{DoxySeeAlso}{See also}
+csymm\+\_\+batchf 
+
+csymm\+\_\+batchf 
+
+dsymm\+\_\+batchf 
+
+ssymm\+\_\+batchf 
+\end{DoxySeeAlso}
+\index{symm\+\_\+batchf\+:  Batch of same size symmetric matrix multiply@{symm\+\_\+batchf\+:  Batch of same size symmetric matrix multiply}!blas\+\_\+dsymm\+\_\+batchf@{blas\+\_\+dsymm\+\_\+batchf}}
+\index{blas\+\_\+dsymm\+\_\+batchf@{blas\+\_\+dsymm\+\_\+batchf}!symm\+\_\+batchf\+:  Batch of same size symmetric matrix multiply@{symm\+\_\+batchf\+:  Batch of same size symmetric matrix multiply}}
+\subsubsection[{\texorpdfstring{blas\+\_\+dsymm\+\_\+batchf(int group\+\_\+size, bblas\+\_\+enum\+\_\+t layout, bblas\+\_\+enum\+\_\+t side, bblas\+\_\+enum\+\_\+t uplo, int m, int n, double alpha, double const $\ast$const $\ast$\+A, int lda, double const $\ast$const $\ast$\+B, int ldb, double beta, double $\ast$$\ast$\+C, int ldc, int $\ast$info)}{blas_dsymm_batchf(int group_size, bblas_enum_t layout, bblas_enum_t side, bblas_enum_t uplo, int m, int n, double alpha, double const *const *A, int lda, double const *const *B, int ldb, double beta, double **C, int ldc, int *info)}}]{\setlength{\rightskip}{0pt plus 5cm}void blas\+\_\+dsymm\+\_\+batchf (
+\begin{DoxyParamCaption}
+\item[{int}]{group\+\_\+size, }
+\item[{bblas\+\_\+enum\+\_\+t}]{layout, }
+\item[{bblas\+\_\+enum\+\_\+t}]{side, }
+\item[{bblas\+\_\+enum\+\_\+t}]{uplo, }
+\item[{int}]{m, }
+\item[{int}]{n, }
+\item[{double}]{alpha, }
+\item[{double const $\ast$const $\ast$}]{A, }
+\item[{int}]{lda, }
+\item[{double const $\ast$const $\ast$}]{B, }
+\item[{int}]{ldb, }
+\item[{double}]{beta, }
+\item[{double $\ast$$\ast$}]{C, }
+\item[{int}]{ldc, }
+\item[{int $\ast$}]{info}
+\end{DoxyParamCaption}
+)}\hypertarget{group__symm__batchf_gac8e8bd6f38e2584eef2162a6f5b6464e}{}\label{group__symm__batchf_gac8e8bd6f38e2584eef2162a6f5b6464e}
+Performs one of the matrix-\/matrix operations
+
+\[ C[i] = \alpha \times A[i] \times B[i] + \beta \times C[i] \] or \[ C[i] = \alpha \times B[i] \times A[i] + \beta \times C[i] \]
+
+where alpha and beta are scalars, A\mbox{[}i\mbox{]}-\/s are symmetric matrices and B\mbox{[}i\mbox{]}-\/s are C\mbox{[}i\mbox{]} are m-\/by-\/n matrices.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em group\+\_\+size} & The number of matrices to operate on\\
+\hline
+\mbox{\tt in}  & {\em layout} & Specifies if the matrix is stored in row major or column major format\+:
+\begin{DoxyItemize}
+\item Bblas\+Row\+Major\+: Row major format
+\item Bblas\+Col\+Major\+: Column major format
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em side} & Specifies whether the symmetric matrices A\mbox{[}i\mbox{]} appears on the left or right in the operation as follows\+:
+\begin{DoxyItemize}
+\item Bblas\+Left\+: \[ C[i] = \alpha \times A[i] \times B[i] + \beta \times C[i] \]
+\item Bblas\+Right\+: \[ C[i] = \alpha \times B[i] \times A[i] + \beta \times C[i] \]
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em uplo} & Specifies whether the upper or lower triangular part of the symmetric matrices A\mbox{[}i\mbox{]} are to be referenced as follows\+:
+\begin{DoxyItemize}
+\item Bblas\+Lower\+: Only the lower triangular part of the symmetric matrices A\mbox{[}i\mbox{]} is to be referenced.
+\item Bblas\+Upper\+: Only the upper triangular part of the symmetric matrices A\mbox{[}i\mbox{]} is to be referenced.
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em m} & The number of rows of the matrices C\mbox{[}i\mbox{]}. m $>$= 0.\\
+\hline
+\mbox{\tt in}  & {\em n} & The number of columns of the matrices C\mbox{[}i\mbox{]}. n $>$= 0.\\
+\hline
+\mbox{\tt in}  & {\em alpha} & The scalar alpha.\\
+\hline
+\mbox{\tt in}  & {\em A} & A is an array of pointers to matrices A\mbox{[}0\mbox{]}, A\mbox{[}1\mbox{]} .. A\mbox{[}group\+\_\+size-\/1\mbox{]}, where each element A\mbox{[}i\mbox{]} is a pointer to a matrix A\mbox{[}i\mbox{]} of size lda-\/by-\/ka, where ka is m when side = Bblas\+Left, and is n otherwise. Only the uplo triangular part is referenced.\\
+\hline
+\mbox{\tt in}  & {\em lda} & The leading dimension of the arrays A\mbox{[}i\mbox{]}. lda $>$= max(1,ka).\\
+\hline
+\mbox{\tt in}  & {\em B} & B is an array of pointers to matrices B\mbox{[}0\mbox{]}, B\mbox{[}1\mbox{]} .. B\mbox{[}group\+\_\+size-\/1\mbox{]}, where each element B\mbox{[}i\mbox{]} is a pointer to a matrix B\mbox{[}i\mbox{]} of size ldb-\/by-\/n matrix, where the leading m-\/by-\/n part of the array B\mbox{[}i\mbox{]} must contain the matrix B\mbox{[}i\mbox{]}.\\
+\hline
+\mbox{\tt in}  & {\em ldb} & The leading dimension of the arrays B\mbox{[}i\mbox{]}. ldb $>$= max(1,m).\\
+\hline
+\mbox{\tt in}  & {\em beta} & The scalar beta.\\
+\hline
+\mbox{\tt in,out}  & {\em C} & C is an array of pointers to matrices C\mbox{[}0\mbox{]}, C\mbox{[}1\mbox{]} .. C\mbox{[}group\+\_\+size-\/1\mbox{]}, where each element C\mbox{[}i\mbox{]} is a pointer to a matrix C\mbox{[}i\mbox{]}. On exit, the array is overwritten by the m-\/by-\/n updated matrix.\\
+\hline
+\mbox{\tt in}  & {\em ldc} & The leading dimension of the arrays C\mbox{[}i\mbox{]}. ldc $>$= max(1,m).\\
+\hline
+\mbox{\tt in,out}  & {\em info} & Array of int for error handling. On entry info\mbox{[}0\mbox{]} should have one of the following values
+\begin{DoxyItemize}
+\item Bblas\+Errors\+Report\+All \+: All errors will be specified on output. Length of the array should be atleast (group\+\_\+count$\ast$group\+\_\+size).
+\item Bblas\+Errors\+Report\+Group \+: Single error from each group will be reported. Length of the array should be atleast to (group\+\_\+count).
+\item Bblas\+Errors\+Report\+Any \+: Occurence of an error will be indicated by a single integer value, and length of the array should be atleast 1.
+\item Bblas\+Errors\+Report\+None \+: No error will be reported on output, and length of the array should be atleast 1.
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Bblas\+Success} & successful exit\\
+\hline
+\end{DoxyRetVals}
+\begin{DoxySeeAlso}{See also}
+dsymm\+\_\+batchf 
+
+csymm\+\_\+batchf 
+
+dsymm\+\_\+batchf 
+
+ssymm\+\_\+batchf 
+\end{DoxySeeAlso}
+\index{symm\+\_\+batchf\+:  Batch of same size symmetric matrix multiply@{symm\+\_\+batchf\+:  Batch of same size symmetric matrix multiply}!blas\+\_\+ssymm\+\_\+batchf@{blas\+\_\+ssymm\+\_\+batchf}}
+\index{blas\+\_\+ssymm\+\_\+batchf@{blas\+\_\+ssymm\+\_\+batchf}!symm\+\_\+batchf\+:  Batch of same size symmetric matrix multiply@{symm\+\_\+batchf\+:  Batch of same size symmetric matrix multiply}}
+\subsubsection[{\texorpdfstring{blas\+\_\+ssymm\+\_\+batchf(int group\+\_\+size, bblas\+\_\+enum\+\_\+t layout, bblas\+\_\+enum\+\_\+t side, bblas\+\_\+enum\+\_\+t uplo, int m, int n, float alpha, float const $\ast$const $\ast$\+A, int lda, float const $\ast$const $\ast$\+B, int ldb, float beta, float $\ast$$\ast$\+C, int ldc, int $\ast$info)}{blas_ssymm_batchf(int group_size, bblas_enum_t layout, bblas_enum_t side, bblas_enum_t uplo, int m, int n, float alpha, float const *const *A, int lda, float const *const *B, int ldb, float beta, float **C, int ldc, int *info)}}]{\setlength{\rightskip}{0pt plus 5cm}void blas\+\_\+ssymm\+\_\+batchf (
+\begin{DoxyParamCaption}
+\item[{int}]{group\+\_\+size, }
+\item[{bblas\+\_\+enum\+\_\+t}]{layout, }
+\item[{bblas\+\_\+enum\+\_\+t}]{side, }
+\item[{bblas\+\_\+enum\+\_\+t}]{uplo, }
+\item[{int}]{m, }
+\item[{int}]{n, }
+\item[{float}]{alpha, }
+\item[{float const $\ast$const $\ast$}]{A, }
+\item[{int}]{lda, }
+\item[{float const $\ast$const $\ast$}]{B, }
+\item[{int}]{ldb, }
+\item[{float}]{beta, }
+\item[{float $\ast$$\ast$}]{C, }
+\item[{int}]{ldc, }
+\item[{int $\ast$}]{info}
+\end{DoxyParamCaption}
+)}\hypertarget{group__symm__batchf_gad73d6157baa333e8b81127d9fb0e73c7}{}\label{group__symm__batchf_gad73d6157baa333e8b81127d9fb0e73c7}
+Performs one of the matrix-\/matrix operations
+
+\[ C[i] = \alpha \times A[i] \times B[i] + \beta \times C[i] \] or \[ C[i] = \alpha \times B[i] \times A[i] + \beta \times C[i] \]
+
+where alpha and beta are scalars, A\mbox{[}i\mbox{]}-\/s are symmetric matrices and B\mbox{[}i\mbox{]}-\/s are C\mbox{[}i\mbox{]} are m-\/by-\/n matrices.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em group\+\_\+size} & The number of matrices to operate on\\
+\hline
+\mbox{\tt in}  & {\em layout} & Specifies if the matrix is stored in row major or column major format\+:
+\begin{DoxyItemize}
+\item Bblas\+Row\+Major\+: Row major format
+\item Bblas\+Col\+Major\+: Column major format
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em side} & Specifies whether the symmetric matrices A\mbox{[}i\mbox{]} appears on the left or right in the operation as follows\+:
+\begin{DoxyItemize}
+\item Bblas\+Left\+: \[ C[i] = \alpha \times A[i] \times B[i] + \beta \times C[i] \]
+\item Bblas\+Right\+: \[ C[i] = \alpha \times B[i] \times A[i] + \beta \times C[i] \]
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em uplo} & Specifies whether the upper or lower triangular part of the symmetric matrices A\mbox{[}i\mbox{]} are to be referenced as follows\+:
+\begin{DoxyItemize}
+\item Bblas\+Lower\+: Only the lower triangular part of the symmetric matrices A\mbox{[}i\mbox{]} is to be referenced.
+\item Bblas\+Upper\+: Only the upper triangular part of the symmetric matrices A\mbox{[}i\mbox{]} is to be referenced.
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em m} & The number of rows of the matrices C\mbox{[}i\mbox{]}. m $>$= 0.\\
+\hline
+\mbox{\tt in}  & {\em n} & The number of columns of the matrices C\mbox{[}i\mbox{]}. n $>$= 0.\\
+\hline
+\mbox{\tt in}  & {\em alpha} & The scalar alpha.\\
+\hline
+\mbox{\tt in}  & {\em A} & A is an array of pointers to matrices A\mbox{[}0\mbox{]}, A\mbox{[}1\mbox{]} .. A\mbox{[}group\+\_\+size-\/1\mbox{]}, where each element A\mbox{[}i\mbox{]} is a pointer to a matrix A\mbox{[}i\mbox{]} of size lda-\/by-\/ka, where ka is m when side = Bblas\+Left, and is n otherwise. Only the uplo triangular part is referenced.\\
+\hline
+\mbox{\tt in}  & {\em lda} & The leading dimension of the arrays A\mbox{[}i\mbox{]}. lda $>$= max(1,ka).\\
+\hline
+\mbox{\tt in}  & {\em B} & B is an array of pointers to matrices B\mbox{[}0\mbox{]}, B\mbox{[}1\mbox{]} .. B\mbox{[}group\+\_\+size-\/1\mbox{]}, where each element B\mbox{[}i\mbox{]} is a pointer to a matrix B\mbox{[}i\mbox{]} of size ldb-\/by-\/n matrix, where the leading m-\/by-\/n part of the array B\mbox{[}i\mbox{]} must contain the matrix B\mbox{[}i\mbox{]}.\\
+\hline
+\mbox{\tt in}  & {\em ldb} & The leading dimension of the arrays B\mbox{[}i\mbox{]}. ldb $>$= max(1,m).\\
+\hline
+\mbox{\tt in}  & {\em beta} & The scalar beta.\\
+\hline
+\mbox{\tt in,out}  & {\em C} & C is an array of pointers to matrices C\mbox{[}0\mbox{]}, C\mbox{[}1\mbox{]} .. C\mbox{[}group\+\_\+size-\/1\mbox{]}, where each element C\mbox{[}i\mbox{]} is a pointer to a matrix C\mbox{[}i\mbox{]}. On exit, the array is overwritten by the m-\/by-\/n updated matrix.\\
+\hline
+\mbox{\tt in}  & {\em ldc} & The leading dimension of the arrays C\mbox{[}i\mbox{]}. ldc $>$= max(1,m).\\
+\hline
+\mbox{\tt in,out}  & {\em info} & Array of int for error handling. On entry info\mbox{[}0\mbox{]} should have one of the following values
+\begin{DoxyItemize}
+\item Bblas\+Errors\+Report\+All \+: All errors will be specified on output. Length of the array should be atleast (group\+\_\+count$\ast$group\+\_\+size).
+\item Bblas\+Errors\+Report\+Group \+: Single error from each group will be reported. Length of the array should be atleast to (group\+\_\+count).
+\item Bblas\+Errors\+Report\+Any \+: Occurence of an error will be indicated by a single integer value, and length of the array should be atleast 1.
+\item Bblas\+Errors\+Report\+None \+: No error will be reported on output, and length of the array should be atleast 1.
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Bblas\+Success} & successful exit\\
+\hline
+\end{DoxyRetVals}
+\begin{DoxySeeAlso}{See also}
+ssymm\+\_\+batchf 
+
+csymm\+\_\+batchf 
+
+dsymm\+\_\+batchf 
+
+ssymm\+\_\+batchf 
+\end{DoxySeeAlso}
+\index{symm\+\_\+batchf\+:  Batch of same size symmetric matrix multiply@{symm\+\_\+batchf\+:  Batch of same size symmetric matrix multiply}!blas\+\_\+zsymm\+\_\+batchf@{blas\+\_\+zsymm\+\_\+batchf}}
+\index{blas\+\_\+zsymm\+\_\+batchf@{blas\+\_\+zsymm\+\_\+batchf}!symm\+\_\+batchf\+:  Batch of same size symmetric matrix multiply@{symm\+\_\+batchf\+:  Batch of same size symmetric matrix multiply}}
+\subsubsection[{\texorpdfstring{blas\+\_\+zsymm\+\_\+batchf(int group\+\_\+size, bblas\+\_\+enum\+\_\+t layout, bblas\+\_\+enum\+\_\+t side, bblas\+\_\+enum\+\_\+t uplo, int m, int n, bblas\+\_\+complex64\+\_\+t alpha, bblas\+\_\+complex64\+\_\+t const $\ast$const $\ast$\+A, int lda, bblas\+\_\+complex64\+\_\+t const $\ast$const $\ast$\+B, int ldb, bblas\+\_\+complex64\+\_\+t beta, bblas\+\_\+complex64\+\_\+t $\ast$$\ast$\+C, int ldc, int $\ast$info)}{blas_zsymm_batchf(int group_size, bblas_enum_t layout, bblas_enum_t side, bblas_enum_t uplo, int m, int n, bblas_complex64_t alpha, bblas_complex64_t const *const *A, int lda, bblas_complex64_t const *const *B, int ldb, bblas_complex64_t beta, bblas_complex64_t **C, int ldc, int *info)}}]{\setlength{\rightskip}{0pt plus 5cm}void blas\+\_\+zsymm\+\_\+batchf (
+\begin{DoxyParamCaption}
+\item[{int}]{group\+\_\+size, }
+\item[{bblas\+\_\+enum\+\_\+t}]{layout, }
+\item[{bblas\+\_\+enum\+\_\+t}]{side, }
+\item[{bblas\+\_\+enum\+\_\+t}]{uplo, }
+\item[{int}]{m, }
+\item[{int}]{n, }
+\item[{bblas\+\_\+complex64\+\_\+t}]{alpha, }
+\item[{bblas\+\_\+complex64\+\_\+t const $\ast$const $\ast$}]{A, }
+\item[{int}]{lda, }
+\item[{bblas\+\_\+complex64\+\_\+t const $\ast$const $\ast$}]{B, }
+\item[{int}]{ldb, }
+\item[{bblas\+\_\+complex64\+\_\+t}]{beta, }
+\item[{bblas\+\_\+complex64\+\_\+t $\ast$$\ast$}]{C, }
+\item[{int}]{ldc, }
+\item[{int $\ast$}]{info}
+\end{DoxyParamCaption}
+)}\hypertarget{group__symm__batchf_ga207ca7335041928197b6c1739e40cd46}{}\label{group__symm__batchf_ga207ca7335041928197b6c1739e40cd46}
+Performs one of the matrix-\/matrix operations
+
+\[ C[i] = \alpha \times A[i] \times B[i] + \beta \times C[i] \] or \[ C[i] = \alpha \times B[i] \times A[i] + \beta \times C[i] \]
+
+where alpha and beta are scalars, A\mbox{[}i\mbox{]}-\/s are symmetric matrices and B\mbox{[}i\mbox{]}-\/s are C\mbox{[}i\mbox{]} are m-\/by-\/n matrices.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em group\+\_\+size} & The number of matrices to operate on\\
+\hline
+\mbox{\tt in}  & {\em layout} & Specifies if the matrix is stored in row major or column major format\+:
+\begin{DoxyItemize}
+\item Bblas\+Row\+Major\+: Row major format
+\item Bblas\+Col\+Major\+: Column major format
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em side} & Specifies whether the symmetric matrices A\mbox{[}i\mbox{]} appears on the left or right in the operation as follows\+:
+\begin{DoxyItemize}
+\item Bblas\+Left\+: \[ C[i] = \alpha \times A[i] \times B[i] + \beta \times C[i] \]
+\item Bblas\+Right\+: \[ C[i] = \alpha \times B[i] \times A[i] + \beta \times C[i] \]
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em uplo} & Specifies whether the upper or lower triangular part of the symmetric matrices A\mbox{[}i\mbox{]} are to be referenced as follows\+:
+\begin{DoxyItemize}
+\item Bblas\+Lower\+: Only the lower triangular part of the symmetric matrices A\mbox{[}i\mbox{]} is to be referenced.
+\item Bblas\+Upper\+: Only the upper triangular part of the symmetric matrices A\mbox{[}i\mbox{]} is to be referenced.
+\end{DoxyItemize}\\
+\hline
+\mbox{\tt in}  & {\em m} & The number of rows of the matrices C\mbox{[}i\mbox{]}. m $>$= 0.\\
+\hline
+\mbox{\tt in}  & {\em n} & The number of columns of the matrices C\mbox{[}i\mbox{]}. n $>$= 0.\\
+\hline
+\mbox{\tt in}  & {\em alpha} & The scalar alpha.\\
+\hline
+\mbox{\tt in}  & {\em A} & A is an array of pointers to matrices A\mbox{[}0\mbox{]}, A\mbox{[}1\mbox{]} .. A\mbox{[}group\+\_\+size-\/1\mbox{]}, where each element A\mbox{[}i\mbox{]} is a pointer to a matrix A\mbox{[}i\mbox{]} of size lda-\/by-\/ka, where ka is m when side = Bblas\+Left, and is n otherwise. Only the uplo triangular part is referenced.\\
+\hline
+\mbox{\tt in}  & {\em lda} & The leading dimension of the arrays A\mbox{[}i\mbox{]}. lda $>$= max(1,ka).\\
+\hline
+\mbox{\tt in}  & {\em B} & B is an array of pointers to matrices B\mbox{[}0\mbox{]}, B\mbox{[}1\mbox{]} .. B\mbox{[}group\+\_\+size-\/1\mbox{]}, where each element B\mbox{[}i\mbox{]} is a pointer to a matrix B\mbox{[}i\mbox{]} of size ldb-\/by-\/n matrix, where the leading m-\/by-\/n part of the array B\mbox{[}i\mbox{]} must contain the matrix B\mbox{[}i\mbox{]}.\\
+\hline
+\mbox{\tt in}  & {\em ldb} & The leading dimension of the arrays B\mbox{[}i\mbox{]}. ldb $>$= max(1,m).\\
+\hline
+\mbox{\tt in}  & {\em beta} & The scalar beta.\\
+\hline
+\mbox{\tt in,out}  & {\em C} & C is an array of pointers to matrices C\mbox{[}0\mbox{]}, C\mbox{[}1\mbox{]} .. C\mbox{[}group\+\_\+size-\/1\mbox{]}, where each element C\mbox{[}i\mbox{]} is a pointer to a matrix C\mbox{[}i\mbox{]}. On exit, the array is overwritten by the m-\/by-\/n updated matrix.\\
+\hline
+\mbox{\tt in}  & {\em ldc} & The leading dimension of the arrays C\mbox{[}i\mbox{]}. ldc $>$= max(1,m).\\
+\hline
+\mbox{\tt in,out}  & {\em info} & Array of int for error handling. On entry info\mbox{[}0\mbox{]} should have one of the following values
+\begin{DoxyItemize}
+\item Bblas\+Errors\+Report\+All \+: All errors will be specified on output. Length of the array should be atleast (group\+\_\+count$\ast$group\+\_\+size).
+\item Bblas\+Errors\+Report\+Group \+: Single error from each group will be reported. Length of the array should be atleast to (group\+\_\+count).
+\item Bblas\+Errors\+Report\+Any \+: Occurence of an error will be indicated by a single integer value, and length of the array should be atleast 1.
+\item Bblas\+Errors\+Report\+None \+: No error will be reported on output, and length of the array should be atleast 1.
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{Return values}
+{\em Bblas\+Success} & successful exit\\
+\hline
+\end{DoxyRetVals}
+\begin{DoxySeeAlso}{See also}
+zsymm\+\_\+batchf 
+
+csymm\+\_\+batchf 
+
+dsymm\+\_\+batchf 
+
+ssymm\+\_\+batchf 
+\end{DoxySeeAlso}

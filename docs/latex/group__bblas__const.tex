@@ -1,0 +1,167 @@
+\hypertarget{group__bblas__const}{}\section{Bblas\+\_\+const}
+\label{group__bblas__const}\index{Bblas\+\_\+const@{Bblas\+\_\+const}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bblas\+\_\+enum\+\_\+t \hyperlink{group__bblas__const_ga6169647caea1bc4ab77bcf161db8019e}{bblas\+\_\+diag\+\_\+const} (char lapack\+\_\+char)
+\item 
+bblas\+\_\+enum\+\_\+t \hyperlink{group__bblas__const_gafdc80d2f9b5d3eb302d64147f1c44aa7}{bblas\+\_\+info\+\_\+const} (char lapack\+\_\+char)
+\item 
+bblas\+\_\+enum\+\_\+t \hyperlink{group__bblas__const_ga5ba578faa6c2dcc4a37e09f1d7aefe7c}{bblas\+\_\+direct\+\_\+const} (char lapack\+\_\+char)
+\item 
+bblas\+\_\+enum\+\_\+t \hyperlink{group__bblas__const_gac004937c6fbbfee293aa7681e3927fe3}{bblas\+\_\+norm\+\_\+const} (char lapack\+\_\+char)
+\item 
+bblas\+\_\+enum\+\_\+t \hyperlink{group__bblas__const_ga56e829b323f9ef83d896d4755283039a}{bblas\+\_\+side\+\_\+const} (char lapack\+\_\+char)
+\item 
+bblas\+\_\+enum\+\_\+t \hyperlink{group__bblas__const_gae9bb1f3a88f105d76062888fea78d4da}{bblas\+\_\+storev\+\_\+const} (char lapack\+\_\+char)
+\item 
+bblas\+\_\+enum\+\_\+t \hyperlink{group__bblas__const_ga2bd4e89d6fbd7df92e8836e862e96e2a}{bblas\+\_\+trans\+\_\+const} (char lapack\+\_\+char)
+\item 
+bblas\+\_\+enum\+\_\+t \hyperlink{group__bblas__const_gacc2bf7245fa316e6cbf888a61aa1f1bc}{bblas\+\_\+uplo\+\_\+const} (char lapack\+\_\+char)
+\item 
+static char \hyperlink{group__bblas__const_gab2e4ef289e7eee71dd23c6d4b817a6a2}{lapack\+\_\+const} (int bblas\+\_\+const)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Convert L\+A\+P\+A\+CK character constants to B\+B\+L\+AS constants. This is a one-\/to-\/many mapping, requiring multiple translators (e.\+g., \char`\"{}\+N\char`\"{} can be No\+Trans or Non\+Unit or No\+Vec). Matching is case-\/insensitive. 
+
+\subsection{Function Documentation}
+\index{Bblas\+\_\+const@{Bblas\+\_\+const}!bblas\+\_\+diag\+\_\+const@{bblas\+\_\+diag\+\_\+const}}
+\index{bblas\+\_\+diag\+\_\+const@{bblas\+\_\+diag\+\_\+const}!Bblas\+\_\+const@{Bblas\+\_\+const}}
+\subsubsection[{\texorpdfstring{bblas\+\_\+diag\+\_\+const(char lapack\+\_\+char)}{bblas_diag_const(char lapack_char)}}]{\setlength{\rightskip}{0pt plus 5cm}bblas\+\_\+enum\+\_\+t bblas\+\_\+diag\+\_\+const (
+\begin{DoxyParamCaption}
+\item[{char}]{lapack\+\_\+char}
+\end{DoxyParamCaption}
+)}\hypertarget{group__bblas__const_ga6169647caea1bc4ab77bcf161db8019e}{}\label{group__bblas__const_ga6169647caea1bc4ab77bcf161db8019e}
+
+\begin{DoxyRetVals}{Return values}
+{\em Bblas\+Non\+Unit} & if lapack\+\_\+char = \textquotesingle{}N\textquotesingle{} \\
+\hline
+{\em Bblas\+Unit} & if lapack\+\_\+char = \textquotesingle{}U\textquotesingle{} \\
+\hline
+\end{DoxyRetVals}
+\index{Bblas\+\_\+const@{Bblas\+\_\+const}!bblas\+\_\+info\+\_\+const@{bblas\+\_\+info\+\_\+const}}
+\index{bblas\+\_\+info\+\_\+const@{bblas\+\_\+info\+\_\+const}!Bblas\+\_\+const@{Bblas\+\_\+const}}
+\subsubsection[{\texorpdfstring{bblas\+\_\+info\+\_\+const(char lapack\+\_\+char)}{bblas_info_const(char lapack_char)}}]{\setlength{\rightskip}{0pt plus 5cm}bblas\+\_\+enum\+\_\+t bblas\+\_\+info\+\_\+const (
+\begin{DoxyParamCaption}
+\item[{char}]{lapack\+\_\+char}
+\end{DoxyParamCaption}
+)}\hypertarget{group__bblas__const_gafdc80d2f9b5d3eb302d64147f1c44aa7}{}\label{group__bblas__const_gafdc80d2f9b5d3eb302d64147f1c44aa7}
+
+\begin{DoxyRetVals}{Return values}
+{\em Bblas\+Errors\+Report\+All} & if lapack\+\_\+char = \textquotesingle{}a\textquotesingle{} \\
+\hline
+{\em Bblas\+Errors\+Report\+Group} & if lapack\+\_\+char = \textquotesingle{}g\textquotesingle{} \\
+\hline
+{\em Bblas\+Errors\+Report\+Any} & if lapack\+\_\+char = \textquotesingle{}o\textquotesingle{} \\
+\hline
+{\em Bblas\+Errors\+Report\+None} & if lapack\+\_\+char = \textquotesingle{}n\textquotesingle{} \\
+\hline
+\end{DoxyRetVals}
+\index{Bblas\+\_\+const@{Bblas\+\_\+const}!bblas\+\_\+direct\+\_\+const@{bblas\+\_\+direct\+\_\+const}}
+\index{bblas\+\_\+direct\+\_\+const@{bblas\+\_\+direct\+\_\+const}!Bblas\+\_\+const@{Bblas\+\_\+const}}
+\subsubsection[{\texorpdfstring{bblas\+\_\+direct\+\_\+const(char lapack\+\_\+char)}{bblas_direct_const(char lapack_char)}}]{\setlength{\rightskip}{0pt plus 5cm}bblas\+\_\+enum\+\_\+t bblas\+\_\+direct\+\_\+const (
+\begin{DoxyParamCaption}
+\item[{char}]{lapack\+\_\+char}
+\end{DoxyParamCaption}
+)}\hypertarget{group__bblas__const_ga5ba578faa6c2dcc4a37e09f1d7aefe7c}{}\label{group__bblas__const_ga5ba578faa6c2dcc4a37e09f1d7aefe7c}
+
+\begin{DoxyRetVals}{Return values}
+{\em Bblas\+Forward} & if lapack\+\_\+char = \textquotesingle{}F\textquotesingle{} \\
+\hline
+{\em Bblas\+Backward} & if lapack\+\_\+char = \textquotesingle{}B\textquotesingle{} \\
+\hline
+\end{DoxyRetVals}
+\index{Bblas\+\_\+const@{Bblas\+\_\+const}!bblas\+\_\+norm\+\_\+const@{bblas\+\_\+norm\+\_\+const}}
+\index{bblas\+\_\+norm\+\_\+const@{bblas\+\_\+norm\+\_\+const}!Bblas\+\_\+const@{Bblas\+\_\+const}}
+\subsubsection[{\texorpdfstring{bblas\+\_\+norm\+\_\+const(char lapack\+\_\+char)}{bblas_norm_const(char lapack_char)}}]{\setlength{\rightskip}{0pt plus 5cm}bblas\+\_\+enum\+\_\+t bblas\+\_\+norm\+\_\+const (
+\begin{DoxyParamCaption}
+\item[{char}]{lapack\+\_\+char}
+\end{DoxyParamCaption}
+)}\hypertarget{group__bblas__const_gac004937c6fbbfee293aa7681e3927fe3}{}\label{group__bblas__const_gac004937c6fbbfee293aa7681e3927fe3}
+
+\begin{DoxyRetVals}{Return values}
+{\em Bblas\+One\+Norm} & if lapack\+\_\+char = \textquotesingle{}O$\vert$o$\vert$1\textquotesingle{} \\
+\hline
+{\em Bblas\+Two\+Norm} & if lapack\+\_\+char = \textquotesingle{}2\textquotesingle{} \\
+\hline
+{\em Bblas\+Frobenius\+Norm} & if lapack\+\_\+char = \textquotesingle{}F$\vert$f$\vert$\+E$\vert$e\textquotesingle{} \\
+\hline
+{\em Bblas\+Inf\+Norm} & if lapack\+\_\+char = \textquotesingle{}I$\vert$i\textquotesingle{} \\
+\hline
+{\em Bblas\+Max\+Norm} & if lapack\+\_\+char = \textquotesingle{}M$\vert$m\textquotesingle{} \\
+\hline
+\end{DoxyRetVals}
+\index{Bblas\+\_\+const@{Bblas\+\_\+const}!bblas\+\_\+side\+\_\+const@{bblas\+\_\+side\+\_\+const}}
+\index{bblas\+\_\+side\+\_\+const@{bblas\+\_\+side\+\_\+const}!Bblas\+\_\+const@{Bblas\+\_\+const}}
+\subsubsection[{\texorpdfstring{bblas\+\_\+side\+\_\+const(char lapack\+\_\+char)}{bblas_side_const(char lapack_char)}}]{\setlength{\rightskip}{0pt plus 5cm}bblas\+\_\+enum\+\_\+t bblas\+\_\+side\+\_\+const (
+\begin{DoxyParamCaption}
+\item[{char}]{lapack\+\_\+char}
+\end{DoxyParamCaption}
+)}\hypertarget{group__bblas__const_ga56e829b323f9ef83d896d4755283039a}{}\label{group__bblas__const_ga56e829b323f9ef83d896d4755283039a}
+
+\begin{DoxyRetVals}{Return values}
+{\em Bblas\+Left} & if lapack\+\_\+char = \textquotesingle{}L\textquotesingle{} \\
+\hline
+{\em Bblas\+Right} & if lapack\+\_\+char = \textquotesingle{}R\textquotesingle{} \\
+\hline
+\end{DoxyRetVals}
+\index{Bblas\+\_\+const@{Bblas\+\_\+const}!bblas\+\_\+storev\+\_\+const@{bblas\+\_\+storev\+\_\+const}}
+\index{bblas\+\_\+storev\+\_\+const@{bblas\+\_\+storev\+\_\+const}!Bblas\+\_\+const@{Bblas\+\_\+const}}
+\subsubsection[{\texorpdfstring{bblas\+\_\+storev\+\_\+const(char lapack\+\_\+char)}{bblas_storev_const(char lapack_char)}}]{\setlength{\rightskip}{0pt plus 5cm}bblas\+\_\+enum\+\_\+t bblas\+\_\+storev\+\_\+const (
+\begin{DoxyParamCaption}
+\item[{char}]{lapack\+\_\+char}
+\end{DoxyParamCaption}
+)}\hypertarget{group__bblas__const_gae9bb1f3a88f105d76062888fea78d4da}{}\label{group__bblas__const_gae9bb1f3a88f105d76062888fea78d4da}
+
+\begin{DoxyRetVals}{Return values}
+{\em Bblas\+Columnwise} & if lapack\+\_\+char = \textquotesingle{}C\textquotesingle{} \\
+\hline
+{\em Bblas\+Rowwise} & if lapack\+\_\+char = \textquotesingle{}R\textquotesingle{} \\
+\hline
+\end{DoxyRetVals}
+\index{Bblas\+\_\+const@{Bblas\+\_\+const}!bblas\+\_\+trans\+\_\+const@{bblas\+\_\+trans\+\_\+const}}
+\index{bblas\+\_\+trans\+\_\+const@{bblas\+\_\+trans\+\_\+const}!Bblas\+\_\+const@{Bblas\+\_\+const}}
+\subsubsection[{\texorpdfstring{bblas\+\_\+trans\+\_\+const(char lapack\+\_\+char)}{bblas_trans_const(char lapack_char)}}]{\setlength{\rightskip}{0pt plus 5cm}bblas\+\_\+enum\+\_\+t bblas\+\_\+trans\+\_\+const (
+\begin{DoxyParamCaption}
+\item[{char}]{lapack\+\_\+char}
+\end{DoxyParamCaption}
+)}\hypertarget{group__bblas__const_ga2bd4e89d6fbd7df92e8836e862e96e2a}{}\label{group__bblas__const_ga2bd4e89d6fbd7df92e8836e862e96e2a}
+
+\begin{DoxyRetVals}{Return values}
+{\em Bblas\+No\+Trans} & if lapack\+\_\+char = \textquotesingle{}N\textquotesingle{} \\
+\hline
+{\em Bblas\+Trans} & if lapack\+\_\+char = \textquotesingle{}T\textquotesingle{} \\
+\hline
+{\em Bblas\+Conj\+Trans} & if lapack\+\_\+char = \textquotesingle{}C\textquotesingle{} \\
+\hline
+\end{DoxyRetVals}
+\index{Bblas\+\_\+const@{Bblas\+\_\+const}!bblas\+\_\+uplo\+\_\+const@{bblas\+\_\+uplo\+\_\+const}}
+\index{bblas\+\_\+uplo\+\_\+const@{bblas\+\_\+uplo\+\_\+const}!Bblas\+\_\+const@{Bblas\+\_\+const}}
+\subsubsection[{\texorpdfstring{bblas\+\_\+uplo\+\_\+const(char lapack\+\_\+char)}{bblas_uplo_const(char lapack_char)}}]{\setlength{\rightskip}{0pt plus 5cm}bblas\+\_\+enum\+\_\+t bblas\+\_\+uplo\+\_\+const (
+\begin{DoxyParamCaption}
+\item[{char}]{lapack\+\_\+char}
+\end{DoxyParamCaption}
+)}\hypertarget{group__bblas__const_gacc2bf7245fa316e6cbf888a61aa1f1bc}{}\label{group__bblas__const_gacc2bf7245fa316e6cbf888a61aa1f1bc}
+
+\begin{DoxyRetVals}{Return values}
+{\em Bblas\+Upper} & if lapack\+\_\+char = \textquotesingle{}U\textquotesingle{} \\
+\hline
+{\em Bblas\+Lower} & if lapack\+\_\+char = \textquotesingle{}L\textquotesingle{} \\
+\hline
+{\em Bblas\+General} & otherwise \\
+\hline
+\end{DoxyRetVals}
+\index{Bblas\+\_\+const@{Bblas\+\_\+const}!lapack\+\_\+const@{lapack\+\_\+const}}
+\index{lapack\+\_\+const@{lapack\+\_\+const}!Bblas\+\_\+const@{Bblas\+\_\+const}}
+\subsubsection[{\texorpdfstring{lapack\+\_\+const(int bblas\+\_\+const)}{lapack_const(int bblas_const)}}]{\setlength{\rightskip}{0pt plus 5cm}static char lapack\+\_\+const (
+\begin{DoxyParamCaption}
+\item[{int}]{bblas\+\_\+const}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{group__bblas__const_gab2e4ef289e7eee71dd23c6d4b817a6a2}{}\label{group__bblas__const_gab2e4ef289e7eee71dd23c6d4b817a6a2}
+
+\begin{DoxyRetVals}{Return values}
+{\em L\+A\+P\+A\+CK} & character constant corresponding to B\+B\+L\+AS constant \\
+\hline
+\end{DoxyRetVals}

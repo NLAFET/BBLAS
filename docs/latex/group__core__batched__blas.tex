@@ -1,0 +1,33 @@
+\hypertarget{group__core__batched__blas}{}\section{\+: Fixed Batched matrix-\/matrix operations,}
+\label{group__core__batched__blas}\index{\+: Fixed Batched matrix-\/matrix operations,@{\+: Fixed Batched matrix-\/matrix operations,}}
+
+
+Fixed Batched matrix-\/matrix operations that perform on problems of same size.  
+
+
+\subsection*{Modules}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__gemm__batchf}{gemm\+\_\+batchf\+:  Batch of same size general  matrix multiply\+: C\mbox{[}i\mbox{]} = A\mbox{[}i\mbox{]}\+B\mbox{[}i\mbox{]} + C\mbox{[}i\mbox{]}}
+\begin{DoxyCompactList}\small\item\em $ C[i] = \alpha[i] \;op(A[i]) \;op(B[i]) + \beta[i] C[i] $ \end{DoxyCompactList}\item 
+\hyperlink{group__hemm__batchf}{hemm\+\_\+batchf\+: Batch of same size hermitian matrix multiply}
+\begin{DoxyCompactList}\small\item\em $ C[i] = \alpha[i] A[i] B[i] + \beta[i] C[i] $ or $ C[i] = \alpha[i] B[i] A[i] + \beta C[i] $ where $ A[i] $ are hermitian \end{DoxyCompactList}\item 
+\hyperlink{group__herk__batchf}{herk\+\_\+batchf\+:  Batch of same size hermitian rank k update}
+\begin{DoxyCompactList}\small\item\em $ C[i] = \alpha[i] A[i] A[i]^T + \beta[i] C[i] $ where $ C[i] $ are hermitian \end{DoxyCompactList}\item 
+\hyperlink{group__her2k__batchf}{her2k\+\_\+batchf\+: Batch of same size hermitian rank 2k update}
+\begin{DoxyCompactList}\small\item\em $ C[i] = \alpha[i] A[i] B[i]^T + \alpha[i] B[i] A[i]^T + \beta[i] C[i] $ where $ C[i] $ are Hermitian \end{DoxyCompactList}\item 
+\hyperlink{group__symm__batchf}{symm\+\_\+batchf\+:  Batch of same size symmetric matrix multiply}
+\begin{DoxyCompactList}\small\item\em $ C[i] = \alpha[i] A[i] B[i] + \beta[i] C[i] $ or $ C[i] = \alpha[i] B[i] A[i] + \beta[i] C[i] $ where $ A[i] $ are symmetric \end{DoxyCompactList}\item 
+\hyperlink{group__syrk__batchf}{syrk\+\_\+batchf\+: Batch of same size symmetric rank k update}
+\begin{DoxyCompactList}\small\item\em $ C[i] = \alpha[i] A[i] A[i]^T + \beta[i] C[i] $ where $ C[i] $ are symmetric \end{DoxyCompactList}\item 
+\hyperlink{group__syr2k__batchf}{syr2k\+\_\+batchf\+: Batch of same size symmetric rank 2k update}
+\begin{DoxyCompactList}\small\item\em $ C[i] = \alpha[i] A[i] B[i]^T + \alpha[i] B[i] A[i]^T + \beta[i] C[i] $ where $ C[i] $ are symmetric \end{DoxyCompactList}\item 
+\hyperlink{group__trmm__batchf}{trmm\+\_\+batchf\+: Batch of same size triangular matrix multiply}
+\begin{DoxyCompactList}\small\item\em $ B[i] = \alpha[i] \;op(A[i])\; B[i] $ or $ B[i] = \alpha[i] B[i] \;op(A[i]) $ where $ A[i] $ are triangular \end{DoxyCompactList}\item 
+\hyperlink{group__trsm__batchf}{trsm\+\_\+batchf\+: Batch of same size triangular solve matrix}
+\begin{DoxyCompactList}\small\item\em $ C[i] = op(A[i])^{-1} B[i] $ or $ C[i] = B[i] \;op(A[i])^{-1} $ where $ A[i] $ are triangular \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Fixed Batched matrix-\/matrix operations that perform on problems of same size. 
+
