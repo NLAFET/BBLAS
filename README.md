@@ -86,7 +86,7 @@ We use random matrices for the test. To simplify the way to provide matrices in 
 the following arguments:
 * **--ng**   : the number groups  [default: --ng=10].
 * **--gs**   : the number matrices in the first group [default: --gs=100].
-* **--incg** : the increment of group sizes. The size of the i^th group is gs + i*incg [default: --incg=10].
+* **--incg** : the increment of group sizes. The size of the i^th group is gs + i * incg [default: --incg=10].
 * **--dim**  : M x N x K dimensions of th matrices in the first group [default: --dim=1000 x 1000 x 1000].
 * **--incm** : The increment of matrix size across the group. If the matrix size in the first group is M x N x K,
 the matrix size in the i^th group will be (M + incm * i) x (N + incm * i) x (K + incm * i)  [default: --incm = 1].
