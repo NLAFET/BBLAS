@@ -86,15 +86,15 @@ We use random matrices for the test. To simplify the way to provide matrices in 
 the following arguments:
 * **--ng**   : the number groups  [default: --ng=10].
 * **--gs**   : the number matrices in the first group [default: --gs=100].
-* **--incg** : the increment of group sizes. The size of the i^th group is **gs + i*incg* ** [default: --incg=10].
+* **--incg** : the increment of group sizes. The size of the i^th group is gs + i * incg [default: --incg=10].
 * **--dim**  : M x N x K dimensions of th matrices in the first group [default: --dim=1000 x 1000 x 1000].
 * **--incm** : The increment of matrix size across the group. If the matrix size in the first group is M x N x K,
-the matrix size in the i^th group will be (M + incm*i) x (N + incm*i) x (K + incm*i)  [default: --incm = 1].
+the matrix size in the i^th group will be (M + incm * i) x (N + incm * i) x (K + incm * i)  [default: --incm = 1].
 * **--info[a|g|n|o]** : The parameter to set an error handling option [default: --info=a].
- * **a**: which indicates that all errors will be specified on output.
- * **g**: which indicates that only a single error will be reported for each group, independently.
- * **n**: which indicates that no errors will be reported on output.
- * **o**: which indicates that the occurrence of errors will be specified on output as a single integer value.
+  - **a**: which indicates that all errors will be specified on output.
+  - **g**: which indicates that only a single error will be reported for each group, independently.
+  - **n**: which indicates that no errors will be reported on output.
+  - **o**: which indicates that the occurrence of errors will be specified on output as a single integer value.
 
 In addition to these options, arguments like **trans, transa, transb, side, diag, uplo, etc.**, can be set, and
 for the sake of simplicity, they have the same value in all the groups.
