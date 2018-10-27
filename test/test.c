@@ -658,12 +658,12 @@ void param_read(int argc, char **argv, param_t param[])
     // Set integer parameters.
     //--------------------------------------------------
     if (param[PARAM_DIM].num == 0) {
-        int3_t dim = { 1000, 1000, 1000 };
+        int3_t dim = { 50, 50, 50 };
         param_add_int3(dim, &param[PARAM_DIM]);
     }
 
     if (param[PARAM_NRHS].num == 0)
-        param_add_int(1000, &param[PARAM_NRHS]);
+        param_add_int(50, &param[PARAM_NRHS]);
 
     if (param[PARAM_NG].num == 0)
         param_add_int(10, &param[PARAM_NG]);

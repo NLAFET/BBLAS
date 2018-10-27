@@ -63,14 +63,14 @@ Compilation
 ===========
 After the configuration of **make.inc**, the compilation is very simple:
 
-*  **make [all]**     --  make lib test
-*  **make lib**      --  make lib/libbblas.{a,so} lib/libcore.{a,so}
-*  **make test**      --  make test/test
-*  **make docs**      --  make docs/html
-*  **make generate**  --  generate precisions
-*  **make clean**     --  remove objects, libraries, and executables
-*  **make cleangen**  --  remove generated precision files
-*  **make distclean** --  remove above, Makefile.*.gen, and anything else that can be generated 
+*  **make [all]**     --  compiles lib test
+*  **make lib**       --  generates library files in lib/libbblas.{a,so} lib/libcore.{a,so}
+*  **make test**      --  generates tester files in  test/test
+*  **make docs**      --  generates documentation docs/html
+*  **make generate**  --  generates routines of other precisions
+*  **make clean**     --  removes objects, libraries, and executables
+*  **make cleangen**  --  removes generated precision files
+*  **make distclean** --  removes above, Makefile.*.gen, and anything else that can be generated 
 
 For MacOS the libraries have to be linked manually. Use the following in the .profile file.
 
